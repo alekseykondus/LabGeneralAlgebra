@@ -1,6 +1,6 @@
 #pragma once
 
-#include <iostream>
+#include "Number.h"
 
 namespace LongArithmetic {
 	class Calculator
