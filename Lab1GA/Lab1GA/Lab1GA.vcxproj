@@ -139,11 +139,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="LongArithmetic.cpp" />
+    <ClCompile Include="Arithmetic.cpp" />
+    <ClCompile Include="Number.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LongArithmetic.h" />
+    <ClInclude Include="Arithmetic.h" />
+    <ClInclude Include="Number.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
