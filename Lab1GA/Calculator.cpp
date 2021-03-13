@@ -49,8 +49,26 @@ namespace LongArithmetic {
                 answer.m_Digits[i] += Number::Base;
             }
         }
-
-        //left._remove_leading_zeros();  ??
+        //answer.RemoveLeadingZeros();  ??
         return answer;
+    }
+    Number Calculator::Multiplication(const Number& left, const Number& right) {
+        Number answer("");
+        answer.m_Digits.resize(left.GetDigits().size() * 2);
+        for (size_t i = 0; i < left.GetDigits().size(); i++) {
+            bool carry = false;
+            for (size_t j = 0; j < right.GetDigits().size() || carry; ++j) {
+                long long cur = answer.m_Digits[i + j] +
+                    left.GetDigits()[i] * 1 * (j < right.GetDigits().size() ? right.GetDigits()[j] : 0) + carry;
+                answer.m_Digits[i + j] = static_cast<uint64_t>(cur % Number::Base);
+                carry = static_cast<uint64_t>(cur / Number::Base);
+            }
+        }
+        //answer.RemoveLeadingZeros(); ??
+        return answer;
+    }
+
+    Number Calculator::Division(const Number& left, const Number& right) {
+        return Number("");
     }
 }
