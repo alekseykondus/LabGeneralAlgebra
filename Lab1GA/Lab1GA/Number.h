@@ -9,11 +9,11 @@ namespace LongArithmetic {
 	{
 	public:
 		enum class Sign {
-			plus = 0,
-			minus
+			plus = -1,
+			minus = 1,
 		};
 
-		explicit Number(const std::string& str);
+		explicit Number(std::string& str);
 
 		Number operator+(const Number& another);
 		Number operator-(const Number& another);
@@ -21,7 +21,10 @@ namespace LongArithmetic {
 		Number operator/(const Number& another);
 
 		Number GetInvertible();
+		Sign GetSign() { return m_Sign; }
 	private:
+		void RemoveLeadingZeros();
+
 		std::vector<std::uint64_t>m_Digits;
 		Sign m_Sign;
 	};
