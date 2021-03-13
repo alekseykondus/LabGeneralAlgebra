@@ -91,36 +91,4 @@ namespace LongArithmetic {
             m_Sign = Sign::Plus;
         }
     }
-
-    Number Number::operator+(const Number& another) const {
-        if (m_Sign == Sign::Minus) {
-            if (another.GetSign() == Sign::Minus) {
-                return -(-*this + (-another));
-            }
-            else if (m_Sign == Sign::Minus) {
-                return another - (-*this);
-            }
-        }
-        else if (another.GetSign() == Sign::Minus) {
-            return *this - (-another);
-        }
-        Number answer(*this);
-        uint64_t carry = 0; // флаг переноса из предыдущего разряда
-        for (size_t i = 0; i < std::max(answer.GetDigits().size(), another.GetDigits().size()) || carry != 0; i++) {
-            if (i == answer.GetDigits().size()) {
-                answer.m_Digits.push_back(0);
-            }
-            answer.m_Digits[i] += carry + (i < another.GetDigits().size() ? another.GetDigits()[i] : 0);
-            carry = answer.GetDigits()[i] >= this->Base;
-            if (carry != 0) {
-                answer.m_Digits[i] -= this->Base;
-            }
-        }
-
-        return answer;
-    }
-
-    Number Number::operator-(const Number& another) const {
-        return Number("");
-    }
 }

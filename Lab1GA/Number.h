@@ -27,11 +27,6 @@ namespace LongArithmetic {
 		void FromString(const std::string& str);	//another name??
 		std::string ToString() const;
 
-		Number operator+(const Number& another) const;
-		Number operator-(const Number& another) const;
-		Number operator*(const Number& another) const;
-		Number operator/(const Number& another) const;
-
 		bool operator==(const Number& another) const;
 
 		Number GetInvertible();
@@ -42,5 +37,7 @@ namespace LongArithmetic {
 
 		std::vector<std::uint64_t>m_Digits;
 		Sign m_Sign;
+
+		friend class Calculator;
 	};
 }
