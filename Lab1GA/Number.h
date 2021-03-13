@@ -25,6 +25,8 @@ namespace LongArithmetic {
 	private:
 		void RemoveLeadingZeros();
 
+		static const uint64_t Base = 10'000'000'000'000'000'000;
+
 		std::vector<std::uint64_t>m_Digits;
 		Sign m_Sign;
 	};
