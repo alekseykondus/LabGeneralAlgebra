@@ -9,23 +9,36 @@ namespace LongArithmetic {
 	{
 	public:
 		enum class Sign {
-			plus = -1,
-			minus = 1,
+			Minus = -1,
+			Plus = 1
 		};
 
-		explicit Number(std::string& str);
+		Number(Sign sign, const std::vector<std::uint64_t>& digits);
 
-		Number operator+(const Number& another);
-		Number operator-(const Number& another);
-		Number operator*(const Number& another);
-		Number operator/(const Number& another);
+		Number(const std::string& str);
+
+		Number(const Number& another);
+
+		Number operator-() const;
+
+		Sign GetSign() const;
+		const std::vector<std::uint64_t>& GetDigits() const;
+
+		void FromString(const std::string& str);	//another name??
+		std::string ToString() const;
+
+		Number operator+(const Number& another) const;
+		Number operator-(const Number& another) const;
+		Number operator*(const Number& another) const;
+		Number operator/(const Number& another) const;
+
+		bool operator==(const Number& another) const;
 
 		Number GetInvertible();
-		Sign GetSign() { return m_Sign; }
 	private:
 		void RemoveLeadingZeros();
 
-		static const uint64_t Base = 10'000'000'000'000'000'000;
+		static const uint64_t Base = 10'000'000'000'000'000;
 
 		std::vector<std::uint64_t>m_Digits;
 		Sign m_Sign;

@@ -1,45 +1,86 @@
 #include "Number.h"
 
-#include <string_view>
-
-#include <array>
-#include <charconv>
-#include <iostream>
-#include <string_view>
+#include <cmath>
 
 namespace LongArithmetic {
+    Number::Number(const std::string& str) {
+        FromString(str);
+    }
 
-    Number::Number(std::string& str) {
+    Number::Number(const Number& another):
+        m_Sign(another.m_Sign), m_Digits(another.m_Digits) {}
+
+    Number::Number(Sign sign, const std::vector<std::uint64_t>& digits):
+        m_Sign(sign), m_Digits(digits) {}
+
+    Number Number::operator-() const {
+        return Number(m_Sign == Sign::Plus ? Sign::Minus : Sign::Plus, m_Digits);;
+    }
+
+    Number::Sign Number::GetSign() const {
+        return m_Sign;
+    }
+
+    const std::vector<std::uint64_t>& Number::GetDigits() const {
+        return m_Digits;
+    }
+
+    void Number::FromString(const std::string& str)
+    {
         try
         {
-            std::string_view view(str);
+            m_Digits.clear();
             if (str.length() == 0) {
-                m_Sign = Sign::plus;
+                m_Sign = Sign::Plus;
+                m_Digits = { 0 };
                 return;
             }
             if (str[0] == '-') {
-                m_Sign = Sign::minus;
-                view.remove_prefix(1);
+                m_Sign = Sign::Minus;
             }
             else {
-                m_Sign = Sign::plus;
+                m_Sign = Sign::Plus;
             }
-            while (view.size() > 18) {
-                //std::from_char(view.begin() + view.size() - 19, view.end(), a);   not works
-                //Copying to string, maybe can be better
-                this->m_Digits.push_back(std::stoll(std::string(view.substr(view.size() - 19, 19))));
-                view.remove_suffix(19);
+
+            int power = 0;
+
+            auto end = m_Sign == Sign::Plus ? str.rend() : --str.rend();
+
+            m_Digits.push_back(0);
+
+            for (auto i = str.rbegin(); i != end; i++) {
+                if (*i < '0' || *i > '9') {
+                    throw std::exception("");
+                }
+                m_Digits.back() += static_cast<uint64_t>(*i - '0') * powl(10, power);
+                if (++power == 16) {
+                    power = 0;
+                    m_Digits.push_back(0);
+                }
             }
-            if (view.size() > 0) {
-                this->m_Digits.push_back(std::stoll(std::string(view.substr(0, view.size()))));
-            }
+
             RemoveLeadingZeros();
         }
-        catch (const std::exception&)
-        {
-            m_Sign = Sign::plus;
+        catch (const std::exception&) {
+            m_Sign = Sign::Plus;
             m_Digits = { 0 };
         }
+    }
+
+    std::string Number::ToString() const
+    {
+        std::string answer;
+        if (m_Sign == Sign::Minus) {
+            answer.push_back('-');
+        }
+        for (auto it = m_Digits.rbegin(); it != m_Digits.rend(); it++) {
+            answer += std::to_string(*it);
+        }
+        return answer;
+    }
+
+    bool Number::operator==(const Number& another) const {
+        return m_Digits == another.GetDigits() && m_Sign == another.GetSign();
     }
 
     void Number::RemoveLeadingZeros() {
@@ -47,7 +88,39 @@ namespace LongArithmetic {
             this->m_Digits.pop_back();
         }
         if (this->m_Digits.size() == 1 && this->m_Digits[0] == 0) {
-            m_Sign = Sign::plus;
+            m_Sign = Sign::Plus;
         }
+    }
+
+    Number Number::operator+(const Number& another) const {
+        if (m_Sign == Sign::Minus) {
+            if (another.GetSign() == Sign::Minus) {
+                return -(-*this + (-another));
+            }
+            else if (m_Sign == Sign::Minus) {
+                return another - (-*this);
+            }
+        }
+        else if (another.GetSign() == Sign::Minus) {
+            return *this - (-another);
+        }
+        Number answer(*this);
+        uint64_t carry = 0; // флаг переноса из предыдущего разряда
+        for (size_t i = 0; i < std::max(answer.GetDigits().size(), another.GetDigits().size()) || carry != 0; i++) {
+            if (i == answer.GetDigits().size()) {
+                answer.m_Digits.push_back(0);
+            }
+            answer.m_Digits[i] += carry + (i < another.GetDigits().size() ? another.GetDigits()[i] : 0);
+            carry = answer.GetDigits()[i] >= this->Base;
+            if (carry != 0) {
+                answer.m_Digits[i] -= this->Base;
+            }
+        }
+
+        return answer;
+    }
+
+    Number Number::operator-(const Number& another) const {
+        return Number("");
     }
 }
