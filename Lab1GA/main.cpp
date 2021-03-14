@@ -49,27 +49,90 @@ TEST_CASE("testing constructor & ToString & FromString") {
 TEST_CASE("testing Calculator") {
 	using namespace LongArithmetic;
 	Calculator calculator(Number("13124325346575678679789870899097686584677777775756756757658"));
-//	CHECK(calculator.Plus(Number("1111111111111111111111111111111111111111111111111"),
-//						  Number("2222222222222222222222222222222222222222222222222")) ==
-//						  Number("3333333333333333333333333333333333333333333333333"));
+	CHECK(calculator.Plus(Number("1111111111111111111111111111111111111111111111111"),
+						  Number("2222222222222222222222222222222222222222222222222")) ==
+						  Number("3333333333333333333333333333333333333333333333333"));
 	CHECK(calculator.Minus(Number("2222222222222222222222222222222222222222222222222"),
 						  Number("1111111111111111111111111111111111111111111111111")) ==
 						  Number("1111111111111111111111111111111111111111111111111"));
 	CHECK(calculator.Minus(Number("2222222222222222222222222222222222222222222222222"),
 						  Number("0")) ==
 						  Number("2222222222222222222222222222222222222222222222222"));
-
-//	CHECK(calculator.Multiplication(Number("2222222222222222222222222222222222222222222222222"),
-//									Number("1000000000000000000000000000000000000000000000000")) ==
-//									Number("2222222222222222222222222222222222222222222222222000000000000000000000000000000000000000000000000"));
+	CHECK(calculator.Multiplication(Number("2222222222222222222222222222222222222222222222222"),
+									Number("1000000000000000000000000000000000000000000000000")) ==
+									Number("2222222222222222222222222222222222222222222222222000000000000000000000000000000000000000000000000"));
 	CHECK(calculator.Division(Number("1111111111111111111111111111111111111111111111111"),
 							  Number("1111111111111111111111111111111111111111111111111")) ==
 							  Number("1"));
 	CHECK(calculator.Division(Number("2222222222222222222222222222222222222222222222222"),
 							  Number("1111111111111111111111111111111111111111111111111")) ==
 							  Number("2"));
+
+	CHECK(calculator.Modul(Number("1111111111111111111111111111111111111111111111111"),
+						   Number("2222222222222222222222222222222222222222222222222")) ==
+						   Number("1111111111111111111111111111111111111111111111111"));
+	CHECK(calculator.Modul(Number("2222222222222222222222222222222222222222222222222"),
+						   Number("1111111111111111111111111111111111111111111111111")) ==
+						   Number("0"));
+	CHECK(calculator.Modul(Number("-2222222222222222222222222222222222222222222222222"),
+						   Number("1111111111111111111111111111111111111111111111111")) ==
+						   Number("0"));
+
+	CHECK(calculator.Modul(Number("-2222222222222222222222222222222222222222222222221"),
+						   Number("1111111111111111111111111111111111111111111111111")) ==
+						   Number("1"));
+
+	CHECK(calculator.Remainder(Number("179"), Number("96")) == Number("83"));
+	CHECK(calculator.Remainder(Number("1111111111111111111111111111111111111111111111111"), 
+		Number("2222222222222222222222222222222222222222222222222")) == 
+		Number("1111111111111111111111111111111111111111111111111"));
+	CHECK(calculator.Remainder(Number("123456789"), 
+		Number("123456789")) == 
+		Number("0"));
+
+	//с интверсией пока что не складывается
+//	std::cout << calculator.Inverse(Number("96"), Number("179")).ToString() << std::endl;
+//	CHECK(calculator.Inverse(Number("96"), Number("179")) == Number("37"));
+//	CHECK(calculator.Inverse(Number("96"), Number("179")) == Number("-37"));
+//	CHECK(calculator.Division(Number("2222222222222222222222222222222222222222222222222"),
+//							  Number("1212121212121212121212121212121212121212121212121")) ==
+//							  Number("2"));
 }
 #endif
+
+//алгоритм для инверсии
+void evklid(long long a, long long b)
+{
+	long long q, x, lastx, y, lasty, temp, temp1, temp2, temp3;
+
+	if (b > a) {
+		temp = a; a = b; b = temp;
+	}
+
+	x = 0;
+	y = 1;
+	lastx = 1;
+	lasty = 0;
+	while (b != 0) {
+		q = a / b;
+		std::cout << "q =  " << q << std::endl;
+		temp1 = a % b;
+		a = b;
+		b = temp1;
+
+		temp2 = x;
+		x = lastx - q * x;
+		lastx = temp2;
+
+		temp3 = y;
+		y = lasty - q * y;
+		lasty = temp3;
+	}
+	std::cout << "ОТВЕТЫ:\n" << std::endl;
+	std::cout << "НОД= " << a << std::endl;
+	std::cout << "x=" << lastx << std::endl;
+	std::cout << "y=" << lasty << std::endl;
+}
 
 int main() {
 #ifdef DOCTEST_CONFIG_IMPLEMENT

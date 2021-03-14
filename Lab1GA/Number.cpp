@@ -9,10 +9,10 @@ namespace LongArithmetic {
         FromString(str);
     }
 
-    Number::Number(const Number& another):
+    Number::Number(const Number& another) :
         m_Sign(another.m_Sign), m_Digits(another.m_Digits) {}
 
-    Number::Number(Sign sign, const std::vector<std::uint64_t>& digits):
+    Number::Number(Sign sign, const std::vector<std::uint64_t>& digits) :
         m_Sign(sign), m_Digits(digits) {}
 
     Number Number::operator-() const {
@@ -116,8 +116,9 @@ namespace LongArithmetic {
         this->m_Digits[0] = 0;
     }
 
-    bool Number::operator<(const Number& right) const{
+    bool Number::operator<(const Number& right) const {
         if (m_Digits == right.GetDigits() && m_Sign == right.GetSign()) return false;
+        else if (m_Sign == Number::Sign::Minus && right.GetSign() == Number::Sign::Plus) return true;
         else {
             if (m_Digits.size() != right.GetDigits().size()) {
                 return m_Digits.size() < right.GetDigits().size();
@@ -131,7 +132,7 @@ namespace LongArithmetic {
         }
     }
     bool Number::operator<=(const Number& right) const {
-        return (*this<right || *this == right);
+        return (*this < right || *this == right);
     }
     bool Number::operator>(const Number& right) const {
         return !(*this <= right);

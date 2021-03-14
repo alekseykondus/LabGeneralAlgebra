@@ -35,7 +35,6 @@ namespace LongArithmetic {
 
 		Number GetInvertible();
 
-		class DivideByZero : public std::exception {  };
 		void ShiftRight();
 	private:
 		void RemoveLeadingZeros();

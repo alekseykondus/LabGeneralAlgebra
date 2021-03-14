@@ -4,6 +4,12 @@ namespace LongArithmetic {
     Calculator::Calculator(const Number& number) :
         m_Number(number) {}
 
+    Number Calculator::Remainder(const Number& left, const Number& right) {
+        Number result(Minus(left, Multiplication(Division(left,right), right)).ToString());
+        if (result.GetSign() == Number::Sign::Minus) result = Plus(result, right);
+        return result;
+    }
+
     bool Calculator::Less(const Number& left, const Number& right)
     {
         for (auto leftIt = left.GetDigits().begin(), rightIt = right.GetDigits().begin();
@@ -22,6 +28,12 @@ namespace LongArithmetic {
 
     Number Calculator::Plus(const Number& left, const Number& right) {
         Number answer(left);
+        if (left.GetSign() == Number::Sign::Minus) {
+            if (right.GetSign() == Number::Sign::Minus) return -Plus(-left, (-right));
+            else
+                return Minus(right, (-left));
+        }
+        else if (right.GetSign() == Number::Sign::Minus) return Minus(left, (-right));
         bool carry = false;
         for (size_t i = 0; i < answer.GetDigits().size() || carry; i++) {
             if (i == answer.GetDigits().size()) {
@@ -33,7 +45,7 @@ namespace LongArithmetic {
                 answer.m_Digits[i] -= Number::Base;
             }
         }
-        if (Less(m_Number, answer)) {
+        if (m_Number<answer) {
             answer = Minus(answer, m_Number);
         }
         return answer;
@@ -42,8 +54,10 @@ namespace LongArithmetic {
     Number Calculator::Minus(const Number& left, const Number& right) {
         if (right.ToString() == "0") return left;
         Number answer(left);
-        if (Less(left,right)) {
-            return Minus(m_Number, (Minus(right,left)));
+        if (left<right) {
+            answer = -Minus(right,left);
+            answer.RemoveLeadingZeros();
+            return answer;
         }
         bool carry = false;
         for (size_t i = 0; i < right.GetDigits().size() || carry != 0; ++i) {
@@ -53,7 +67,7 @@ namespace LongArithmetic {
                 answer.m_Digits[i] += Number::Base;
             }
         }
-        //answer.RemoveLeadingZeros();  ??
+        answer.RemoveLeadingZeros();
         return answer;
     }
     Number Calculator::Multiplication(const Number& left, const Number& right) {
@@ -74,7 +88,7 @@ namespace LongArithmetic {
 
     Number Calculator::Division(const Number& left, const Number& right) {
 
-        if (right.ToString() == "0") throw Number::DivideByZero();
+        if (right.ToString() == "0") throw std::exception{ "Divide By Zero" };
         Number b(right.ToString());
         Number result(""), current("");
         result.m_Digits.resize(left.GetDigits().size());
@@ -101,10 +115,44 @@ namespace LongArithmetic {
 
         result.RemoveLeadingZeros();
         return result;
-        return Number("");
     }
 
-    Number Calculator::Modul(const Number& number) {
-        return Number("");
+    Number Calculator::Modul(const Number& number, const Number& modul) {
+        if (number > modul || number == modul)
+            return Remainder(number, modul);
+        else if (number.GetSign() == Number::Sign::Minus) {
+            Number result(Plus(number, Multiplication(Division(number, modul), modul)).ToString());
+            if (result.GetSign() == Number::Sign::Minus) result = Plus(result, modul);
+            return result;
+        }
+        return number;
+    }
+    Number Calculator::Inverse(const Number& a, const Number& b) {
+        Number q(""), x(""), lastx(""), y(""), lasty(""), temp(""), temp1(""), temp2(""), temp3(""), _a(a.ToString()), _b(b.ToString());
+
+        if (b > a) {
+            temp = a; _a = b; _b = temp;
+        }
+
+        x.FromString("0");
+        y.FromString("1");
+        lastx.FromString("1");
+        lasty.FromString("0");
+        while (_b.ToString() != "0") {
+            q = Division(_a, _b);
+            temp1 = Remainder(_a, _b);
+            _a = _b;
+            _b = temp1;
+
+            temp2 = x;
+            x = Minus(lastx, Multiplication(q, x));
+            lastx = temp2;
+
+            temp3 = y;
+            y = Minus(lasty, Multiplication(q, y));
+            lasty = temp3;
+        }
+        //нужно еще по модулю звять (вдруг отрицательное)
+        return x;
     }
 }
