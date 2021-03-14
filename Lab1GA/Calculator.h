@@ -14,6 +14,8 @@ namespace LongArithmetic {
 		Number Minus(const Number& left, const Number& right);
 		Number Multiplication(const Number& left, const Number& right);
 		Number Division(const Number& left, const Number& right);
+
+		Number Modul(const Number& number);
 	private:
 		Number m_Number;	//rename
 	};

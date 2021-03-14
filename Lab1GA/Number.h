@@ -3,6 +3,7 @@
 #include <vector>
 #include <cstdint>
 #include <string>
+#include <iostream>
 
 namespace LongArithmetic {
 	class Number
@@ -33,7 +34,7 @@ namespace LongArithmetic {
 	private:
 		void RemoveLeadingZeros();
 
-		static const uint64_t Base = 10'000'000'000'000'000;
+		static const uint64_t Base = 1'000'000'000;
 
 		std::vector<std::uint64_t>m_Digits;
 		Sign m_Sign;

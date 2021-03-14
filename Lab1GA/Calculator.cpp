@@ -33,6 +33,9 @@ namespace LongArithmetic {
                 answer.m_Digits[i] -= Number::Base;
             }
         }
+        if (Less(m_Number, answer)) {
+            answer = Minus(answer, m_Number);
+        }
         return answer;
     }
 
@@ -54,21 +57,25 @@ namespace LongArithmetic {
     }
     Number Calculator::Multiplication(const Number& left, const Number& right) {
         Number answer("");
-        answer.m_Digits.resize(left.GetDigits().size() * 2);
-        for (size_t i = 0; i < left.GetDigits().size(); i++) {
-            bool carry = false;
-            for (size_t j = 0; j < right.GetDigits().size() || carry; ++j) {
-                long long cur = answer.m_Digits[i + j] +
-                    left.GetDigits()[i] * 1 * (j < right.GetDigits().size() ? right.GetDigits()[j] : 0) + carry;
-                answer.m_Digits[i + j] = static_cast<uint64_t>(cur % Number::Base);
+        answer.m_Digits.resize(left.GetDigits().size() + right.GetDigits().size());
+        for (size_t i = 0; i < left.GetDigits().size(); ++i) {
+            uint64_t carry = 0;
+            for (size_t j = 0; j < right.GetDigits().size() || carry != 0; ++j) {
+                uint64_t cur = answer.GetDigits()[i + j] +
+                    left.GetDigits()[i] * 1LL * (j < right.GetDigits().size() ? right.GetDigits()[j] : 0) + carry;
+                answer.m_Digits[i + j] = static_cast<int>(cur % Number::Base);
                 carry = static_cast<uint64_t>(cur / Number::Base);
             }
         }
-        //answer.RemoveLeadingZeros(); ??
+        answer.RemoveLeadingZeros();
         return answer;
     }
 
     Number Calculator::Division(const Number& left, const Number& right) {
+        return Number("");
+    }
+
+    Number Calculator::Modul(const Number& number) {
         return Number("");
     }
 }

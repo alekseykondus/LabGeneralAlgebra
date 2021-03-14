@@ -1,6 +1,8 @@
 #include "Number.h"
 
 #include <cmath>
+#include <iomanip>
+#include <sstream>
 
 namespace LongArithmetic {
     Number::Number(const std::string& str) {
@@ -53,7 +55,7 @@ namespace LongArithmetic {
                     throw std::exception("");
                 }
                 m_Digits.back() += static_cast<uint64_t>(*i - '0') * powl(10, power);
-                if (++power == 16) {
+                if (++power == 9) {
                     power = 0;
                     m_Digits.push_back(0);
                 }
@@ -67,16 +69,28 @@ namespace LongArithmetic {
         }
     }
 
+    std::ostream& operator <<(std::ostream& os, const Number& number) {
+        if (number.GetDigits().empty()) {
+            os << 0;
+            return os;
+        }
+        if (number.GetSign() == Number::Sign::Minus) {
+            os << '-';
+        }
+        os << number.GetDigits().back();
+        char old_fill = os.fill('0');
+        for (auto it = ++number.GetDigits().rbegin(); it != number.GetDigits().rend(); it++) {
+            os << std::setw(9) << *it;
+        }
+        os.fill(old_fill);
+        return os;
+    }
+
     std::string Number::ToString() const
     {
-        std::string answer;
-        if (m_Sign == Sign::Minus) {
-            answer.push_back('-');
-        }
-        for (auto it = m_Digits.rbegin(); it != m_Digits.rend(); it++) {
-            answer += std::to_string(*it);
-        }
-        return answer;
+        std::ostringstream oss;
+        oss << *this;
+        return oss.str();
     }
 
     bool Number::operator==(const Number& another) const {
