@@ -105,4 +105,35 @@ namespace LongArithmetic {
             m_Sign = Sign::Plus;
         }
     }
+
+    void Number::ShiftRight() {
+        if (this->m_Digits.size() == 0) {
+            this->m_Digits.push_back(0);
+            return;
+        }
+        this->m_Digits.push_back(this->m_Digits[this->m_Digits.size() - 1]);
+        for (size_t i = this->m_Digits.size() - 2; i > 0; --i) this->m_Digits[i] = this->m_Digits[i - 1];
+        this->m_Digits[0] = 0;
+    }
+
+    bool Number::operator<(const Number& right) const{
+        if (m_Digits == right.GetDigits() && m_Sign == right.GetSign()) return false;
+        else {
+            if (m_Digits.size() != right.GetDigits().size()) {
+                return m_Digits.size() < right.GetDigits().size();
+            }
+            else {
+                for (long long i = m_Digits.size() - 1; i >= 0; --i) {
+                    if (m_Digits[i] != right.GetDigits()[i]) return m_Digits[i] < right.GetDigits()[i];
+                }
+                return false;
+            }
+        }
+    }
+    bool Number::operator<=(const Number& right) const {
+        return (*this<right || *this == right);
+    }
+    bool Number::operator>(const Number& right) const {
+        return !(*this <= right);
+    }
 }

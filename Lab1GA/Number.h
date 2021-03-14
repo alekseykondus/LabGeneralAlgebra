@@ -29,8 +29,14 @@ namespace LongArithmetic {
 		std::string ToString() const;
 
 		bool operator==(const Number& another) const;
+		bool operator<(const Number& right) const;
+		bool operator<=(const Number& right) const;
+		bool operator>(const Number& right) const;
 
 		Number GetInvertible();
+
+		class DivideByZero : public std::exception {  };
+		void ShiftRight();
 	private:
 		void RemoveLeadingZeros();
 

@@ -40,6 +40,7 @@ namespace LongArithmetic {
     }
 
     Number Calculator::Minus(const Number& left, const Number& right) {
+        if (right.ToString() == "0") return left;
         Number answer(left);
         if (Less(left,right)) {
             return Minus(m_Number, (Minus(right,left)));
@@ -72,6 +73,34 @@ namespace LongArithmetic {
     }
 
     Number Calculator::Division(const Number& left, const Number& right) {
+
+        if (right.ToString() == "0") throw Number::DivideByZero();
+        Number b(right.ToString());
+        Number result(""), current("");
+        result.m_Digits.resize(left.GetDigits().size());
+
+        for (long long i = static_cast<long long>(left.GetDigits().size()) - 1; i >= 0; --i) {
+            current.ShiftRight();
+            current.m_Digits[0] = left.GetDigits()[i];
+            current.RemoveLeadingZeros();
+            int x = 0, l = 0, r = Number::Base;
+            while (l <= r) {
+                int m = (l + r) / 2;
+                Number _m(std::to_string(m));
+                Number t(Multiplication(b, _m).ToString());
+                if (t <= current) {
+                    x = m;
+                    l = m + 1;
+                }
+                else r = m - 1;
+            }
+            Number _x(std::to_string(x));
+            result.m_Digits[i] = x;
+            current = Minus(current, Multiplication(b, _x));
+        }
+
+        result.RemoveLeadingZeros();
+        return result;
         return Number("");
     }
 
