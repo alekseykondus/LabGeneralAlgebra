@@ -138,8 +138,9 @@ namespace LongArithmetic {
             _a = _b;
             _b = temp1;
 
-            lastx = x;
+            temp2 = x;
             x = Minus(lastx, Multiplication(q, x));
+            lastx = temp2;
 
             temp3 = y;
             y = Minus(lasty, Multiplication(q, y));
