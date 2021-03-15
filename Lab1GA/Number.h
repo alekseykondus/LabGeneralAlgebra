@@ -23,6 +23,7 @@ namespace LongArithmetic {
 		Number operator-() const;
 
 		Sign GetSign() const;
+		void SetSign(Sign sing) { m_Sign = sing; }
 		const std::vector<std::uint64_t>& GetDigits() const;
 
 		void FromString(const std::string& str);	//another name??

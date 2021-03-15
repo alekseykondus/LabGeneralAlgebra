@@ -10,22 +10,6 @@ namespace LongArithmetic {
         return result;
     }
 
-    bool Calculator::Less(const Number& left, const Number& right)
-    {
-        for (auto leftIt = left.GetDigits().begin(), rightIt = right.GetDigits().begin();
-            leftIt != left.GetDigits().end();
-            leftIt++, rightIt++) {
-            if (*leftIt < *rightIt) {
-                return true;
-            }
-            else if (*leftIt < *rightIt) {
-                return false;
-            }
-        }
-        return false;
-    }
-
-
     Number Calculator::Plus(const Number& left, const Number& right) {
         Number answer(left);
         if (left.GetSign() == Number::Sign::Minus) {
@@ -54,7 +38,9 @@ namespace LongArithmetic {
     Number Calculator::Minus(const Number& left, const Number& right) {
         if (right.ToString() == "0") return left;
         Number answer(left);
-        if (left<right) {
+        if (right.GetSign() == Number::Sign::Minus) return Plus(left, (-right));
+        else if (left.GetSign() == Number::Sign::Minus) return -(Plus((-left), right));
+        else if (left<right) {
             answer = -Minus(right,left);
             answer.RemoveLeadingZeros();
             return answer;
@@ -72,6 +58,13 @@ namespace LongArithmetic {
     }
     Number Calculator::Multiplication(const Number& left, const Number& right) {
         Number answer("");
+        if (left.GetSign() == Number::Sign::Minus && right.GetSign() == Number::Sign::Minus)
+            answer.SetSign(Number::Sign::Plus);
+        else if (left.GetSign() == Number::Sign::Plus && right.GetSign() == Number::Sign::Plus)
+            answer.SetSign(Number::Sign::Plus);
+        else 
+            answer.SetSign(Number::Sign::Minus);
+
         answer.m_Digits.resize(left.GetDigits().size() + right.GetDigits().size());
         for (size_t i = 0; i < left.GetDigits().size(); ++i) {
             uint64_t carry = 0;
@@ -127,32 +120,35 @@ namespace LongArithmetic {
         }
         return number;
     }
-    Number Calculator::Inverse(const Number& a, const Number& b) {
-        Number q(""), x(""), lastx(""), y(""), lasty(""), temp(""), temp1(""), temp2(""), temp3(""), _a(a.ToString()), _b(b.ToString());
+    Number Calculator::Inverse(const Number& number, const Number& modul) {
+        Number q(""), x("0"), lastx("1"), y("1"), lasty("0"), temp1(""), temp2(""), temp3(""), _a(""), _b("");
 
-        if (b > a) {
-            temp = a; _a = b; _b = temp;
+        if (modul > number) {
+            _a = modul;
+            _b = number;
         }
-
-        x.FromString("0");
-        y.FromString("1");
-        lastx.FromString("1");
-        lasty.FromString("0");
+        else {
+            _a = number; 
+            _b = modul;
+        }
         while (_b.ToString() != "0") {
             q = Division(_a, _b);
             temp1 = Remainder(_a, _b);
+
             _a = _b;
             _b = temp1;
 
-            temp2 = x;
+            lastx = x;
             x = Minus(lastx, Multiplication(q, x));
-            lastx = temp2;
 
             temp3 = y;
             y = Minus(lasty, Multiplication(q, y));
             lasty = temp3;
         }
-        //нужно еще по модулю звять (вдруг отрицательное)
-        return x;
+        return Modul(lasty, modul);
+    }
+
+    Number Calculator::ModuloDivision(const Number& left, const Number& right, const Number& modul) {
+        return Modul(Multiplication(left, Inverse(right, modul)), modul);
     }
 }

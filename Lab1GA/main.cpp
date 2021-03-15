@@ -67,6 +67,27 @@ TEST_CASE("testing Calculator") {
 	CHECK(calculator.Division(Number("2222222222222222222222222222222222222222222222222"),
 							  Number("1111111111111111111111111111111111111111111111111")) ==
 							  Number("2"));
+/*	
+---------------------BIG TEST---------------------
+for (long long int i = 1; i < 100; i++)
+		for (long long j = 1; j < 100; j++) {
+			CHECK(calculator.Plus(Number(std::to_string(i)), 
+				Number(std::to_string(j))) == 
+				Number(std::to_string(i+j)));
+			CHECK(calculator.Minus(Number(std::to_string(i)), 
+				Number(std::to_string(j))) == 
+				Number(std::to_string(i-j)));
+			CHECK(calculator.Multiplication(Number(std::to_string(i)),
+				Number(std::to_string(j))) == 
+				Number(std::to_string(i*j)));
+			CHECK(calculator.Division(Number(std::to_string(i)),
+				Number(std::to_string(j))) == 
+				Number(std::to_string(i/j)));
+			CHECK(calculator.Remainder(Number(std::to_string(i)),
+				Number(std::to_string(j))) == 
+				Number(std::to_string(i%j)));
+		} 
+*/
 
 	CHECK(calculator.Modul(Number("1111111111111111111111111111111111111111111111111"),
 						   Number("2222222222222222222222222222222222222222222222222")) ==
@@ -77,26 +98,24 @@ TEST_CASE("testing Calculator") {
 	CHECK(calculator.Modul(Number("-2222222222222222222222222222222222222222222222222"),
 						   Number("1111111111111111111111111111111111111111111111111")) ==
 						   Number("0"));
-
 	CHECK(calculator.Modul(Number("-2222222222222222222222222222222222222222222222221"),
 						   Number("1111111111111111111111111111111111111111111111111")) ==
 						   Number("1"));
+	CHECK(calculator.Modul(Number("-1"),
+						   Number("4")) ==
+						   Number("3"));
 
 	CHECK(calculator.Remainder(Number("179"), Number("96")) == Number("83"));
 	CHECK(calculator.Remainder(Number("1111111111111111111111111111111111111111111111111"), 
 		Number("2222222222222222222222222222222222222222222222222")) == 
 		Number("1111111111111111111111111111111111111111111111111"));
 	CHECK(calculator.Remainder(Number("123456789"), 
-		Number("123456789")) == 
-		Number("0"));
+							   Number("123456789")) == 
+							   Number("0"));
 
-	//с интверсией пока что не складывается
-//	std::cout << calculator.Inverse(Number("96"), Number("179")).ToString() << std::endl;
-//	CHECK(calculator.Inverse(Number("96"), Number("179")) == Number("37"));
-//	CHECK(calculator.Inverse(Number("96"), Number("179")) == Number("-37"));
-//	CHECK(calculator.Division(Number("2222222222222222222222222222222222222222222222222"),
-//							  Number("1212121212121212121212121212121212121212121212121")) ==
-//							  Number("2"));
+	CHECK(calculator.Inverse(Number("96"), Number("179")) == Number("69"));
+	CHECK(calculator.Inverse(Number("25"), Number("132")) == Number("37"));
+	CHECK(calculator.Inverse(Number("101"), Number("150")) == Number("101"));
 }
 #endif
 
@@ -116,6 +135,8 @@ void evklid(long long a, long long b)
 	while (b != 0) {
 		q = a / b;
 		std::cout << "q =  " << q << std::endl;
+		std::cout << "a =  " << a << std::endl;
+		std::cout << "b =  " << b << std::endl;
 		temp1 = a % b;
 		a = b;
 		b = temp1;
@@ -127,6 +148,11 @@ void evklid(long long a, long long b)
 		temp3 = y;
 		y = lasty - q * y;
 		lasty = temp3;
+
+		std::cout << "x:   " << x << std::endl;
+		std::cout << "y:   " << y << std::endl;
+		std::cout << "lastx:   " << lastx << std::endl;
+		std::cout << "lasty:   " << lasty << std::endl;
 	}
 	std::cout << "ОТВЕТЫ:\n" << std::endl;
 	std::cout << "НОД= " << a << std::endl;
@@ -134,7 +160,37 @@ void evklid(long long a, long long b)
 	std::cout << "y=" << lasty << std::endl;
 }
 
+int gcdex(int a, int b, int& x, int& y) {
+	if (b == 0) {
+		x = 1;
+		y = 0;
+		return a;
+	}
+	int x1, y1;
+	int d1 = gcdex(b, a % b, x1, y1);
+	x = y1;
+	y = x1 - (a / b) * y1;
+	return d1;
+}
+
+// Function returns 1 if such element doesn't exist and 0 if exists and puts it
+// in result.
+int ReverseElement(int a, int N) {
+	int result;
+	int x, y, d;
+	d = gcdex(a, N, x, y);
+	if (d != 1) {
+		return 1;
+	}
+	else {
+		result = x;
+		return result;
+	}
+}
 int main() {
+//	std::cout << ReverseElement(96, 179) << std::endl;
+//	evklid(96, 179);
+
 #ifdef DOCTEST_CONFIG_IMPLEMENT
 	doctest::Context context;
 	int res = context.run();
