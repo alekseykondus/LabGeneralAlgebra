@@ -242,4 +242,10 @@ namespace LongArithmetic {
         result.RemoveLeadingZeros();
         return result;
     }
+
+    /*Number Number::operator%(const Number& right) const {
+        Number result(*this - ((*this / right) * right));
+        if (result.GetSign() == Number::Sign::Minus) result = result + right;
+        return result;
+    }*/
 }

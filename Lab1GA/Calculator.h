@@ -9,7 +9,6 @@ namespace LongArithmetic {
 		Calculator(const Number& modulus);
 
 		Number Remainder(const Number& left, const Number& right);
-
 		Number Plus(const Number& left, const Number& right);
 		Number Minus(const Number& left, const Number& right);
 		Number Multiplication(const Number& left, const Number& right);
