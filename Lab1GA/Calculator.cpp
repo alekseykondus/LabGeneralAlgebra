@@ -7,13 +7,14 @@ namespace LongArithmetic {
     }
 
     Number Calculator::Remainder(const Number& left, const Number& right) {
-        Number result(Minus(left, Multiplication(Division(left,right), right)));
-        if (result.GetSign() == Number::Sign::Minus) result = Plus(result, right);
+        Number result(left -  ((left / right) * right));
+        if (result.GetSign() == Number::Sign::Minus) result = result + right;
         return result;
     }
 
     Number Calculator::Plus(const Number& left, const Number& right) {
-        Number answer(left);
+        return Modul(left + right);
+        /*Number answer(left);
         if (left.GetSign() == Number::Sign::Minus) {
             if (right.GetSign() == Number::Sign::Minus) return -Plus(-left, (-right));
             else
@@ -34,11 +35,12 @@ namespace LongArithmetic {
         if (m_Modulus <answer) {
             answer = Minus(answer, m_Modulus);
         }
-        return answer;
+        return answer;*/
     }
 
     Number Calculator::Minus(const Number& left, const Number& right) {
-        if (right.ToString() == "0") return left;
+        return Modul(left - right);
+        /*if (right.ToString() == "0") return left;
         Number answer(left);
         if (right.GetSign() == Number::Sign::Minus) return Plus(left, (-right));
         else if (left.GetSign() == Number::Sign::Minus) return -(Plus((-left), right));
@@ -56,11 +58,12 @@ namespace LongArithmetic {
             }
         }
         answer.RemoveLeadingZeros();
-        return answer;
+        return answer;*/
     }
 
     Number Calculator::Multiplication(const Number& left, const Number& right) {
-        Number answer("");
+        return Modul(left * right);
+        /*Number answer("");
         if (left.GetSign() == Number::Sign::Minus && right.GetSign() == Number::Sign::Minus)
             answer.SetSign(Number::Sign::Plus);
         else if (left.GetSign() == Number::Sign::Plus && right.GetSign() == Number::Sign::Plus)
@@ -79,12 +82,12 @@ namespace LongArithmetic {
             }
         }
         answer.RemoveLeadingZeros();
-        return answer;
+        return answer;*/
     }
 
     Number Calculator::Division(const Number& left, const Number& right) {
-
-        if (right.ToString() == "0") throw std::exception{ "Divide By Zero" };
+        return Modul(left / right);
+        /*if (right.ToString() == "0") throw std::exception{ "Divide By Zero" };
         Number b(right.ToString());
         Number result(""), current("");
         result.m_Digits.resize(left.GetDigits().size());
@@ -110,15 +113,15 @@ namespace LongArithmetic {
         }
 
         result.RemoveLeadingZeros();
-        return result;
+        return result;*/
     }
 
     Number Calculator::Modul(const Number& number) {
         if (number > m_Modulus || number == m_Modulus)
             return Remainder(number, m_Modulus);
         else if (number.GetSign() == Number::Sign::Minus) {
-            Number result(Plus(number, Multiplication(Division(number, m_Modulus), m_Modulus)).ToString());
-            if (result.GetSign() == Number::Sign::Minus) result = Plus(result, m_Modulus);
+            Number result(number + ((number / m_Modulus) * m_Modulus));
+            if (result.GetSign() == Number::Sign::Minus) result = result + m_Modulus;
             return result;
         }
         return number;

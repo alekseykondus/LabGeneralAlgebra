@@ -58,9 +58,6 @@ TEST_CASE("testing Calculator") {
 	CHECK(calculator.Minus(Number("2222222222222222222222222222222222222222222222222"),
 						  Number("0")) ==
 						  Number("2222222222222222222222222222222222222222222222222"));
-	CHECK(calculator.Multiplication(Number("2222222222222222222222222222222222222222222222222"),
-									Number("1000000000000000000000000000000000000000000000000")) ==
-									Number("2222222222222222222222222222222222222222222222222000000000000000000000000000000000000000000000000"));
 	CHECK(calculator.Division(Number("1111111111111111111111111111111111111111111111111"),
 							  Number("1111111111111111111111111111111111111111111111111")) ==
 							  Number("1"));
@@ -72,22 +69,21 @@ TEST_CASE("testing Calculator") {
 		for (long long j = 1; j < 100; j++) {
 			CHECK(calculator.Plus(Number(std::to_string(i)),
 				Number(std::to_string(j))) ==
-				Number(std::to_string(i + j)));
+				calculator.Modul(Number(std::to_string(i + j))));
 			CHECK(calculator.Minus(Number(std::to_string(i)),
 				Number(std::to_string(j))) ==
-				Number(std::to_string(i - j)));
+				calculator.Modul(Number(std::to_string(i - j))));
 			CHECK(calculator.Multiplication(Number(std::to_string(i)),
 				Number(std::to_string(j))) ==
-				Number(std::to_string(i * j)));
+				calculator.Modul(Number(std::to_string(i * j))));
 			CHECK(calculator.Division(Number(std::to_string(i)),
 				Number(std::to_string(j))) ==
-				Number(std::to_string(i / j)));
+				calculator.Modul(Number(std::to_string(i / j))));
 			CHECK(calculator.Remainder(Number(std::to_string(i)),
 				Number(std::to_string(j))) ==
-				Number(std::to_string(i % j)));
+				calculator.Modul(Number(std::to_string(i % j))));
 		}
 	}
-
 
 	calculator.SetModulus(Number("2222222222222222222222222222222222222222222222222"));
 

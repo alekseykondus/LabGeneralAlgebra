@@ -38,6 +38,11 @@ namespace LongArithmetic {
 	private:
 		void RemoveLeadingZeros();
 
+		Number operator+(const Number& right) const;
+		Number operator-(const Number& right) const;
+		Number operator*(const Number& right) const;
+		Number operator/(const Number& right) const;
+
 		static const uint64_t Base = 1'000'000'000;
 
 		std::vector<std::uint64_t>m_Digits;
