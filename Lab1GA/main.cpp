@@ -67,55 +67,58 @@ TEST_CASE("testing Calculator") {
 	CHECK(calculator.Division(Number("2222222222222222222222222222222222222222222222222"),
 							  Number("1111111111111111111111111111111111111111111111111")) ==
 							  Number("2"));
-/*	
----------------------BIG TEST---------------------
-for (long long int i = 1; i < 100; i++)
+	
+	for (long long int i = 1; i < 100; i++) {
 		for (long long j = 1; j < 100; j++) {
-			CHECK(calculator.Plus(Number(std::to_string(i)), 
-				Number(std::to_string(j))) == 
-				Number(std::to_string(i+j)));
-			CHECK(calculator.Minus(Number(std::to_string(i)), 
-				Number(std::to_string(j))) == 
-				Number(std::to_string(i-j)));
+			CHECK(calculator.Plus(Number(std::to_string(i)),
+				Number(std::to_string(j))) ==
+				Number(std::to_string(i + j)));
+			CHECK(calculator.Minus(Number(std::to_string(i)),
+				Number(std::to_string(j))) ==
+				Number(std::to_string(i - j)));
 			CHECK(calculator.Multiplication(Number(std::to_string(i)),
-				Number(std::to_string(j))) == 
-				Number(std::to_string(i*j)));
+				Number(std::to_string(j))) ==
+				Number(std::to_string(i * j)));
 			CHECK(calculator.Division(Number(std::to_string(i)),
-				Number(std::to_string(j))) == 
-				Number(std::to_string(i/j)));
+				Number(std::to_string(j))) ==
+				Number(std::to_string(i / j)));
 			CHECK(calculator.Remainder(Number(std::to_string(i)),
-				Number(std::to_string(j))) == 
-				Number(std::to_string(i%j)));
-		} 
-*/
+				Number(std::to_string(j))) ==
+				Number(std::to_string(i % j)));
+		}
+	}
 
-	CHECK(calculator.Modul(Number("1111111111111111111111111111111111111111111111111"),
-						   Number("2222222222222222222222222222222222222222222222222")) ==
+
+	calculator.SetModulus(Number("2222222222222222222222222222222222222222222222222"));
+
+	CHECK(calculator.Modul(Number("1111111111111111111111111111111111111111111111111")) ==
 						   Number("1111111111111111111111111111111111111111111111111"));
-	CHECK(calculator.Modul(Number("2222222222222222222222222222222222222222222222222"),
-						   Number("1111111111111111111111111111111111111111111111111")) ==
+	CHECK(calculator.Modul(Number("2222222222222222222222222222222222222222222222222")) ==
 						   Number("0"));
-	CHECK(calculator.Modul(Number("-2222222222222222222222222222222222222222222222222"),
-						   Number("1111111111111111111111111111111111111111111111111")) ==
+	CHECK(calculator.Modul(Number("-2222222222222222222222222222222222222222222222222")) ==
 						   Number("0"));
-	CHECK(calculator.Modul(Number("-2222222222222222222222222222222222222222222222221"),
-						   Number("1111111111111111111111111111111111111111111111111")) ==
+	CHECK(calculator.Modul(Number("-2222222222222222222222222222222222222222222222221")) ==
 						   Number("1"));
-	CHECK(calculator.Modul(Number("-1"),
-						   Number("4")) ==
+
+	calculator.SetModulus(Number("4"));
+
+	CHECK(calculator.Modul(Number("-1")) ==
 						   Number("3"));
 
 	CHECK(calculator.Remainder(Number("179"), Number("96")) == Number("83"));
 	CHECK(calculator.Remainder(Number("1111111111111111111111111111111111111111111111111"), 
-		Number("2222222222222222222222222222222222222222222222222")) == 
-		Number("1111111111111111111111111111111111111111111111111"));
+							   Number("2222222222222222222222222222222222222222222222222")) == 
+							   Number("1111111111111111111111111111111111111111111111111"));
 	CHECK(calculator.Remainder(Number("123456789"), 
 							   Number("123456789")) == 
 							   Number("0"));
 
-	CHECK(calculator.Inverse(Number("96"), Number("179")) == Number("69"));
-	CHECK(calculator.Inverse(Number("25"), Number("132")) == Number("37"));
-	CHECK(calculator.Inverse(Number("101"), Number("150")) == Number("101"));
+	calculator.SetModulus(Number("179"));
+	CHECK(calculator.Inverse(Number("96")) == Number("69"));
+	calculator.SetModulus(Number("132"));
+	CHECK(calculator.Inverse(Number("25")) == Number("37"));
+	calculator.SetModulus(Number("150"));
+	CHECK(calculator.Inverse(Number("101")) == Number("101"));
 }
 #endif
 

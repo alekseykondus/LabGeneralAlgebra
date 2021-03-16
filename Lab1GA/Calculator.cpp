@@ -1,11 +1,13 @@
 #include "Calculator.h"
 
 namespace LongArithmetic {
-    Calculator::Calculator(const Number& number) :
-        m_Number(number) {}
+    Calculator::Calculator(const Number& modulus) :
+        m_Modulus("0") {
+        SetModulus(modulus);
+    }
 
     Number Calculator::Remainder(const Number& left, const Number& right) {
-        Number result(Minus(left, Multiplication(Division(left,right), right)).ToString());
+        Number result(Minus(left, Multiplication(Division(left,right), right)));
         if (result.GetSign() == Number::Sign::Minus) result = Plus(result, right);
         return result;
     }
@@ -29,8 +31,8 @@ namespace LongArithmetic {
                 answer.m_Digits[i] -= Number::Base;
             }
         }
-        if (m_Number<answer) {
-            answer = Minus(answer, m_Number);
+        if (m_Modulus <answer) {
+            answer = Minus(answer, m_Modulus);
         }
         return answer;
     }
@@ -56,6 +58,7 @@ namespace LongArithmetic {
         answer.RemoveLeadingZeros();
         return answer;
     }
+
     Number Calculator::Multiplication(const Number& left, const Number& right) {
         Number answer("");
         if (left.GetSign() == Number::Sign::Minus && right.GetSign() == Number::Sign::Minus)
@@ -110,26 +113,27 @@ namespace LongArithmetic {
         return result;
     }
 
-    Number Calculator::Modul(const Number& number, const Number& modul) {
-        if (number > modul || number == modul)
-            return Remainder(number, modul);
+    Number Calculator::Modul(const Number& number) {
+        if (number > m_Modulus || number == m_Modulus)
+            return Remainder(number, m_Modulus);
         else if (number.GetSign() == Number::Sign::Minus) {
-            Number result(Plus(number, Multiplication(Division(number, modul), modul)).ToString());
-            if (result.GetSign() == Number::Sign::Minus) result = Plus(result, modul);
+            Number result(Plus(number, Multiplication(Division(number, m_Modulus), m_Modulus)).ToString());
+            if (result.GetSign() == Number::Sign::Minus) result = Plus(result, m_Modulus);
             return result;
         }
         return number;
     }
-    Number Calculator::Inverse(const Number& number, const Number& modul) {
+
+    Number Calculator::Inverse(const Number& number) {
         Number q(""), x("0"), lastx("1"), y("1"), lasty("0"), temp1(""), temp2(""), temp3(""), _a(""), _b("");
 
-        if (modul > number) {
-            _a = modul;
+        if (m_Modulus > number) {
+            _a = m_Modulus;
             _b = number;
         }
         else {
-            _a = number; 
-            _b = modul;
+            _a = number;
+            _b = m_Modulus;
         }
         while (_b.ToString() != "0") {
             q = Division(_a, _b);
@@ -146,10 +150,19 @@ namespace LongArithmetic {
             y = Minus(lasty, Multiplication(q, y));
             lasty = temp3;
         }
-        return Modul(lasty, modul);
+        return Modul(lasty);
     }
 
-    Number Calculator::ModuloDivision(const Number& left, const Number& right, const Number& modul) {
-        return Modul(Multiplication(left, Inverse(right, modul)), modul);
+    void Calculator::SetModulus(const Number& modulus) {
+        if (Number("-1") < modulus) {
+            m_Modulus = modulus;
+        }
+        else {
+            throw std::invalid_argument("modulus can't be less than 0!");
+        }
+    }
+
+    Number Calculator::ModuloDivision(const Number& left, const Number& right) {
+        return Modul(Multiplication(left, Inverse(right)));
     }
 }

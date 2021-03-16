@@ -131,9 +131,15 @@ namespace LongArithmetic {
             }
         }
     }
+
+    void Number::SetSign(Sign sing){
+        m_Sign = sing;
+    }
+
     bool Number::operator<=(const Number& right) const {
         return (*this < right || *this == right);
     }
+
     bool Number::operator>(const Number& right) const {
         return !(*this <= right);
     }
