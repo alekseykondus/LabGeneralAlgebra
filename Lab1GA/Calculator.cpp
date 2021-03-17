@@ -32,7 +32,7 @@ namespace LongArithmetic {
         if (number > m_Modulus || number == m_Modulus)
             return Remainder(number, m_Modulus);
         else if (number.GetSign() == Number::Sign::Minus) {
-            Number result(number + ((number / m_Modulus) * m_Modulus));
+            Number result(number + ((-(number / m_Modulus)) * m_Modulus));
             if (result.GetSign() == Number::Sign::Minus) result = result + m_Modulus;
             return result;
         }
@@ -51,18 +51,18 @@ namespace LongArithmetic {
             _b = m_Modulus;
         }
         while (_b.ToString() != "0") {
-            q = Division(_a, _b);
+            q = _a / _b;
             temp1 = Remainder(_a, _b);
 
             _a = _b;
             _b = temp1;
 
             temp2 = x;
-            x = Minus(lastx, Multiplication(q, x));
+            x = (lastx -(q * x));
             lastx = temp2;
 
             temp3 = y;
-            y = Minus(lasty, Multiplication(q, y));
+            y = (lasty -(q * y));
             lasty = temp3;
         }
         return Modul(lasty);

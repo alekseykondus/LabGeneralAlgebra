@@ -216,6 +216,7 @@ namespace LongArithmetic {
     Number Number::operator/(const Number& right) const {
         if (right.ToString() == "0") throw std::exception{ "Divide By Zero" };
         Number b(right.ToString());
+        b.SetSign(Number::Sign::Plus);
         Number result(""), current("");
         result.m_Digits.resize(GetDigits().size());
 
@@ -239,7 +240,14 @@ namespace LongArithmetic {
             current = current - (b * _x);
         }
 
+        if (GetSign() == Number::Sign::Minus && right.GetSign() == Number::Sign::Minus)
+            result.SetSign(Number::Sign::Plus);
+        else if (GetSign() == Number::Sign::Plus && right.GetSign() == Number::Sign::Plus)
+            result.SetSign(Number::Sign::Plus);
+        else
+            result.SetSign(Number::Sign::Minus);
         result.RemoveLeadingZeros();
+
         return result;
     }
 
