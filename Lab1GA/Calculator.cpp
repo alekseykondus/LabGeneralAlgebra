@@ -80,4 +80,14 @@ namespace LongArithmetic {
     Number Calculator::ModuloDivision(const Number& left, const Number& right) {
         return Modul(Multiplication(left, Inverse(right)));
     }
+
+    Number& Calculator::Increment(Number& number) {
+        number = Modul(++number);
+        return number;
+    }
+
+    Number& Calculator::Decrement(Number& number) {
+        number = Modul(--number);
+        return number;
+    }
 }

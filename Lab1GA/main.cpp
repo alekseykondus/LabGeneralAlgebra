@@ -122,6 +122,30 @@ TEST_CASE("testing Calculator") {
 	calculator.SetModulus(Number("123456789"));
 	CHECK(calculator.Inverse(Number("1234567")) == Number("18033013"));
 }
+
+TEST_CASE("testing increment decrement") {
+	using namespace LongArithmetic;
+	Calculator calculator(Number("100"));
+	Number number("99");
+	SUBCASE("without modulus") {
+		CHECK(number++ == Number("99"));
+		CHECK(number == Number("100"));
+		CHECK(number-- == Number("100"));
+		CHECK(number == Number("99"));
+		CHECK(++number == Number("100"));
+		CHECK(number == Number("100"));
+		CHECK(--number == Number("99"));
+		CHECK(number == Number("99"));
+	}
+	SUBCASE("with modulus") {
+		CHECK(calculator.Decrement(number) == Number("98"));
+		CHECK(calculator.Increment(number) == Number("99"));
+		CHECK(calculator.Increment(number) == Number("0"));
+		CHECK(calculator.Increment(number) == Number("1"));
+		CHECK(calculator.Decrement(number) == Number("0"));
+		CHECK(calculator.Decrement(number) == Number("99"));
+	}
+}
 #endif
 
 //алгоритм для инверсии

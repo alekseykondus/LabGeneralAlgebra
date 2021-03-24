@@ -35,7 +35,6 @@ namespace LongArithmetic {
 		bool operator>(const Number& right) const;
 
 		void ShiftRight();
-//private:
 		void RemoveLeadingZeros();
 
 		Number operator+(const Number& right) const;
@@ -44,8 +43,11 @@ namespace LongArithmetic {
 		Number operator/(const Number& right) const;
 		//Number operator%(const Number& right) const;
 
-		Number operator++() const;
-		Number operator--() const;
+		Number& operator++();
+		Number& operator--();
+
+		Number operator++(int);
+		Number operator--(int);
 private:
 
 		static const uint64_t Base = 1'000'000'000;

@@ -15,6 +15,9 @@ namespace LongArithmetic {
 		Number Division(const Number& left, const Number& right);
 		Number ModuloDivision(const Number& left, const Number& right);
 
+		Number& Increment(Number& number);
+		Number& Decrement(Number& number);
+
 		Number Modul(const Number& number);
 		Number Inverse(const Number& number);
 

@@ -250,12 +250,25 @@ namespace LongArithmetic {
 
         return result;
     }
-    Number Number::operator++() const {
-        m_Digits = (*this - Number("1")).GetDigits();
+    Number& Number::operator++() {
+        *this = *this + Number("1");
         return *this;
     }
-    Number Number::operator--() const {
-        return (*this = *this - Number("1"));
+    Number& Number::operator--() {
+        *this = *this - Number("1");
+        return *this;
+    }
+
+    Number Number::operator++(int) {
+        Number temp = *this;
+        ++*this;
+        return temp;
+    }
+
+    Number Number::operator--(int) {
+        Number temp = *this;
+        --*this;
+        return temp;
     }
     /*Number Number::operator%(const Number& right) const {
         Number result(*this - ((*this / right) * right));
