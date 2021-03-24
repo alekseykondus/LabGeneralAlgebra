@@ -251,7 +251,8 @@ namespace LongArithmetic {
         return result;
     }
     Number Number::operator++() const {
-        return (*this->FromString( (*this - Number("1")).ToString()));
+        m_Digits = (*this - Number("1")).GetDigits();
+        return *this;
     }
     Number Number::operator--() const {
         return (*this = *this - Number("1"));
