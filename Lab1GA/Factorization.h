@@ -30,5 +30,8 @@ namespace LongArithmetic {
 	private:
 
 		Calculator self_mod;
+
+		// recursive part of PrimeFactors()
+		bool RecursiveSearchingPrimeFactors(const Number& number, vector<Number>* list);
 	};
 }

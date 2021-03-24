@@ -124,4 +124,30 @@ namespace LongArithmetic {
 			return NO_FACTOR;
 		}
 	}
+
+	vector<Number> Factorization::PrimeFactors(const Number& number)
+	{
+		vector<Number> list = vector<Number>(0);
+
+		RecursiveSearchingPrimeFactors(number, &list);
+
+		return list;
+	}
+
+	// recursive part of PrimeFactors()
+	// return true if number is prime
+	bool Factorization::RecursiveSearchingPrimeFactors(const Number& number, vector<Number>* list)
+	{
+		pair<Number, Number> pollard_result = PollardRhoFactorization(number);
+
+		if (pollard_result == NO_FACTOR)
+		{
+			list->push_back(number);
+		}
+		else
+		{
+			RecursiveSearchingPrimeFactors(pollard_result.first, list);
+			RecursiveSearchingPrimeFactors(pollard_result.second, list);
+		}
+	};
 }
