@@ -141,6 +141,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Calculator.cpp" />
+    <ClCompile Include="Factorization.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Number.cpp" />
   </ItemGroup>
