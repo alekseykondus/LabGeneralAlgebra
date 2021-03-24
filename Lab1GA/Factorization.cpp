@@ -10,16 +10,118 @@ namespace LongArithmetic {
 	{
 		vector<Number> factor_list = vector<Number>(0);
 
-		// may be optimized with 4 lab var - calc sqrt(number) once time and don't calculate on each iteration
-		for (Number i = Number("2"); /*at this place -> */ i * i <= number; i++)
+		if (number.GetSign() == Number::Sign::Plus)
 		{
-			// this can be changed at ((number % i) == 0) (don't realized at 1st var)
-			if (/*at this place ->*/((number / i) * i) == number)
+			// may be optimized with 4 lab var - calc sqrt(number) once time and don't calculate on each iteration
+			for (Number i = Number("2"); /*at this place -> */ i * i <= number; i++)
 			{
-				factor_list.push_back(i);
+				// this can be changed at : ((number % i) == 0) (don't realized at 1st var)
+				if (/*at this place ->*/((number / i) * i) == number)
+				{
+					factor_list.push_back(i);
+				}
 			}
 		}
 
 		return factor_list;
+	}
+
+	Number GCD(const Number& number1, const Number& number2)
+	{
+		if (number1.GetSign() == Number::Sign::Plus && number2.GetSign() == Number::Sign::Plus)
+		{
+			// defining because Number don't has default constructor
+			Number bigger = Number("0");
+			Number smaller = Number("0");
+			Number rest = Number("0");
+			Number zero = Number("0");
+
+			if (number1 > number2)
+			{
+				bigger = number1;
+				smaller = number2;
+			}
+			else
+			{
+				bigger = number2;
+				smaller = number1;
+			}
+
+			do
+			{
+				// this can be changed at : rest = bigger % smaller; (don't realized at 1st var)
+				rest = bigger - (bigger / smaller) * smaller;
+				
+				// for next step
+				bigger = smaller;
+				smaller = rest;
+			}
+			// don't realized !=
+			while(!(rest == zero));
+
+			// last non-zero rest (changed for no-next step)
+			return bigger;
+		}
+		else
+		{
+			return Number("0");
+		}
+	}
+
+	pair<Number, Number> Factorization::PollardRhoFactorization(const Number& number)
+	{
+		if (number.GetSign() == Number::Sign::Plus)
+		{
+			self_mod.SetModulus(number);
+
+			Number a = Number("2");
+			Number b = Number("2");
+			// defining because Number don't has default constructor
+			Number d = Number("0");
+
+			Number diff = Number("0");
+			Number one = Number("1");
+
+			do
+			{
+				// a = a^2 + 1 mod n
+				a = a * a;
+				a++;
+				a = self_mod.Modul(a);
+
+				// b = b^2 + 1 mod n (twice)
+				b = b * b;
+				b++;
+				b = self_mod.Modul(b);
+				b = b * b;
+				b++;
+				b = self_mod.Modul(b);
+
+				// working as |a - b|
+				if (a > b)
+				{
+					diff = a - b;
+				}
+				else
+				{
+					diff = b - a;
+				}
+
+				d = GCD(diff, number);
+
+				if (d > one && d < number)
+				{
+					return make_pair(d, number / d);
+				}
+			}
+			// terminating algoritm with failure
+			while(!(d == number));
+			// terminating algoritm with failure
+			return NO_FACTOR;
+		}
+		else
+		{
+			return NO_FACTOR;
+		}
 	}
 }

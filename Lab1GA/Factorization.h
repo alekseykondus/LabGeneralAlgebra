@@ -18,7 +18,10 @@ namespace LongArithmetic {
 		// return all factors
 		vector<Number> NaiveFactorization(const Number& number);
 
-		// return pair of factors
+		// Euclidean algorithm (return 0 if numbers aren't both pozitive)
+		Number GCD(const Number& number1, const Number& number2);
+
+		// return pair of factors (NO_FACTOR if failed)
 		pair<Number, Number> PollardRhoFactorization(const Number& number);
 
 		// return all prime factors (with repeating if it exists)
