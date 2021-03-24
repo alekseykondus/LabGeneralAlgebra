@@ -250,7 +250,12 @@ namespace LongArithmetic {
 
         return result;
     }
-
+    Number Number::operator++() const {
+        return (*this->FromString( (*this - Number("1")).ToString()));
+    }
+    Number Number::operator--() const {
+        return (*this = *this - Number("1"));
+    }
     /*Number Number::operator%(const Number& right) const {
         Number result(*this - ((*this / right) * right));
         if (result.GetSign() == Number::Sign::Minus) result = result + right;
