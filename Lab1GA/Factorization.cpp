@@ -8,7 +8,8 @@ namespace LongArithmetic {
 
 	vector<Number> Factorization::NaiveFactorization(const Number& number)
 	{
-		vector<Number> factor_list = vector<Number>(0);
+		// ! added Number initializer because don't realized default constructor !
+		vector<Number> factor_list = vector<Number>(0, Number("0"));
 
 		if (number.GetSign() == Number::Sign::Plus)
 		{
@@ -26,7 +27,7 @@ namespace LongArithmetic {
 		return factor_list;
 	}
 
-	Number GCD(const Number& number1, const Number& number2)
+	Number Factorization::GCD(const Number& number1, const Number& number2)
 	{
 		if (number1.GetSign() == Number::Sign::Plus && number2.GetSign() == Number::Sign::Plus)
 		{
@@ -127,7 +128,8 @@ namespace LongArithmetic {
 
 	vector<Number> Factorization::PrimeFactors(const Number& number)
 	{
-		vector<Number> list = vector<Number>(0);
+		// ! added Number initializer because don't realized default constructor !
+		vector<Number> list = vector<Number>(0, Number("0"));
 
 		RecursiveSearchingPrimeFactors(number, &list);
 
@@ -135,8 +137,7 @@ namespace LongArithmetic {
 	}
 
 	// recursive part of PrimeFactors()
-	// return true if number is prime
-	bool Factorization::RecursiveSearchingPrimeFactors(const Number& number, vector<Number>* list)
+	void Factorization::RecursiveSearchingPrimeFactors(const Number& number, vector<Number>* list)
 	{
 		pair<Number, Number> pollard_result = PollardRhoFactorization(number);
 
