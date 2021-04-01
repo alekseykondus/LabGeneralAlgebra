@@ -81,7 +81,7 @@ Point EllipticCurve::Inverse(Point p)
 			return p;
 		}
 		else {
-			p.setY(calculator->Inverse(p.y()));
+			p.setY(calculator->Minus(modul,p.y()));
 			return p;
 		}
 	}
