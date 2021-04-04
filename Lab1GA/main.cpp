@@ -88,6 +88,15 @@ TEST_CASE("testing Calculator") {
 		}
 	}
 	*/
+
+	calculator.SetModulus(Number("170141183460469231731687303715884105727"));
+
+
+	CHECK(calculator.Division(calculator.Multiplication(Number("1234563"), Number("143523")), Number ("143523")) == Number("1234563"));
+
+	calculator.Inverse(Number("123456789")).ToString();
+
+
 	calculator.SetModulus(Number("2222222222222222222222222222222222222222222222222"));
 
 	CHECK(calculator.Modul(Number("1111111111111111111111111111111111111111111111111")) ==
