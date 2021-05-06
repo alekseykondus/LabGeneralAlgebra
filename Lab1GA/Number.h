@@ -41,7 +41,7 @@ namespace LongArithmetic {
 		Number operator-(const Number& right) const;
 		Number operator*(const Number& right) const;
 		Number operator/(const Number& right) const;
-		//Number operator%(const Number& right) const;
+		Number operator%(const Number& right) const;
 
 		Number& operator++();
 		Number& operator--();

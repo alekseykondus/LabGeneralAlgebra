@@ -1,7 +1,7 @@
 #include "Number.h"
 #include "Calculator.h"
 #include "doctest.h"
-
+#include "generators.h"
 #include <string>
 
 #define DOCTEST_CONFIG_IMPLEMENT
@@ -223,10 +223,12 @@ int main() {
 //	evklid(96, 179);
 //	evklid(1234567, 123456789);
 
-#ifdef DOCTEST_CONFIG_IMPLEMENT
-	doctest::Context context;
-	int res = context.run();
-#endif
-	std::string str("abc");
-	LongArithmetic::Number number(str);
+//#ifdef DOCTEST_CONFIG_IMPLEMENT
+//	doctest::Context context;
+//	int res = context.run();
+//#endif
+	//std::string str("abc");
+	//LongArithmetic::Number number(str);
+	//Generators a;
+	//a.Generators::generators(Number("15"), '+');
 }
