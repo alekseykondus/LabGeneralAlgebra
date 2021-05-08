@@ -39,7 +39,7 @@ namespace LongArithmetic {
         return number;
     }
 
-    Number Calculator::Inverse(const Number& number) {
+    /*Number Calculator::Inverse(const Number& number) {
         Number q(""), x("0"), lastx("1"), y("1"), lasty("0"), temp1(""), temp2(""), temp3(""), _a(""), _b("");
 
         if (m_Modulus > number) {
@@ -66,7 +66,7 @@ namespace LongArithmetic {
             lasty = temp3;
         }
         return Modul(lasty);
-    }
+    }*/
 
     void Calculator::SetModulus(const Number& modulus) {
         if (Number("-1") < modulus) {
@@ -89,5 +89,59 @@ namespace LongArithmetic {
     Number& Calculator::Decrement(Number& number) {
         number = Modul(--number);
         return number;
+    }
+    void Calculator::decrease(const Number& a, Number& b, const Number& a_count_in_a, Number& a_count_in_b)
+    {
+/*        if (b.getN() == "0") {
+            std::string N = a.getN();
+        }
+        else {
+            std::string N = b.getN();
+        }*/
+        Number one("1");
+        Number ten("10");
+        Number modifier("0");
+        Number count("0");
+        for (int i = b.GetDigits().size() - 1; i >= 0; i--) {
+            count = count * ten;
+            modifier = modifier * ten;
+            modifier = modifier + Number(std::to_string(b.GetDigits()[i]));
+            while (modifier >= a) {
+                modifier = modifier - a;
+                count = count + one;
+            }
+        }
+        Modul(modifier);
+        Modul(count);
+        b = modifier;
+        a_count_in_b = a_count_in_b - count * a_count_in_a;
+    }
+
+    Number Calculator::Inverse(const Number& number) {
+        Number a = number;
+        Number b(m_Modulus);
+        Number one("1");
+        Number zero("0");
+        Number a_1("1"); //a count in a
+        Number b_1("0"); //a count in b
+        Number x("0");//result
+        while (!(a == one) && !(b == one)) {
+            if ((a == zero) || (b == zero)) {
+                return zero;
+            }
+            if (a >= b) {
+                decrease(b, a, b_1, a_1);
+            }
+            else {
+                decrease(a, b, a_1, b_1);
+            }
+        }
+        if (a == one) {
+            x = a_1;
+        }
+        else {
+            x = b_1;
+        }
+        return Modul(x);
     }
 }

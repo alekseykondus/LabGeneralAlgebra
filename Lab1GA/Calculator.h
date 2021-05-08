@@ -18,8 +18,10 @@ namespace LongArithmetic {
 		Number& Increment(Number& number);
 		Number& Decrement(Number& number);
 
+
 		Number Modul(const Number& number);
 		Number Inverse(const Number& number);
+		void decrease(const Number& a, Number& b, const Number& a_count_in_a, Number& a_count_in_b);
 
 		void SetModulus(const Number& modulus);
 	private:

@@ -92,9 +92,12 @@ TEST_CASE("testing Calculator") {
 	calculator.SetModulus(Number("170141183460469231731687303715884105727"));
 
 
-	//CHECK(calculator.Division(calculator.Multiplication(Number("1234563"), Number("143523")), Number ("143523")) == Number("1234563"));
-
-	//calculator.Inverse(Number("123456789")).ToString();
+	CHECK(calculator.Division(calculator.Multiplication(Number("1234563"), Number("143523")), Number("143523")) == Number("1234563"));
+	CHECK(calculator.Division(calculator.Multiplication(Number("1234789"), Number("143523")), Number("143523")) == Number("1234789"));
+	CHECK(calculator.Division(calculator.Multiplication(Number("1234789"), Number("143523")), Number("143523")) == Number("1234789"));
+//	std::cout << "Inverse(Number(1234789)):	" << calculator.Inverse(Number("1234789")).ToString() << std::endl;
+//	std::cout << "Test:	" << calculator.Multiplication(calculator.Inverse(Number("1234789")), Number("1234789")).ToString();
+//	CHECK(calculator.Multiplication(calculator.Inverse(Number("1234789")), Number("1234789")) == Number("1"));
 
 
 	calculator.SetModulus(Number("2222222222222222222222222222222222222222222222222"));
