@@ -33,6 +33,7 @@ namespace LongArithmetic {
 		bool operator<(const Number& right) const;
 		bool operator<=(const Number& right) const;
 		bool operator>(const Number& right) const;
+		bool operator>=(const Number& right) const;
 
 		void ShiftRight();
 		void RemoveLeadingZeros();

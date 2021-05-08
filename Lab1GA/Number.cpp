@@ -275,4 +275,7 @@ namespace LongArithmetic {
         if (result.GetSign() == Number::Sign::Minus) result = result + right;
         return result;
     }
+    bool Number::operator>=(const Number& right) const {
+        return (*this > right || *this == right) ? true : false;
+    }
 }
