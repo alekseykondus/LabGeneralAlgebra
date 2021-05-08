@@ -92,9 +92,9 @@ TEST_CASE("testing Calculator") {
 	calculator.SetModulus(Number("170141183460469231731687303715884105727"));
 
 
-	CHECK(calculator.Division(calculator.Multiplication(Number("1234563"), Number("143523")), Number ("143523")) == Number("1234563"));
+	//CHECK(calculator.Division(calculator.Multiplication(Number("1234563"), Number("143523")), Number ("143523")) == Number("1234563"));
 
-	calculator.Inverse(Number("123456789")).ToString();
+	//calculator.Inverse(Number("123456789")).ToString();
 
 
 	calculator.SetModulus(Number("2222222222222222222222222222222222222222222222222"));
@@ -223,10 +223,10 @@ int main() {
 //	evklid(96, 179);
 //	evklid(1234567, 123456789);
 
-//#ifdef DOCTEST_CONFIG_IMPLEMENT
-//	doctest::Context context;
-//	int res = context.run();
-//#endif
+#ifdef DOCTEST_CONFIG_IMPLEMENT
+	doctest::Context context;
+	int res = context.run();
+#endif
 	//std::string str("abc");
 	//LongArithmetic::Number number(str);
 	//Generators a;
