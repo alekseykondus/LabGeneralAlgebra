@@ -25,6 +25,9 @@ namespace LongArithmetic {
 		Sign GetSign() const;
 		void SetSign(Sign sing);
 		const std::vector<std::uint64_t>& GetDigits() const;
+		void SetDigits(std::vector<std::uint64_t> digits) {
+			m_Digits = digits;
+		}
 
 		void FromString(const std::string& str);	//another name??
 		std::string ToString() const;

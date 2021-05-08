@@ -4,6 +4,9 @@
 #include "generators.h"
 #include <string>
 
+Number evklid(Number a, Number b);
+
+
 #define DOCTEST_CONFIG_IMPLEMENT
 
 #ifdef DOCTEST_CONFIG_IMPLEMENT
@@ -91,14 +94,17 @@ TEST_CASE("testing Calculator") {
 
 	calculator.SetModulus(Number("170141183460469231731687303715884105727"));
 
+	CHECK(calculator.ModuloDivision(calculator.Multiplication(Number("123456789123"), Number("123456789123")), Number("123456789123")) == Number("123456789123"));
+	CHECK(calculator.ModuloDivision(calculator.Multiplication(Number("1234564353453453454789123"), Number("1234567896786123")), Number("1234567896786123")) == Number("1234564353453453454789123"));
+	CHECK(calculator.ModuloDivision(calculator.Multiplication(Number("1236353"), Number("250795")), Number("250795")) == Number("1236353"));
+	
+	CHECK(calculator.Division(calculator.Multiplication(Number("5555555"), Number("666666")), Number("666666")) == Number("5555555"));
 
-	CHECK(calculator.Division(calculator.Multiplication(Number("1234563"), Number("143523")), Number("143523")) == Number("1234563"));
-	CHECK(calculator.Division(calculator.Multiplication(Number("1234789"), Number("143523")), Number("143523")) == Number("1234789"));
-	CHECK(calculator.Division(calculator.Multiplication(Number("1234789"), Number("143523")), Number("143523")) == Number("1234789"));
-//	std::cout << "Inverse(Number(1234789)):	" << calculator.Inverse(Number("1234789")).ToString() << std::endl;
-//	std::cout << "Test:	" << calculator.Multiplication(calculator.Inverse(Number("1234789")), Number("1234789")).ToString();
-//	CHECK(calculator.Multiplication(calculator.Inverse(Number("1234789")), Number("1234789")) == Number("1"));
+	CHECK(calculator.Multiplication(calculator.Inverse(Number("1234789")), Number("1234789")) == Number("1"));
+	CHECK(calculator.Multiplication(calculator.Inverse(Number("1233245325325425454354354345435344789")), Number("1233245325325425454354354345435344789")) == Number("1"));
 
+	calculator.SetModulus(Number("170141183"));
+	CHECK(calculator.Inverse(Number("123")) == Number("142475950"));
 
 	calculator.SetModulus(Number("2222222222222222222222222222222222222222222222222"));
 
@@ -161,19 +167,19 @@ TEST_CASE("testing increment decrement") {
 #endif
 
 //алгоритм для инверсии
-void evklid(unsigned long long a, long long b)
+Number evklid(Number a, Number b)
 {
-	unsigned long long q, x, lastx, y, lasty, temp, temp1, temp2, temp3;
+	Number q(""), x(""), lastx(""), y(""), lasty(""), temp(""), temp1(""), temp2(""), temp3("");
 
 	if (b > a) {
 		temp = a; a = b; b = temp;
 	}
 
-	x = 0;
-	y = 1;
-	lastx = 1;
-	lasty = 0;
-	while (b != 0) {
+	x = Number("0");
+	y = Number("1");
+	lastx = Number("1");
+	lasty = Number("0");
+	while (!(b == Number("0"))) {
 		q = a / b;
 		temp1 = a % b;
 		a = b;
@@ -188,10 +194,9 @@ void evklid(unsigned long long a, long long b)
 		lasty = temp3;
 
 	}
-	std::cout << "ОТВЕТЫ:\n" << std::endl;
-	std::cout << "НОД= " << a << std::endl;
-	std::cout << "x=" << lastx << std::endl;
-	std::cout << "y=" << lasty << std::endl;
+	std::cout << "x=" << lastx.ToString() << std::endl;
+	std::cout << "y=" << lasty.ToString() << std::endl;
+	return lasty;
 }
 
 int gcdex(int a, int b, int& x, int& y) {
@@ -223,7 +228,7 @@ int ReverseElement(int a, int N) {
 }
 int main() {
 //	std::cout << ReverseElement(96, 179) << std::endl;
-//	evklid(96, 179);
+//	evklid(Number("96"), Number("179"));
 //	evklid(1234567, 123456789);
 
 #ifdef DOCTEST_CONFIG_IMPLEMENT

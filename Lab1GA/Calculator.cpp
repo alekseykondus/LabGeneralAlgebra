@@ -107,8 +107,8 @@ namespace LongArithmetic {
             modifier = modifier * ten;
             modifier = modifier + Number(std::to_string(b.GetDigits()[i]));
             while (modifier >= a) {
-                modifier = modifier - a;
-                count = count + one;
+                count = count + (modifier / a);
+                modifier = modifier%a;
             }
         }
         Modul(modifier);
@@ -117,7 +117,7 @@ namespace LongArithmetic {
         a_count_in_b = a_count_in_b - count * a_count_in_a;
     }
 
-    Number Calculator::Inverse(const Number& number) {
+    /*Number Calculator::Inverse(const Number& number) {
         Number a = number;
         Number b(m_Modulus);
         Number one("1");
@@ -143,5 +143,35 @@ namespace LongArithmetic {
             x = b_1;
         }
         return Modul(x);
+    }*/
+    Number Calculator::Inverse(Number a) {
+        Number b = m_Modulus;
+        Number q(""), x(""), lastx(""), y(""), lasty(""), temp(""), temp1(""), temp2(""), temp3("");
+
+        if (b > a) {
+            temp = a; a = b; b = temp;
+        }
+
+        x = Number("0");
+        y = Number("1");
+        lastx = Number("1");
+        lasty = Number("0");
+        while (!(b == Number("0"))) {
+            q = a / b;
+            temp1 = a % b;
+            a = b;
+            b = temp1;
+
+            temp2 = x;
+            x = lastx - q * x;
+            lastx = temp2;
+
+            temp3 = y;
+            y = lasty - q * y;
+            lasty = temp3;
+
+        }
+        return Modul(lasty);
     }
+
 }

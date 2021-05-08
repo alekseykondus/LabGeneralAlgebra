@@ -144,7 +144,7 @@ namespace LongArithmetic {
         return !(*this <= right);
     }
 
-    Number Number::operator+(const Number& right) const {
+    /*Number Number::operator+(const Number& right) const {
         Number answer(*this);
         if (GetSign() == Number::Sign::Minus) {
             if (right.GetSign() == Number::Sign::Minus) return -((-*this) + (-right));
@@ -164,11 +164,87 @@ namespace LongArithmetic {
         }
         /*if (m_Modulus < answer) {
             answer = Minus(answer, m_Modulus);
-        }*/
+        }////
         return answer;
+    }*/
+    int my_div(int num, int diver) {
+        if ((num < 0) && (num % diver))
+            return num / diver - 1;
+        else
+            return num / diver;
+    }
+    int my_mod(int num, int diver) {
+        if ((num < 0) && (num % diver))
+            return num % diver + diver;
+        else
+            return num % diver;
+    }
+    Number Number::operator + (const Number& num) const {
+
+        Number res("0");
+        std::vector<std::uint64_t> reschunks;
+        //a+b
+        Number a = *this;
+        Number b = num;
+        if (a.GetDigits().size() > b.GetDigits().size()) {
+            b.m_Digits.resize(a.GetDigits().size());
+        }
+        else {
+            a.m_Digits.resize(b.m_Digits.size());
+        }
+
+        if (m_Sign == b.GetSign()) {
+
+            res.SetSign(a.GetSign());
+
+            int over = 0;
+            for (int i = 0; i < a.m_Digits.size(); i++) {
+                reschunks.push_back(a.m_Digits[i] + b.m_Digits[i]);
+                reschunks[i] += over;
+                over = my_div(reschunks[i], Base);
+                reschunks[i] = my_mod(reschunks[i], Base);
+            }
+
+            if (over != 0) {
+                reschunks.push_back(over);
+            }
+
+        }
+        else {
+            res.SetSign(a.GetSign());
+            int over = 0;
+            a.SetSign(static_cast<Sign>((int)a.GetSign() * (-1)));
+            if (a >= b) {
+
+                for (int i = 0; i < a.m_Digits.size(); i++) {
+                    reschunks.push_back(a.m_Digits[i] - b.m_Digits[i]);
+                    reschunks[i] += over;
+                    over = my_div(reschunks[i], Base);
+                    reschunks[i] = my_mod(reschunks[i], Base);
+                }
+            }
+            else {
+                res.SetSign(static_cast<Sign>((int)res.GetSign() * (-1)));
+                for (int i = 0; i < a.m_Digits.size(); i++) {
+                    reschunks.push_back(b.m_Digits[i] - a.m_Digits[i]);
+                    reschunks[i] += over;
+                    over = my_div(reschunks[i], Base);
+                    reschunks[i] = my_mod(reschunks[i], Base);
+                }
+            }
+            a.SetSign(static_cast<Sign>((int)a.GetSign() * (-1)));
+
+        }
+
+        res.SetDigits(reschunks);
+        res.RemoveLeadingZeros();
+
+        return res;
     }
 
-    Number Number::operator-(const Number& right) const {
+
+
+    /*Number Number::operator-(const Number& right) const {
         if (right.ToString() == "0") return *this;  //TODO
         Number answer(*this);
         if (right.GetSign() == Number::Sign::Minus) return *this + (-right);
@@ -188,6 +264,67 @@ namespace LongArithmetic {
         }
         answer.RemoveLeadingZeros();
         return answer;
+    }*/
+
+    Number Number::operator - (const Number& num) const {
+
+        Number res("0");
+        std::vector<std::uint64_t> reschunks;
+        //a-b
+        Number a = *this;
+        Number b = num;
+        if (a.GetDigits().size() > b.GetDigits().size()) {
+            b.m_Digits.resize(a.GetDigits().size());
+        }
+        else {
+            a.m_Digits.resize(b.m_Digits.size());
+        }
+
+        if (m_Sign != b.GetSign()) {
+
+            res.SetSign(a.GetSign());
+
+            int over = 0;
+            for (int i = 0; i < a.GetDigits().size(); i++) {
+                reschunks.push_back(a.GetDigits()[i] + b.GetDigits()[i]);
+                reschunks[i] += over;
+                over = my_div(reschunks[i], Base);
+                reschunks[i] = my_mod(reschunks[i], Base);
+            }
+
+            if (over != 0) {
+                reschunks.push_back(over);
+            }
+
+        }
+        else {
+            res.SetSign(a.GetSign());
+            int over = 0;
+
+            if (a >= b) {
+                for (int i = 0; i < a.GetDigits().size(); i++) {
+                    reschunks.push_back(a.GetDigits()[i] - b.GetDigits()[i]);
+                    reschunks[i] += over;
+                    over = my_div(reschunks[i], Base);
+                    reschunks[i] = my_mod(reschunks[i], Base);
+                }
+            }
+            else {
+                res.SetSign(static_cast<Sign>((int)res.GetSign() * (-1)));
+                for (int i = 0; i < a.GetDigits().size(); i++) {
+                    reschunks.push_back(b.GetDigits()[i] - a.GetDigits()[i]);
+                    reschunks[i] += over;
+                    over = my_div(reschunks[i], Base);
+                    reschunks[i] = my_mod(reschunks[i], Base);
+                }
+            }
+
+        }
+
+        res.SetDigits(reschunks);
+        res.RemoveLeadingZeros();
+
+        return res;
     }
 
     Number Number::operator*(const Number& right) const {
