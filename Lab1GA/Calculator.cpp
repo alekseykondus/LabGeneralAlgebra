@@ -78,6 +78,10 @@ namespace LongArithmetic {
         }
     }
 
+    Number Calculator::GetModulus() const {
+        return m_Modulus;
+    }
+
     Number Calculator::ModuloDivision(const Number& left, const Number& right) {
         return Modul(Multiplication(Modul(left), Inverse(Modul(right))));
     }

@@ -2,10 +2,25 @@
 #include "Calculator.h"
 #include "doctest.h"
 #include "generators.h"
+
+#include <random>
 #include <string>
+
+static std::random_device dev;
+static std::mt19937 mersenne(dev());
 
 Number evklid(Number a, Number b);
 
+Number RandomNumber() {
+	std::string s;
+	if (mersenne() % 2) s.push_back('-');
+	int length = mersenne() % 100;
+	s.reserve(length);
+	for (int i = 0; i < length; i++) {
+		s.push_back('0' + mersenne() % 10);
+	}
+	return Number(s);
+}
 
 #define DOCTEST_CONFIG_IMPLEMENT
 
@@ -69,6 +84,8 @@ TEST_CASE("testing Calculator") {
 							  Number("2"));
 	
 	calculator.SetModulus(Number("7"));
+
+	
 /*	for (long long int i = -100; i < 100; i++) {
 		for (long long j = -10; j < 100; j++) {
 			CHECK(calculator.Plus(Number(std::to_string(i)),
@@ -166,6 +183,80 @@ TEST_CASE("testing increment decrement") {
 		CHECK(calculator.Increment(number) == Number("1"));
 		CHECK(calculator.Decrement(number) == Number("0"));
 		CHECK(calculator.Decrement(number) == Number("99"));
+	}
+}
+
+TEST_CASE("random testing") {
+	using namespace LongArithmetic;
+	Calculator calculator(Number("100"));
+	for (int i = 0; i < 100; i++) {
+		int m = mersenne() % 1000;
+		calculator.SetModulus(Number(std::to_string(m)));
+		int a = mersenne() % 1000;
+		int b = mersenne() % 1000;
+		if (mersenne() % 2) a *= -1;
+		if (mersenne() % 2) b *= -1;
+		CHECK(calculator.Plus(Number(std::to_string(a)),
+			Number(std::to_string(b))) ==
+			calculator.Modul(Number(std::to_string(a + b))));
+		CHECK(calculator.Minus(Number(std::to_string(a)),
+			Number(std::to_string(b))) ==
+			calculator.Modul(Number(std::to_string(a - b))));
+		CHECK(calculator.Multiplication(Number(std::to_string(a)),
+			Number(std::to_string(b))) ==
+			calculator.Modul(Number(std::to_string(a * b))));
+
+		if (a >= 0 && b > 0) CHECK(calculator.Division(Number(std::to_string(a)),
+			Number(std::to_string(b))) ==
+			calculator.Modul(Number(std::to_string((a % m) / (b % m)))));
+	}
+
+	for (int i = 0; i < 1000; i++) {
+		calculator.SetModulus(Number(Number::Sign::Plus, RandomNumber().GetDigits()));
+		Number a = RandomNumber();
+		Number b = RandomNumber();
+		CHECK(calculator.Modul(a) == calculator.Plus(calculator.Minus(a,b),b));
+		Number sum = calculator.Plus(a, b);
+		CHECK(calculator.Modul(a) == calculator.Minus(sum, b));
+		CHECK(calculator.Modul(b) == calculator.Minus(sum, a));
+		if (!(b == Number("0"))) {
+			bool check = calculator.Modul(a) == calculator.Multiplication(calculator.ModuloDivision(a, b), b);
+			CHECK(check);
+			if (!check) {
+				std::cout << "\n\n" << "Modul: " << calculator.GetModulus().ToString() << std::endl;
+				std::cout << "a: " << a.ToString() << std::endl;
+				std::cout << "b: " << b.ToString() << std::endl;
+				std::cout << "Modul a: " << calculator.Modul(a).ToString() << std::endl;
+				Number div = calculator.ModuloDivision(a, b);
+				std::cout << "ModuloDivision: " << div.ToString() << std::endl;
+				std::cout << "Multiplication: " << calculator.Multiplication(div, b).ToString() << std::endl;
+			}
+		}
+		Number product = calculator.Multiplication(a, b);
+		if (!(b == Number("0"))) {
+			bool check = calculator.Modul(a) == calculator.ModuloDivision(product, b);
+			CHECK(check);
+			if (!check) {
+				std::cout << "\n\n" << "Modul: " << calculator.GetModulus().ToString() << std::endl;
+				std::cout << "a: " << a.ToString() << std::endl;
+				std::cout << "b: " << b.ToString() << std::endl;
+				std::cout << "Modul a: " << calculator.Modul(a).ToString() << std::endl;
+				std::cout << "Multiplication: " << product.ToString() << std::endl;
+				std::cout << "ModuloDivision: " << calculator.ModuloDivision(product, b).ToString() << std::endl;
+			}
+		}
+		if (!(a == Number("0"))) {
+			bool check = calculator.Modul(b) == calculator.ModuloDivision(product, a);
+			CHECK(check);
+			if (!check) {
+				std::cout << "\n\n" << "Modul: " << calculator.GetModulus().ToString() << std::endl;
+				std::cout << "a: " << a.ToString() << std::endl;
+				std::cout << "b: " << b.ToString() << std::endl;
+				std::cout << "Modul b: " << calculator.Modul(b).ToString() << std::endl;
+				std::cout << "Multiplication: " << product.ToString() << std::endl;
+				std::cout << "ModuloDivision: " << calculator.ModuloDivision(product, a).ToString() << std::endl;
+			}
+		}
 	}
 }
 #endif

@@ -25,6 +25,7 @@ namespace LongArithmetic {
 		void decrease(const Number& a, Number& b, const Number& a_count_in_a, Number& a_count_in_b);
 
 		void SetModulus(const Number& modulus);
+		Number GetModulus() const;
 	private:
 		Number m_Modulus;
 	};
