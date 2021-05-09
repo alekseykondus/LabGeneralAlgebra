@@ -25,12 +25,13 @@ namespace LongArithmetic {
     }
 
     Number Calculator::Division(const Number& left, const Number& right) {
-        return Multiplication(Modul(left), Inverse(Modul(right)));
+        return Modul(Modul(left)/Modul(right));
     }
 
     Number Calculator::Modul(const Number& number) {
-        if (number > m_Modulus || number == m_Modulus)
+        if (number > m_Modulus || number == m_Modulus) {
             return Remainder(number, m_Modulus);
+        }
         else if (number.GetSign() == Number::Sign::Minus) {
             Number result(number + ((-(number / m_Modulus)) * m_Modulus));
             if (result.GetSign() == Number::Sign::Minus) result = result + m_Modulus;
@@ -78,7 +79,7 @@ namespace LongArithmetic {
     }
 
     Number Calculator::ModuloDivision(const Number& left, const Number& right) {
-        return Modul(Multiplication(left, Inverse(right)));
+        return Modul(Multiplication(Modul(left), Inverse(Modul(right))));
     }
 
     Number& Calculator::Increment(Number& number) {

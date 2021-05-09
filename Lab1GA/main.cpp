@@ -140,8 +140,8 @@ TEST_CASE("testing Calculator") {
 	calculator.SetModulus(Number("123456789"));
 	CHECK(calculator.Inverse(Number("1234567")) == Number("18033013"));
 
-	//calculator.SetModulus(Number("17999999999999999999999999999999999999999999"));
-	Number a = calculator.Division(calculator.Multiplication(Number("12343453535345534234563"), Number("4654645")), Number("4654645"));
+	calculator.SetModulus(Number("13"));
+	Number a = calculator.ModuloDivision(calculator.Multiplication(Number("12343453535345534234563"), Number("4654645")), Number("4654645"));
 	CHECK(a == calculator.Modul(Number("12343453535345534234563")));
 }
 
