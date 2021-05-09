@@ -139,6 +139,10 @@ TEST_CASE("testing Calculator") {
 	CHECK(calculator.Inverse(Number("101")) == Number("101"));
 	calculator.SetModulus(Number("123456789"));
 	CHECK(calculator.Inverse(Number("1234567")) == Number("18033013"));
+
+	//calculator.SetModulus(Number("17999999999999999999999999999999999999999999"));
+	Number a = calculator.Division(calculator.Multiplication(Number("12343453535345534234563"), Number("4654645")), Number("4654645"));
+	CHECK(a == calculator.Modul(Number("12343453535345534234563")));
 }
 
 TEST_CASE("testing increment decrement") {

@@ -13,19 +13,19 @@ namespace LongArithmetic {
     }
 
     Number Calculator::Plus(const Number& left, const Number& right) {
-        return Modul(left + right);
+        return Modul(Modul(left) + Modul(right));
     }
 
     Number Calculator::Minus(const Number& left, const Number& right) {
-        return Modul(left - right);
+        return Modul(Modul(left) - Modul(right));
     }
 
     Number Calculator::Multiplication(const Number& left, const Number& right) {
-        return Modul(left * right);
+        return Modul(Modul(left) * Modul(right));
     }
 
     Number Calculator::Division(const Number& left, const Number& right) {
-        return Modul(left / right);
+        return Multiplication(Modul(left), Inverse(Modul(right)));
     }
 
     Number Calculator::Modul(const Number& number) {
