@@ -308,6 +308,6 @@ int main() {
 #endif
 	//std::string str("abc");
 	//LongArithmetic::Number number(str);
-	//Generators a;
-	//a.Generators::generators(Number("15"), '+');
+	//std::vector<Number> res =  Generators::generators(Number("15"));
+	
 }

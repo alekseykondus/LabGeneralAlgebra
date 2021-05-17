@@ -15,7 +15,7 @@ std::vector<Number> Generators::generators(Number number) {
 	for (Number i = Number("2"); i < number; i++) {
 		if (Generators::gcd(i,number) == Number("1")) {
 			result.push_back(i);
-			
+				
 		}
 	}
 	

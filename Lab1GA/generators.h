@@ -5,8 +5,8 @@ using namespace LongArithmetic;
 class Generators
 {
 public:
-	Number gcd(Number a, Number b);
-	std::vector<Number> generators( Number number);
+	static Number gcd(Number a, Number b);
+	static std::vector<Number> generators( Number number);
 private:
 
 };

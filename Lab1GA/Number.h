@@ -52,6 +52,7 @@ namespace LongArithmetic {
 
 		Number operator++(int);
 		Number operator--(int);
+
 private:
 
 		static const uint64_t Base = 1'000'000'000;
