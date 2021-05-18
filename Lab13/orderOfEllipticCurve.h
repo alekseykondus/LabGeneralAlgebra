@@ -10,7 +10,7 @@ namespace OrderOfEllipticCurve {
 
 		OrderOfEllipticCurve(const LongArithmetic::Number& a, const LongArithmetic::Number& b, const LongArithmetic::Number& mod);
 		void initializePrimeNumbersVector();
-
+		bool isPrime(const LongArithmetic::Number& mod);
 	};
 
 	class FrobeniusTrace {

@@ -2,7 +2,7 @@
 #include "orderOfEllipticCurve.h"
 #include "/PROJECTS/GA-Lab/LabGeneralAlgebra/Lab1GA/Number.h"
 
-void scenario(OrderOfEllipticCurve& core) {
+void scenario(OrderOfEllipticCurve::OrderOfEllipticCurve& core) {
 
 }
 
@@ -18,8 +18,12 @@ int main()
     std::cout << "Input modul: ";
     std::cin >> buffer;
     LongArithmetic::Number modul(buffer);
-
-    OrderOfEllipticCurve core(a, b, modul);
+    OrderOfEllipticCurve::OrderOfEllipticCurve core(a, b, modul);
+    while (!core.isPrime(modul)) {
+        std::cout << "Modul is not a prime number, try again please: ";
+        std::cin >> buffer;
+        core.mainEllipticCurve.setModul(buffer);
+    }
     scenario(core);
 
     return 0;
