@@ -3,6 +3,28 @@
 #include "Number.h"
 #include <iostream>
 
+EllipticCurve::EllipticCurve(const LongArithmetic::Number& a, const LongArithmetic::Number& b, const LongArithmetic::Number& mod) : _a{ a }, _b{ b }, modul{ mod }
+{
+
+	EllipticCurve::calculator = new LongArithmetic::Calculator(mod);
+	try
+	{
+		if (calculator->Plus(calculator->Multiplication(LongArithmetic::Number("4"), calculator->Multiplication(calculator->Multiplication(a, a), a)), calculator->Multiplication(LongArithmetic::Number("27"), calculator->Multiplication(b, b))) == LongArithmetic::Number("0")) {
+			throw std::exception();
+		}
+		else {
+			EllipticCurve::_a = a;
+			EllipticCurve::_b = b;
+		}
+	}
+	catch (const std::exception&)
+	{
+		std::cout << "4*A*A*A + 27*B*B = 0" << std::endl;
+		EllipticCurve::_a = LongArithmetic::Number("1");
+		EllipticCurve::_b = LongArithmetic::Number("0");
+	}
+}
+
 bool EllipticCurve::is_curve_point(Point x)
 {
 	if (x.is_endless()) return true;
