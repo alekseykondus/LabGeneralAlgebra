@@ -9,7 +9,14 @@ Number Generators::gcd(Number a, Number b) {
 		return gcd(a - (a / b) * b, b);
 	return gcd(a, b - (b / a) * a);
 }
-std::vector<Number> Generators::generators(Number number) {
+Number Generators::pow(Number a, Number b) {
+	Number res("1");
+	for (int i = 0; i < std::stoi(b.ToString()); i++) {
+		res = res * a;
+	}
+	return res;
+}
+std::vector<Number> Generators::generators_test(Number number) {
 	std::vector<Number> result;
 	result.push_back(Number("1"));
 	for (Number i = Number("2"); i < number; i++) {
@@ -20,4 +27,63 @@ std::vector<Number> Generators::generators(Number number) {
 	}
 	
 	return result;
+}
+std::vector<Number> Generators::generators(Number number,char op) {
+	std::vector<Number> order;
+	
+	std::vector<Number> generators_vector;
+	
+	std::vector<Number> result;
+	result.push_back(Number("1"));
+	for (Number i = Number("2"); i < number; i++) {
+		if (Generators::gcd(i, number) == Number("1")) {
+			result.push_back(i);
+
+		}
+	}
+	Number val = Number("0");
+	for (std::vector<int>::size_type i = 0;i < result.size();i++) {
+		Number temp = Number("1");
+		
+		while (1) {
+		if (op == '+') {
+			return result;
+		}
+		else if (op == '*')
+		{
+			
+				val = pow(result[i],temp);
+				if (val % number == Number("1")) {
+					order.push_back(temp);
+					//std::cout << result[i].ToString() << ' ';
+					break;
+				}
+				
+			}
+		temp++;
+		}
+		
+	}
+	//return order;
+	
+	Number count = Number("0");
+	
+	bool cyclic = false;
+	for (std::vector<int>::size_type i = 0;i < order.size();i++) {
+		if (order[i] == Number(std::to_string(order.size()))) {
+			generators_vector.push_back(result[i]);
+			cyclic = true;
+			count++;
+		}
+	}
+	if (cyclic) {
+		/*std::cout << count.ToString() << ' ';
+		for (std::vector<int>::size_type i = 0;i < generators_vector.size();i++) {
+			std::cout << generators_vector[i].ToString() << ' ';
+			}*/
+
+		return generators_vector;
+
+	}
+	else std::cout << "The group is not a cyclic group " << std::endl;
 }
