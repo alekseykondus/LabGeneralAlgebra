@@ -3,7 +3,11 @@
 #include "/PROJECTS/GA-Lab/LabGeneralAlgebra/Lab1GA/Number.h"
 
 void scenario(OrderOfEllipticCurve::OrderOfEllipticCurve& core) {
-
+    core.initializePrimeNumbersVector();
+    for (int i = 0; i < core.primeNumbers.size(); i++) {
+        for (int j = 0; j < core.primeNumbers[i].GetDigits().size(); j++)
+            std::cout << core.primeNumbers[i].GetDigits()[j] << ", ";
+    }
 }
 
 int main()
@@ -22,7 +26,8 @@ int main()
     while (!core.isPrime(modul)) {
         std::cout << "Modul is not a prime number, try again please: ";
         std::cin >> buffer;
-        core.mainEllipticCurve.setModul(buffer);
+        modul = buffer;
+        core.mainEllipticCurve.setModul(modul);
     }
     scenario(core);
 
