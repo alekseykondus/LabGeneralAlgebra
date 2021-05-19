@@ -298,9 +298,9 @@ int ReverseElement(int a, int N) {
 	}
 }
 int main() {
-//	std::cout << ReverseElement(96, 179) << std::endl;
-//	evklid(Number("96"), Number("179"));
-//	evklid(1234567, 123456789);
+	//	std::cout << ReverseElement(96, 179) << std::endl;
+	//	evklid(Number("96"), Number("179"));
+	//	evklid(1234567, 123456789);
 
 #ifdef DOCTEST_CONFIG_IMPLEMENT
 	doctest::Context context;
@@ -308,6 +308,12 @@ int main() {
 #endif
 	//std::string str("abc");
 	//LongArithmetic::Number number(str);
-	//std::vector<Number> res =  Generators::generators(Number("15"));
-	
+	//std::vector<Number> res = Generators::generators(Number("30"));
+	/*for (auto const& element : res) {
+		std::cout << element.ToString() << ' ';
+	}*/
+	/*std::vector<Number> result = Generators::generators(Number("50"),'*');
+	for (std::vector<int>::size_type i = 0;i != result.size();i++) {
+		std::cout << result[i].ToString() << ' ';
+	}*/
 }
