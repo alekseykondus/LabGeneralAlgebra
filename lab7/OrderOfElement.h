@@ -10,10 +10,7 @@ using namespace std;
 
 
 namespace LongArithmetic {
-    const Number ZERO("0");
-    const Number ONE("1");
-
-    Number calcPower(const Number &bottom, const Number &top,  const Number &modulo);
+        Number calcPower(const Number &bottom, const Number &top,  const Number &modulo);
 
     Number find(const Number &n, const Number &a);
 

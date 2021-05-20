@@ -6,17 +6,22 @@
 
 namespace LongArithmetic {
     Number calcPower(const Number &bottom, const Number &top, const Number &modulo) {
+        Number ZERO("0");
+        Number ONE("1");
+
         Calculator calc(modulo);
 
         Number res(ONE);
         Number times(top);
 
-        while (!(times == ZERO)) {
+        while (!(ZERO == times)) {
             res = calc.Multiplication(res, bottom);
-            times = calc.Minus(times, ONE);
+            cout << "times:" << times.ToString() << endl;
+            times = times - ONE;
         }
 
-        return res;
+        cout << "times------" << calc.Modul(res).ToString() << endl;
+        return calc.Modul(res);
     }
 
     Number find(const Number &n, const Number &a) {
@@ -24,14 +29,16 @@ namespace LongArithmetic {
         Calculator calc(n);
 
         Factorization fact = Factorization();
-        vector<Number> p = fact.PrimeFactors(n);
+        vector<Number> pe = fact.PrimeFactors(n);
+        vector<Number> p = fact.NaiveFactorization(n);
 
-        Number t = Number(n);
-        int k = p.size();
+        Number t(n);
+        cout << t.ToString() << endl;
+        int k = pe.size();
 
         Number a1("0");
         for(int i = 0; i < k; i++) {
-            t = calc.Division(t, p[i]);
+            t = calc.Division(t, pe[i]);
             a1 = calcPower(a, t, n);
 
             while (!(a1 == one)) {
@@ -39,7 +46,6 @@ namespace LongArithmetic {
                 t = calc.Multiplication(t, p[i]);
             }
         }
-
         return t;
     }
 }
