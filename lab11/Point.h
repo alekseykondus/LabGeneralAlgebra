@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Number.h"
+#include "../Lab1GA/Number.h"
 
 /*!
 * This class discribes point on elliptic curve

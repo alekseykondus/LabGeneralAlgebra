@@ -1,6 +1,6 @@
 #include "EllipticCurve.h"
-#include "Calculator.h"
-#include "Number.h"
+#include "../Lab1GA/Calculator.h"
+#include "../Lab1GA/Number.h"
 #include <iostream>
 
 EllipticCurve::EllipticCurve(const LongArithmetic::Number& a, const LongArithmetic::Number& b, const LongArithmetic::Number& mod) : _a( a ), _b( b ), modul( mod )

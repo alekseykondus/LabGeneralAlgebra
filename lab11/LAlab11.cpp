@@ -1,8 +1,8 @@
 ﻿#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
-#include "Number.h"
-#include "Calculator.h"
+#include "../Lab1GA/Number.h"
+#include "../Lab1GA/Calculator.h"
 #include "Point.h"
-#include "doctest.h"
+#include "../Lab1GA/doctest.h"
 #include "EllipticCurve.h"
 #include <string>
 
