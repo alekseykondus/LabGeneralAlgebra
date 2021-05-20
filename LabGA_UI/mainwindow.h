@@ -50,6 +50,10 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_montMult_clicked();
+
+    void on_montPow_clicked();
+
 private:
     Ui::MainWindow *ui;
     LongArithmetic::Calculator m_Calculator;

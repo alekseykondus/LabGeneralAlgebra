@@ -252,3 +252,24 @@ void MainWindow::on_pushButton_3_clicked()
     }
     ui->label_23->setText(items.join(","));
 }
+
+void MainWindow::on_montMult_clicked()
+{
+    LongArithmetic::Number a(ui->Number_aM->text().toStdString());
+    LongArithmetic::Number b(ui->Number_bM->text().toStdString());
+    LongArithmetic::Number mod(ui->Number_modul->text().toStdString());
+    m_Calculator.SetModulus(mod);
+
+    ui->resultM->setText(QString::fromStdString(m_Calculator.montMult(a,b,mod).ToString()));
+}
+
+
+void MainWindow::on_montPow_clicked()
+{
+    LongArithmetic::Number a(ui->Number_aM->text().toStdString());
+    LongArithmetic::Number b(ui->Number_bM->text().toStdString());
+    LongArithmetic::Number mod(ui->Number_modul->text().toStdString());
+    m_Calculator.SetModulus(mod);
+
+    ui->resultM->setText(QString::fromStdString(m_Calculator.montPow(a,b,mod).ToString()));
+}

@@ -205,4 +205,119 @@ namespace LongArithmetic {
         Number noAns("-1");
         return noAns;
     }*/
+
+    //----------- Montgomery related ------------/
+
+    Number evklidMont(Number a, Number b, Number& a1, Number& b1) {
+      Number q(""), x(""), lastx(""), y(""), lasty(""), temp(""), temp1(""),
+          temp2(""), temp3("");
+
+      if (b > a) {
+        temp = a;
+        a = b;
+        b = temp;
+      }
+
+      x = Number("0");
+      y = Number("1");
+      lastx = Number("1");
+      lasty = Number("0");
+      while (!(b == Number("0"))) {
+        q = a / b;
+        temp1 = a % b;
+        a = b;
+        b = temp1;
+
+        temp2 = x;
+        x = lastx - q * x;
+        lastx = temp2;
+
+        temp3 = y;
+        y = lasty - q * y;
+        lasty = temp3;
+      }
+      std::cout << "x=" << lastx.ToString() << std::endl;
+      std::cout << "y=" << lasty.ToString() << std::endl;
+      a1 = lastx;
+      b1 = lasty;
+      return lasty;
+    }
+
+
+    int gcdex(int a, int b, int &x, int &y) {
+      if (b == 0) {
+        x = 1;
+        y = 0;
+        return a;
+      }
+      int x1, y1;
+      int d1 = gcdex(b, a % b, x1, y1);
+      x = y1;
+      y = x1 - (a / b) * y1;
+      return d1;
+    }
+
+    // Function returns 1 if such element doesn't exist and 0 if exists and puts it
+    // in result.
+    int ReverseElement(int a, int N) {
+      int result;
+      int x, y, d;
+      d = gcdex(a, N, x, y);
+      if (d != 1) {
+        return 1;
+      } else {
+        result = x;
+        return result;
+      }
+    }
+
+
+    Number Power(Number a, Number b, Number mod) {
+      Number res("1");
+      for (int i = 0; i < std::stoi(b.ToString()); i++) {
+        res = res * a;
+      }
+      return res - (res / mod) * mod;
+    }
+
+    Number calculateMontgomeryCoefficient(const Number &mod) {
+      auto size = std::to_string(mod.ToString().size());
+      return Power(Number("10"), Number(size), mod);
+    }
+
+    Number Calculator::montMult(Number a, Number b, Number mod) {
+      Number R_inv(""), P_inv("");
+      Number R = calculateMontgomeryCoefficient(mod);
+      evklidMont(R, mod, P_inv, R_inv);
+      using namespace LongArithmetic;
+      Calculator calculator(mod);
+      Calculator calculatorR(R);
+
+      R_inv = calculator.Modul(R_inv);
+      P_inv = calculator.Modul(-P_inv);
+
+      //  P_inv = Calculator(mod).Modul(P_inv);
+      //  std::cout << R_inv.ToString() << " <- " << P_inv.ToString();
+      Number a_inv = calculator.Modul(a * R);
+      Number b_inv = calculator.Modul(b * R);
+
+      Number t = a_inv * b_inv;
+      Number tm = calculatorR.Modul(t);
+
+      Number u = calculator.Modul((t + (calculatorR.Modul(P_inv * tm) * mod)) *
+                                  calculator.Inverse(R));
+
+      while (u > mod)
+        u = u - mod;
+
+      return u;
+    };
+
+
+    Number Calculator::montPow(Number a, Number b, Number mod) {
+      //impl
+      return Number("0");
+
+    }
+    //-------------
 }

@@ -19,6 +19,8 @@ namespace LongArithmetic {
 		Number& Increment(Number& number);
 		Number& Decrement(Number& number);
 
+        Number montMult(Number a, Number b, Number mod);
+        Number montPow(Number a, Number b, Number mod);
 
 		Number Modul(const Number& number);
 		//Number Inverse(const Number& number);
