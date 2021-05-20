@@ -29,7 +29,7 @@ namespace LongArithmetic {
 			m_Digits = digits;
 		}
 
-		void FromString(const std::string& str);	//another name??
+        void FromString(const std::string& str);
 		std::string ToString() const;
 
 		bool operator==(const Number& another) const;

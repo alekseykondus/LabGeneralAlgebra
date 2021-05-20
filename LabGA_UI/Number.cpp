@@ -146,46 +146,23 @@ namespace LongArithmetic {
         return !(*this <= right);
     }
 
-    /*Number Number::operator+(const Number& right) const {
-        Number answer(*this);
-        if (GetSign() == Number::Sign::Minus) {
-            if (right.GetSign() == Number::Sign::Minus) return -((-*this) + (-right));
-            else return right - (-*this);
-        }
-        else if (right.GetSign() == Number::Sign::Minus) return *this - (-right);
-        bool carry = false;
-        for (size_t i = 0; i < answer.GetDigits().size() || carry; i++) {
-            if (i == answer.GetDigits().size()) {
-                answer.m_Digits.push_back(0);
-            }
-            answer.m_Digits[i] += carry + right.GetDigits()[i];
-            carry = answer.GetDigits()[i] >= Number::Base;
-            if (carry) {
-                answer.m_Digits[i] -= Number::Base;
-            }
-        }
-        /*if (m_Modulus < answer) {
-            answer = Minus(answer, m_Modulus);
-        }////
-        return answer;
-    }*/
-    int my_div(int num, int diver) {
+    int64_t my_div(int64_t num, int64_t diver) {
         if ((num < 0) && (num % diver))
             return num / diver - 1;
         else
             return num / diver;
     }
-    int my_mod(int num, int diver) {
+    int64_t my_mod(int64_t num, int64_t diver) {
         if ((num < 0) && (num % diver))
             return num % diver + diver;
         else
             return num % diver;
     }
+
     Number Number::operator + (const Number& num) const {
 
         Number res("0");
         std::vector<std::uint64_t> reschunks;
-        //a+b
         Number a = *this;
         Number b = num;
         if (a.GetDigits().size() > b.GetDigits().size()) {
@@ -199,8 +176,8 @@ namespace LongArithmetic {
 
             res.SetSign(a.GetSign());
 
-            int over = 0;
-            for (int i = 0; i < a.m_Digits.size(); i++) {
+            int64_t over = 0;
+            for (size_t i = 0; i < a.m_Digits.size(); i++) {
                 reschunks.push_back(a.m_Digits[i] + b.m_Digits[i]);
                 reschunks[i] += over;
                 over = my_div(reschunks[i], Base);
