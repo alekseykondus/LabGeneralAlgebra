@@ -55,7 +55,7 @@ namespace LongArithmetic {
 
 private:
 
-                static const uint64_t Base = 1000000000;
+        static const uint64_t Base = 1000000000;
 
 		std::vector<std::uint64_t>m_Digits;
 		Sign m_Sign;
