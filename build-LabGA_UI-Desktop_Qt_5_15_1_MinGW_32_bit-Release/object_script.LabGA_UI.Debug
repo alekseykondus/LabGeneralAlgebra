@@ -1,4 +1,5 @@
 debug/Calculator.o
+debug/euler_carmichael.o
 debug/Factorization.o
 debug/Generators.o
 debug/main.o
