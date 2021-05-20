@@ -435,6 +435,33 @@ TEST_CASE("Check sum")
 
 // lab 3 testing start
 
+#include "Factorization.h"
+
+TEST_CASE("factorization error testing")
+{
+    using namespace LongArithmetic;
+
+    Number prime1("7591324493");
+    Number prime2("2167854043");
+
+    vector<Number> result;
+
+    Factorization factorObject = Factorization();
+
+    result = factorObject.NaiveFactorization(- prime1);
+    CHECK(result.size() == 0);
+}
+
+/*
+Number prime_numbers[] = {
+    Number("7591324493"),
+    Number("2167854043"),
+    Number("9038293309"),
+    Number("1012128389"),
+    Number("4212308629")
+};
+*/
+
 // lab 3 testing end
 
 #endif
