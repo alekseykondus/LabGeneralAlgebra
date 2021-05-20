@@ -240,9 +240,9 @@ void MainWindow::on_pushButton_3_clicked()
     using namespace LongArithmetic;
     std::vector<Number> result;
     LongArithmetic::Number const modul(ui->Number_modul->text().toStdString());
-    if(ui->radioButton->isChecked()) {
+    if(ui->radioButton_2->isChecked()) {
         result = Generators::generators(modul,'+');
-    } else if(ui->radioButton_2->isChecked()) {
+    } else if(ui->radioButton->isChecked()) {
         result = Generators::generators(modul,'*');
     }
     QStringList items;

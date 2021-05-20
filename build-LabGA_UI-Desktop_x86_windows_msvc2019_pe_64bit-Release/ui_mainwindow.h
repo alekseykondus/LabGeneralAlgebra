@@ -17,6 +17,7 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
@@ -84,7 +85,32 @@ public:
     QLineEdit *euler_result;
     QLabel *label_15;
     QWidget *tab_5;
+    QLineEdit *lineEdit__EC_res;
+    QLabel *label_22;
+    QPushButton *pushButton_EC_sum;
+    QWidget *layoutWidget;
+    QGridLayout *gridLayout_5;
+    QLabel *label_18;
+    QLabel *label_19;
+    QLineEdit *lineEdit_EC_y1;
+    QLineEdit *lineEdit_EC_x1;
+    QLabel *label_16;
+    QLineEdit *lineEdit_EC_B;
+    QLineEdit *lineEdit_EC_x2;
+    QLineEdit *lineEdit_EC_A;
+    QLineEdit *lineEdit_EC_y2;
+    QLabel *label_21;
+    QLabel *label_17;
+    QLabel *label_20;
+    QPushButton *pushButton_EC_inverse1;
+    QPushButton *pushButton_EC_inverse_2;
     QWidget *tab_6;
+    QLabel *label_23;
+    QPushButton *pushButton_3;
+    QWidget *gridLayoutWidget;
+    QGridLayout *gridLayout_6;
+    QRadioButton *radioButton;
+    QRadioButton *radioButton_2;
     QWidget *tab_7;
     QWidget *tab_9;
     QWidget *tab_10;
@@ -303,9 +329,120 @@ public:
         tabWidget->addTab(tab_4, QString());
         tab_5 = new QWidget();
         tab_5->setObjectName(QString::fromUtf8("tab_5"));
+        lineEdit__EC_res = new QLineEdit(tab_5);
+        lineEdit__EC_res->setObjectName(QString::fromUtf8("lineEdit__EC_res"));
+        lineEdit__EC_res->setGeometry(QRect(150, 260, 511, 22));
+        label_22 = new QLabel(tab_5);
+        label_22->setObjectName(QString::fromUtf8("label_22"));
+        label_22->setGeometry(QRect(80, 260, 55, 16));
+        pushButton_EC_sum = new QPushButton(tab_5);
+        pushButton_EC_sum->setObjectName(QString::fromUtf8("pushButton_EC_sum"));
+        pushButton_EC_sum->setGeometry(QRect(60, 200, 701, 28));
+        layoutWidget = new QWidget(tab_5);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(60, 20, 709, 163));
+        gridLayout_5 = new QGridLayout(layoutWidget);
+        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        gridLayout_5->setContentsMargins(0, 0, 0, 0);
+        label_18 = new QLabel(layoutWidget);
+        label_18->setObjectName(QString::fromUtf8("label_18"));
+
+        gridLayout_5->addWidget(label_18, 2, 0, 1, 1);
+
+        label_19 = new QLabel(layoutWidget);
+        label_19->setObjectName(QString::fromUtf8("label_19"));
+
+        gridLayout_5->addWidget(label_19, 2, 1, 1, 1);
+
+        lineEdit_EC_y1 = new QLineEdit(layoutWidget);
+        lineEdit_EC_y1->setObjectName(QString::fromUtf8("lineEdit_EC_y1"));
+
+        gridLayout_5->addWidget(lineEdit_EC_y1, 3, 1, 1, 1);
+
+        lineEdit_EC_x1 = new QLineEdit(layoutWidget);
+        lineEdit_EC_x1->setObjectName(QString::fromUtf8("lineEdit_EC_x1"));
+        lineEdit_EC_x1->setMinimumSize(QSize(300, 0));
+
+        gridLayout_5->addWidget(lineEdit_EC_x1, 3, 0, 1, 1);
+
+        label_16 = new QLabel(layoutWidget);
+        label_16->setObjectName(QString::fromUtf8("label_16"));
+
+        gridLayout_5->addWidget(label_16, 0, 0, 1, 1);
+
+        lineEdit_EC_B = new QLineEdit(layoutWidget);
+        lineEdit_EC_B->setObjectName(QString::fromUtf8("lineEdit_EC_B"));
+        lineEdit_EC_B->setMinimumSize(QSize(300, 0));
+
+        gridLayout_5->addWidget(lineEdit_EC_B, 1, 1, 1, 1);
+
+        lineEdit_EC_x2 = new QLineEdit(layoutWidget);
+        lineEdit_EC_x2->setObjectName(QString::fromUtf8("lineEdit_EC_x2"));
+        lineEdit_EC_x2->setMinimumSize(QSize(300, 0));
+
+        gridLayout_5->addWidget(lineEdit_EC_x2, 5, 0, 1, 1);
+
+        lineEdit_EC_A = new QLineEdit(layoutWidget);
+        lineEdit_EC_A->setObjectName(QString::fromUtf8("lineEdit_EC_A"));
+        lineEdit_EC_A->setMinimumSize(QSize(300, 0));
+
+        gridLayout_5->addWidget(lineEdit_EC_A, 1, 0, 1, 1);
+
+        lineEdit_EC_y2 = new QLineEdit(layoutWidget);
+        lineEdit_EC_y2->setObjectName(QString::fromUtf8("lineEdit_EC_y2"));
+
+        gridLayout_5->addWidget(lineEdit_EC_y2, 5, 1, 1, 1);
+
+        label_21 = new QLabel(layoutWidget);
+        label_21->setObjectName(QString::fromUtf8("label_21"));
+
+        gridLayout_5->addWidget(label_21, 4, 1, 1, 1);
+
+        label_17 = new QLabel(layoutWidget);
+        label_17->setObjectName(QString::fromUtf8("label_17"));
+
+        gridLayout_5->addWidget(label_17, 0, 1, 1, 1);
+
+        label_20 = new QLabel(layoutWidget);
+        label_20->setObjectName(QString::fromUtf8("label_20"));
+
+        gridLayout_5->addWidget(label_20, 4, 0, 1, 1);
+
+        pushButton_EC_inverse1 = new QPushButton(layoutWidget);
+        pushButton_EC_inverse1->setObjectName(QString::fromUtf8("pushButton_EC_inverse1"));
+
+        gridLayout_5->addWidget(pushButton_EC_inverse1, 3, 2, 1, 1);
+
+        pushButton_EC_inverse_2 = new QPushButton(layoutWidget);
+        pushButton_EC_inverse_2->setObjectName(QString::fromUtf8("pushButton_EC_inverse_2"));
+
+        gridLayout_5->addWidget(pushButton_EC_inverse_2, 5, 2, 1, 1);
+
         tabWidget->addTab(tab_5, QString());
         tab_6 = new QWidget();
         tab_6->setObjectName(QString::fromUtf8("tab_6"));
+        label_23 = new QLabel(tab_6);
+        label_23->setObjectName(QString::fromUtf8("label_23"));
+        label_23->setGeometry(QRect(9, 95, 758, 370));
+        pushButton_3 = new QPushButton(tab_6);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+        pushButton_3->setGeometry(QRect(340, 90, 177, 28));
+        gridLayoutWidget = new QWidget(tab_6);
+        gridLayoutWidget->setObjectName(QString::fromUtf8("gridLayoutWidget"));
+        gridLayoutWidget->setGeometry(QRect(130, 70, 160, 80));
+        gridLayout_6 = new QGridLayout(gridLayoutWidget);
+        gridLayout_6->setObjectName(QString::fromUtf8("gridLayout_6"));
+        gridLayout_6->setContentsMargins(0, 0, 0, 0);
+        radioButton = new QRadioButton(gridLayoutWidget);
+        radioButton->setObjectName(QString::fromUtf8("radioButton"));
+
+        gridLayout_6->addWidget(radioButton, 0, 0, 1, 1);
+
+        radioButton_2 = new QRadioButton(gridLayoutWidget);
+        radioButton_2->setObjectName(QString::fromUtf8("radioButton_2"));
+
+        gridLayout_6->addWidget(radioButton_2, 1, 0, 1, 1);
+
         tabWidget->addTab(tab_6, QString());
         tab_7 = new QWidget();
         tab_7->setObjectName(QString::fromUtf8("tab_7"));
@@ -333,7 +470,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(5);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -375,7 +512,21 @@ public:
         karmikle_button->setText(QCoreApplication::translate("MainWindow", "\320\232\320\260\321\200\320\274\320\260\320\271\320\272\320\273", nullptr));
         label_15->setText(QCoreApplication::translate("MainWindow", "Result", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("MainWindow", "\320\225\320\271\320\273\320\265\321\200 \320\232\320\260\321\200\320\274\320\260\320\271\320\272\320\273", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_5), QCoreApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));
+        label_22->setText(QCoreApplication::translate("MainWindow", "Result", nullptr));
+        pushButton_EC_sum->setText(QCoreApplication::translate("MainWindow", "Sum", nullptr));
+        label_18->setText(QCoreApplication::translate("MainWindow", "x1", nullptr));
+        label_19->setText(QCoreApplication::translate("MainWindow", "y1", nullptr));
+        label_16->setText(QCoreApplication::translate("MainWindow", "A", nullptr));
+        label_21->setText(QCoreApplication::translate("MainWindow", "y2", nullptr));
+        label_17->setText(QCoreApplication::translate("MainWindow", "B", nullptr));
+        label_20->setText(QCoreApplication::translate("MainWindow", "x2", nullptr));
+        pushButton_EC_inverse1->setText(QCoreApplication::translate("MainWindow", "Inverse", nullptr));
+        pushButton_EC_inverse_2->setText(QCoreApplication::translate("MainWindow", "Inverse", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_5), QCoreApplication::translate("MainWindow", "Elliptic Curve", nullptr));
+        label_23->setText(QString());
+        pushButton_3->setText(QCoreApplication::translate("MainWindow", "\320\227\320\275\320\260\320\271\321\202\320\270 \320\262\321\201\321\226 \320\263\320\265\320\275\320\265\321\200\320\260\321\202\320\276\321\200\320\270 \320\263\321\200\321\203\320\277\320\270", nullptr));
+        radioButton->setText(QCoreApplication::translate("MainWindow", "*", nullptr));
+        radioButton_2->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QCoreApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_7), QCoreApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_9), QCoreApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));
