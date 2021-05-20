@@ -1,4 +1,5 @@
 release/Calculator.o
+release/euler_carmichael.o
 release/Factorization.o
 release/Generators.o
 release/main.o
