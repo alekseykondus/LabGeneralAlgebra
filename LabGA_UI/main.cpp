@@ -500,33 +500,16 @@ int ReverseElement(int a, int N) {
 }
 
 int main(int argc, char *argv[]) {
+/*#ifdef DOCTEST_CONFIG_IMPLEMENT
+    doctest::Context context;
+    int res = context.run();
+#endif*/
+
     QApplication a(argc, argv);
     MainWindow w;
 
     w.setWindowState(Qt::WindowMaximized);
     w.show();
 
-/*#ifdef DOCTEST_CONFIG_IMPLEMENT
-    doctest::Context context;
-    int res = context.run();
-#endif*/
-
-
-//	std::cout << ReverseElement(96, 179) << std::endl;
-//	evklid(Number("96"), Number("179"));
-//	evklid(1234567, 123456789);
-//	std::cout << Euler_fuction(12) << std::endl;
-//	std::cout << carmichael(12) << std::endl;
-
-    //std::string str("abc");
-    //LongArithmetic::Number number(str);
-    //std::vector<Number> res = Generators::generators(Number("30"));
-    /*for (auto const& element : res) {
-        std::cout << element.ToString() << ' ';
-    }*/
-    /*std::vector<Number> result = Generators::generators(Number("7"),'+');
-    for (std::vector<int>::size_type i = 0;i != result.size();i++) {
-        std::cout << result[i].ToString() << ' ';
-    }*/
     return a.exec();
 }
