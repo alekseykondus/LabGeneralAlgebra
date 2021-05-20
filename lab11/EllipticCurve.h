@@ -24,34 +24,14 @@ private:
     */
 	LongArithmetic::Number modul;
 	/*!
-	* This is a class for out calculations
+	* This is a class for our calculations
 	*/
 	LongArithmetic::Calculator* calculator;
 public:
 	/*!
 	* This is constructer of our class. It has three parameters: parameter A, parameter B, module
 	*/
-	EllipticCurve(const LongArithmetic::Number& a, const LongArithmetic::Number& b, const LongArithmetic::Number& mod) : _a{ a }, _b{ b }, modul{ mod }
-	{
-
-		EllipticCurve::calculator = new LongArithmetic::Calculator(mod);
-		try
-		{
-			if (calculator->Plus(calculator->Multiplication(LongArithmetic::Number("4"), calculator->Multiplication(calculator->Multiplication(a, a), a)), calculator->Multiplication(LongArithmetic::Number("27"), calculator->Multiplication(b, b))) == LongArithmetic::Number("0")) {
-				throw std::exception();
-			}
-			else {
-				EllipticCurve::_a = a;
-				EllipticCurve::_b = b;
-			}
-		}
-		catch (const std::exception&)
-		{
-			std::cout << "4*A*A*A + 27*B*B = 0" << std::endl;
-			EllipticCurve::_a = LongArithmetic::Number("1");
-			EllipticCurve::_b = LongArithmetic::Number("0");
-		}
-	}
+	EllipticCurve(const LongArithmetic::Number& a, const LongArithmetic::Number& b, const LongArithmetic::Number& mod);
 	/*!
 	* This function returns true, if point is on a curve, otherwise - false
 	*/
