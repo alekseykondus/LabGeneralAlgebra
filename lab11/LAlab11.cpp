@@ -8,10 +8,12 @@
 
 using namespace LongArithmetic;
 
-TEST_CASE("1") {
+TEST_CASE("Is point on curve") {
 	EllipticCurve e1(Number("1"), Number("0"), Number("13"));
+	e1.setA(Number("0"));
 	CHECK(e1.a() == Number("1"));
 	CHECK(e1.b() == Number("0"));
+	CHECK(e1.Modul() == Number("13"));
 	Point g;
 	g.make_normal(Number("7"), Number("8"));
 	CHECK(e1.is_curve_point(g));
@@ -114,7 +116,7 @@ TEST_CASE("1") {
 	CHECK(!e1.is_curve_point(g));
 }
 
-TEST_CASE("2")
+TEST_CASE("Check sum")
 {
 	EllipticCurve e1(Number("1"), Number("0"), Number("13"));
 	Point g1(Number("6"), Number("1")), g2(Number("2"), Number("6"));

@@ -5,9 +5,15 @@
 
 EllipticCurve::EllipticCurve(const LongArithmetic::Number& a, const LongArithmetic::Number& b, const LongArithmetic::Number& mod) : _a( a ), _b( b ), modul( mod )
 {
-
-	if (mod > LongArithmetic::Number("2")) EllipticCurve::calculator = new LongArithmetic::Calculator(mod);
-	else { modul = LongArithmetic::Number("3"); calculator = new LongArithmetic::Calculator(modul);
+	try
+	{
+		if (mod > LongArithmetic::Number("2")) EllipticCurve::calculator = new LongArithmetic::Calculator(mod);
+		else throw std::exception();
+	}
+	catch (const std::exception&)
+	{
+		std::cerr << "modul < 3" << std::endl;
+		modul = LongArithmetic::Number("3"); calculator = new LongArithmetic::Calculator(modul);
 	}
 	try
 	{
@@ -21,7 +27,7 @@ EllipticCurve::EllipticCurve(const LongArithmetic::Number& a, const LongArithmet
 	}
 	catch (const std::exception&)
 	{
-		std::cout << "4*A*A*A + 27*B*B = 0" << std::endl;
+		std::cerr << "4*A*A*A + 27*B*B = 0" << std::endl;
 		EllipticCurve::_a = LongArithmetic::Number("1");
 		EllipticCurve::_b = LongArithmetic::Number("0");
 	}
@@ -48,7 +54,7 @@ void EllipticCurve::setA(const LongArithmetic::Number& a)
 	}
 	catch (const std::exception&)
 	{
-		std::cout << "4*A*A*A + 27*B*B = 0" << std::endl;
+		std::cerr << "4*A*A*A + 27*B*B = 0" << std::endl;
 	}
 }
 void EllipticCurve::setB(const LongArithmetic::Number& b)
@@ -64,7 +70,7 @@ void EllipticCurve::setB(const LongArithmetic::Number& b)
 	}
 	catch (const std::exception&)
 	{
-		std::cout << "4*A*A*A + 27*B*B = 0" << std::endl;
+		std::cerr << "4*A*A*A + 27*B*B = 0" << std::endl;
 	}
 }
 void EllipticCurve::setModul(const LongArithmetic::Number& mod)
@@ -115,7 +121,7 @@ Point EllipticCurve::Sum(Point p1, Point p2)
     }
 	catch (const std::exception&)
 	{
-		std::cout << "Points are not on a curve" << std::endl;
+		std::cerr << "Points are not on a curve" << std::endl;
 	}
 }
 
@@ -135,6 +141,6 @@ Point EllipticCurve::Inverse(Point p)
 	}
 	catch (const std::exception&)
 	{
-		std::cout << "Point is not on a curve" << std::endl;
+		std::cerr << "Point is not on a curve" << std::endl;
 	}
 }
