@@ -434,7 +434,6 @@ TEST_CASE("Check sum")
 }
 #endif
 
-//�������� ��� ��������
 Number evklid(Number a, Number b)
 {
     Number q(""), x(""), lastx(""), y(""), lasty(""), temp(""), temp1(""), temp2(""), temp3("");
@@ -495,51 +494,6 @@ int ReverseElement(int a, int N) {
     }
 }
 
-int Euler_fuction(int n)
-{
-    int result = n;
-    for (int i = 2; i * i <= n; ++i)
-        if (n % i == 0) {
-            while (n % i == 0)
-                n /= i;
-            result -= result / i;
-        }
-    if (n > 1)
-        result -= result / n;
-    return result;
-}
-
-int nsd(int a, int b) {
-    int t;
-    while (b) {
-        t = b;
-        b = a % b;
-        a = t;
-    }
-    return a;
-}
-int ostacha(int a, int b, int c) {
-    int t = 1;
-    for (int e = 0; e < b; e++) {
-        t = (t * a) % c;
-    }
-    return t;
-}
-int carmichael(int n) {
-    int k = 1;
-    for (;; ) {
-        int done = 1;
-        for (int x = 1; x < n; x++) {
-            if (nsd(x, n) == 1 && ostacha(x, k, n) != 1) {
-                done = 0;
-                k++;
-            }
-        }
-        if (done) break;
-    }
-    return k;
-}
-
 int main(int argc, char *argv[]) {
     QApplication a(argc, argv);
     MainWindow w;
@@ -550,7 +504,7 @@ int main(int argc, char *argv[]) {
 /*#ifdef DOCTEST_CONFIG_IMPLEMENT
     doctest::Context context;
     int res = context.run();
-#endif */
+#endif*/
 
 
 //	std::cout << ReverseElement(96, 179) << std::endl;

@@ -5,7 +5,6 @@
 #include <sstream>
 
 #include <stdexcept>
-#include <stdexcpt.h>
 
 namespace LongArithmetic {
     Number::Number(const std::string& str) {

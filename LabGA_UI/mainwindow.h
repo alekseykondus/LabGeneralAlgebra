@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "Calculator.h"
+#include "euler_carmichael.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -37,8 +38,13 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_euler_button_clicked();
+
+    void on_karmikle_button_clicked();
+
 private:
     Ui::MainWindow *ui;
     LongArithmetic::Calculator m_Calculator;
+    Euler_Carmichael m_Euler;
 };
 #endif // MAINWINDOW_H

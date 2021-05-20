@@ -124,3 +124,22 @@ void MainWindow::on_pushButton_2_clicked()
     ui->result_x->setText(QString::fromStdString(point.x().ToString()));
     ui->result_y->setText(QString::fromStdString(point.y().ToString()));
 }
+
+void MainWindow::on_euler_button_clicked()
+{
+    LongArithmetic::Number a(ui->euler_number->text().toStdString());
+    LongArithmetic::Number modul(ui->Number_modul->text().toStdString());
+    m_Euler.SetModul(modul);
+
+    ui->euler_result->setText(QString::fromStdString(m_Euler.Euler_fuction(a).ToString()));
+}
+
+void MainWindow::on_karmikle_button_clicked()
+{
+    LongArithmetic::Number a(ui->euler_number->text().toStdString());
+    LongArithmetic::Number modul(ui->Number_modul->text().toStdString());
+    m_Calculator.SetModulus(modul);
+    m_Euler.SetModul(modul);
+
+    ui->euler_result->setText(QString::fromStdString(m_Euler.carmichael(a).ToString()));
+}
