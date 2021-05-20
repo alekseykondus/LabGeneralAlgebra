@@ -25,7 +25,7 @@ namespace LongArithmetic {
     }
 
     Number Calculator::Division(const Number& left, const Number& right) {
-        return Modul(left/right);
+        return Modul(Modul(left)/Modul(right));
     }
 
     Number Calculator::Modul(const Number& number) {

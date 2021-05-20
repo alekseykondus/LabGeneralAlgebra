@@ -180,9 +180,11 @@ TEST_CASE("random testing") {
 			Number(std::to_string(b))) ==
 			calculator.Modul(Number(std::to_string(a * b))));
 
-		if (a >= 0 && b > 0) CHECK(calculator.Division(Number(std::to_string(a)),
-			Number(std::to_string(b))) ==
-			calculator.Modul(Number(std::to_string((a % 487) / (b % 487)))));
+		if (a >= 0 && b > 0 && Number("0") < calculator.Modul(Number(std::to_string(b)))) {
+			CHECK(calculator.Division(Number(std::to_string(a)),
+				Number(std::to_string(b))) ==
+				calculator.Modul(Number(std::to_string((a % 487) / (b % 487)))));
+		}
 	}
 
 	calculator.SetModulus(Number("20988936657440586486151264256610222593863921"));
