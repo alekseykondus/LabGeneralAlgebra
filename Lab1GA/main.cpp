@@ -5,7 +5,6 @@
 
 #include <random>
 #include <string>
-
 static std::random_device dev;
 static std::mt19937 mersenne(dev());
 
@@ -297,11 +296,58 @@ int ReverseElement(int a, int N) {
 		return result;
 	}
 }
+
+int Euler_fuction(int n) 
+{
+	int result = n;
+	for (int i = 2; i * i <= n; ++i)
+		if (n % i == 0) {
+			while (n % i == 0)
+				n /= i;
+			result -= result / i;
+		}
+	if (n > 1)
+		result -= result / n;
+	return result;
+}
+
+int nsd(int a, int b) {
+	int t;
+	while (b) {
+		t = b;
+		b = a % b;
+		a = t;
+	}
+	return a;
+}
+int ostacha(int a, int b, int c) {
+	int t = 1;
+	for (int e = 0; e < b; e++) {
+		t = (t * a) % c;
+	}
+	return t;
+}
+int carmichael(int n) {
+	int k = 1;
+	for (;; ) {
+		int done = 1;
+		for (int x = 1; x < n; x++) {
+			if (nsd(x, n) == 1 && ostacha(x, k, n) != 1) {
+				done = 0;
+				k++;
+			}
+		}
+		if (done) break;
+	}
+	return k;
+}
+
 int main() {
 //	std::cout << ReverseElement(96, 179) << std::endl;
 //	evklid(Number("96"), Number("179"));
 //	evklid(1234567, 123456789);
-
+//	std::cout << Euler_fuction(12) << std::endl;
+//	std::cout << carmichael(12) << std::endl;
 #ifdef DOCTEST_CONFIG_IMPLEMENT
 	doctest::Context context;
 	int res = context.run();
