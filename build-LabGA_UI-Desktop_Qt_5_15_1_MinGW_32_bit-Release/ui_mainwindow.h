@@ -29,8 +29,8 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QGridLayout *gridLayout;
-    QLabel *label;
     QLineEdit *Number_modul;
+    QLabel *label;
     QTabWidget *tabWidget;
     QWidget *tab;
     QGridLayout *gridLayout_4;
@@ -78,7 +78,31 @@ public:
     QLabel *label_14;
     QPushButton *pushButton_2;
     QWidget *tab_4;
+    QLineEdit *euler_number;
+    QPushButton *euler_button;
+    QPushButton *karmikle_button;
+    QLineEdit *euler_result;
+    QLabel *label_15;
     QWidget *tab_5;
+    QLineEdit *lineEdit__EC_res;
+    QLabel *label_22;
+    QPushButton *pushButton_EC_sum;
+    QWidget *layoutWidget;
+    QGridLayout *gridLayout_5;
+    QLabel *label_18;
+    QLabel *label_19;
+    QLineEdit *lineEdit_EC_y1;
+    QLineEdit *lineEdit_EC_x1;
+    QLabel *label_16;
+    QLineEdit *lineEdit_EC_B;
+    QLineEdit *lineEdit_EC_x2;
+    QLineEdit *lineEdit_EC_A;
+    QLineEdit *lineEdit_EC_y2;
+    QLabel *label_21;
+    QLabel *label_17;
+    QLabel *label_20;
+    QPushButton *pushButton_EC_inverse1;
+    QPushButton *pushButton_EC_inverse_2;
     QWidget *tab_6;
     QWidget *tab_7;
     QWidget *tab_9;
@@ -96,15 +120,15 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         gridLayout = new QGridLayout(centralwidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        label = new QLabel(centralwidget);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        gridLayout->addWidget(label, 1, 0, 1, 1);
-
         Number_modul = new QLineEdit(centralwidget);
         Number_modul->setObjectName(QString::fromUtf8("Number_modul"));
 
         gridLayout->addWidget(Number_modul, 1, 1, 1, 1);
+
+        label = new QLabel(centralwidget);
+        label->setObjectName(QString::fromUtf8("label"));
+
+        gridLayout->addWidget(label, 1, 0, 1, 1);
 
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
@@ -280,9 +304,113 @@ public:
         tabWidget->addTab(tab_3, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QString::fromUtf8("tab_4"));
+        euler_number = new QLineEdit(tab_4);
+        euler_number->setObjectName(QString::fromUtf8("euler_number"));
+        euler_number->setGeometry(QRect(150, 80, 113, 22));
+        euler_button = new QPushButton(tab_4);
+        euler_button->setObjectName(QString::fromUtf8("euler_button"));
+        euler_button->setGeometry(QRect(50, 240, 93, 28));
+        karmikle_button = new QPushButton(tab_4);
+        karmikle_button->setObjectName(QString::fromUtf8("karmikle_button"));
+        karmikle_button->setGeometry(QRect(270, 240, 93, 28));
+        euler_result = new QLineEdit(tab_4);
+        euler_result->setObjectName(QString::fromUtf8("euler_result"));
+        euler_result->setGeometry(QRect(190, 350, 113, 22));
+        label_15 = new QLabel(tab_4);
+        label_15->setObjectName(QString::fromUtf8("label_15"));
+        label_15->setGeometry(QRect(90, 350, 55, 16));
         tabWidget->addTab(tab_4, QString());
         tab_5 = new QWidget();
         tab_5->setObjectName(QString::fromUtf8("tab_5"));
+        lineEdit__EC_res = new QLineEdit(tab_5);
+        lineEdit__EC_res->setObjectName(QString::fromUtf8("lineEdit__EC_res"));
+        lineEdit__EC_res->setGeometry(QRect(150, 260, 511, 22));
+        label_22 = new QLabel(tab_5);
+        label_22->setObjectName(QString::fromUtf8("label_22"));
+        label_22->setGeometry(QRect(80, 260, 55, 16));
+        pushButton_EC_sum = new QPushButton(tab_5);
+        pushButton_EC_sum->setObjectName(QString::fromUtf8("pushButton_EC_sum"));
+        pushButton_EC_sum->setGeometry(QRect(60, 200, 701, 28));
+        layoutWidget = new QWidget(tab_5);
+        layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
+        layoutWidget->setGeometry(QRect(60, 20, 709, 163));
+        gridLayout_5 = new QGridLayout(layoutWidget);
+        gridLayout_5->setObjectName(QString::fromUtf8("gridLayout_5"));
+        gridLayout_5->setContentsMargins(0, 0, 0, 0);
+        label_18 = new QLabel(layoutWidget);
+        label_18->setObjectName(QString::fromUtf8("label_18"));
+
+        gridLayout_5->addWidget(label_18, 2, 0, 1, 1);
+
+        label_19 = new QLabel(layoutWidget);
+        label_19->setObjectName(QString::fromUtf8("label_19"));
+
+        gridLayout_5->addWidget(label_19, 2, 1, 1, 1);
+
+        lineEdit_EC_y1 = new QLineEdit(layoutWidget);
+        lineEdit_EC_y1->setObjectName(QString::fromUtf8("lineEdit_EC_y1"));
+
+        gridLayout_5->addWidget(lineEdit_EC_y1, 3, 1, 1, 1);
+
+        lineEdit_EC_x1 = new QLineEdit(layoutWidget);
+        lineEdit_EC_x1->setObjectName(QString::fromUtf8("lineEdit_EC_x1"));
+        lineEdit_EC_x1->setMinimumSize(QSize(300, 0));
+
+        gridLayout_5->addWidget(lineEdit_EC_x1, 3, 0, 1, 1);
+
+        label_16 = new QLabel(layoutWidget);
+        label_16->setObjectName(QString::fromUtf8("label_16"));
+
+        gridLayout_5->addWidget(label_16, 0, 0, 1, 1);
+
+        lineEdit_EC_B = new QLineEdit(layoutWidget);
+        lineEdit_EC_B->setObjectName(QString::fromUtf8("lineEdit_EC_B"));
+        lineEdit_EC_B->setMinimumSize(QSize(300, 0));
+
+        gridLayout_5->addWidget(lineEdit_EC_B, 1, 1, 1, 1);
+
+        lineEdit_EC_x2 = new QLineEdit(layoutWidget);
+        lineEdit_EC_x2->setObjectName(QString::fromUtf8("lineEdit_EC_x2"));
+        lineEdit_EC_x2->setMinimumSize(QSize(300, 0));
+
+        gridLayout_5->addWidget(lineEdit_EC_x2, 5, 0, 1, 1);
+
+        lineEdit_EC_A = new QLineEdit(layoutWidget);
+        lineEdit_EC_A->setObjectName(QString::fromUtf8("lineEdit_EC_A"));
+        lineEdit_EC_A->setMinimumSize(QSize(300, 0));
+
+        gridLayout_5->addWidget(lineEdit_EC_A, 1, 0, 1, 1);
+
+        lineEdit_EC_y2 = new QLineEdit(layoutWidget);
+        lineEdit_EC_y2->setObjectName(QString::fromUtf8("lineEdit_EC_y2"));
+
+        gridLayout_5->addWidget(lineEdit_EC_y2, 5, 1, 1, 1);
+
+        label_21 = new QLabel(layoutWidget);
+        label_21->setObjectName(QString::fromUtf8("label_21"));
+
+        gridLayout_5->addWidget(label_21, 4, 1, 1, 1);
+
+        label_17 = new QLabel(layoutWidget);
+        label_17->setObjectName(QString::fromUtf8("label_17"));
+
+        gridLayout_5->addWidget(label_17, 0, 1, 1, 1);
+
+        label_20 = new QLabel(layoutWidget);
+        label_20->setObjectName(QString::fromUtf8("label_20"));
+
+        gridLayout_5->addWidget(label_20, 4, 0, 1, 1);
+
+        pushButton_EC_inverse1 = new QPushButton(layoutWidget);
+        pushButton_EC_inverse1->setObjectName(QString::fromUtf8("pushButton_EC_inverse1"));
+
+        gridLayout_5->addWidget(pushButton_EC_inverse1, 3, 2, 1, 1);
+
+        pushButton_EC_inverse_2 = new QPushButton(layoutWidget);
+        pushButton_EC_inverse_2->setObjectName(QString::fromUtf8("pushButton_EC_inverse_2"));
+
+        gridLayout_5->addWidget(pushButton_EC_inverse_2, 5, 2, 1, 1);
+
         tabWidget->addTab(tab_5, QString());
         tab_6 = new QWidget();
         tab_6->setObjectName(QString::fromUtf8("tab_6"));
@@ -313,7 +441,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(2);
+        tabWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -322,8 +450,8 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Modul", nullptr));
         Number_modul->setText(QCoreApplication::translate("MainWindow", "487", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Modul", nullptr));
         moduloDivision->setText(QCoreApplication::translate("MainWindow", "/", nullptr));
         plus->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
         multiplication->setText(QCoreApplication::translate("MainWindow", "*", nullptr));
@@ -351,8 +479,21 @@ public:
         label_14->setText(QCoreApplication::translate("MainWindow", "y", nullptr));
         pushButton_2->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("MainWindow", "\320\241\321\202\320\265\320\277\321\226\320\275\321\214 \321\202\320\276\321\207\320\272\320\270", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_5), QCoreApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));
+        euler_button->setText(QCoreApplication::translate("MainWindow", "\320\225\320\271\320\273\320\265\321\200", nullptr));
+        karmikle_button->setText(QCoreApplication::translate("MainWindow", "\320\232\320\260\321\200\320\274\320\260\320\271\320\272\320\273", nullptr));
+        label_15->setText(QCoreApplication::translate("MainWindow", "Result", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("MainWindow", "\320\225\320\271\320\273\320\265\321\200 \320\232\320\260\321\200\320\274\320\260\320\271\320\272\320\273", nullptr));
+        label_22->setText(QCoreApplication::translate("MainWindow", "Result", nullptr));
+        pushButton_EC_sum->setText(QCoreApplication::translate("MainWindow", "Sum", nullptr));
+        label_18->setText(QCoreApplication::translate("MainWindow", "x1", nullptr));
+        label_19->setText(QCoreApplication::translate("MainWindow", "y1", nullptr));
+        label_16->setText(QCoreApplication::translate("MainWindow", "A", nullptr));
+        label_21->setText(QCoreApplication::translate("MainWindow", "y2", nullptr));
+        label_17->setText(QCoreApplication::translate("MainWindow", "B", nullptr));
+        label_20->setText(QCoreApplication::translate("MainWindow", "x2", nullptr));
+        pushButton_EC_inverse1->setText(QCoreApplication::translate("MainWindow", "Inverse", nullptr));
+        pushButton_EC_inverse_2->setText(QCoreApplication::translate("MainWindow", "Inverse", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_5), QCoreApplication::translate("MainWindow", "Elliptic Curve", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QCoreApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_7), QCoreApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_9), QCoreApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));

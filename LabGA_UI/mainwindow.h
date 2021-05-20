@@ -42,6 +42,14 @@ private slots:
 
     void on_karmikle_button_clicked();
 
+    void on_pushButton_EC_sum_clicked();
+
+    void on_pushButton_EC_inverse1_clicked();
+
+    void on_pushButton_EC_inverse_2_clicked();
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::MainWindow *ui;
     LongArithmetic::Calculator m_Calculator;

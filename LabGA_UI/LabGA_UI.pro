@@ -10,7 +10,6 @@ CONFIG += c++11
 
 SOURCES += \
     *.cpp \
-    euler_carmichael.cpp \
     lab11/EllipticCurve.cpp \
     lab11/LAlab11.cpp \
     lab11/Point.cpp \
@@ -19,7 +18,6 @@ SOURCES += \
 
 HEADERS += \
     *.h \
-    euler_carmichael.h \
     lab11/EllipticCurve.h \
     lab11/Point.h \
     lab12/pointDegree.h \
