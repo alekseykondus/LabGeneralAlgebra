@@ -32,7 +32,7 @@
     <item row="1" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>7</number>
+       <number>5</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -668,7 +668,7 @@
       </widget>
       <widget class="QWidget" name="tab_6">
        <attribute name="title">
-        <string>Страница</string>
+        <string>Генератори групи</string>
        </attribute>
        <widget class="QLabel" name="label_23">
         <property name="geometry">
