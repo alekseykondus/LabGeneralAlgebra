@@ -178,5 +178,30 @@ namespace LongArithmetic {
         }
         return Modul(lasty);
     }
+    Number DiscretLog(Number& left, Number& right, Number& modul)
+    {
+        Number n = (Number)sqrt(modul) + 1;
 
+        Number an("1");
+        for (Number i("0"); i < n; i++)
+            an = (an * left) % modul;
+
+        std::map<Number, Number> vals;
+        for (Number i("1"), cur = an; i <= n; i++) {
+            if (!vals.count(cur))
+                vals[cur] = i;
+            cur = (cur * an) % modul;
+        }
+
+        for (Number i("0"), cur = right; i <= n; i++) {
+            if (vals.count(cur)) {
+                Number ans = vals[cur] * n - i;
+                if (ans < modul)
+                    return ans;
+            }
+            cur = (cur * left) % modul;
+        }
+        Number noAns("-1");
+        return noAns;
+    }
 }
