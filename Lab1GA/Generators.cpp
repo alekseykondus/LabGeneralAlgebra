@@ -148,27 +148,28 @@ Number Generators::efficient_generator( Number number) {
 	Number alpha =  RandomNum(std::stoi(number.ToString()));
 	//= RandomNum(std::stoi(number.ToString()));
 	//Number alpha = RandomNum();
-	Number cycle = Number("0");
+	Number cycle = Number("1");
 	Calculator calc(number);
 	Number res = Number("0");
-	
+	std::vector<Number> elements;
 	Number b = Number("0");
 	std::vector<Number> prime_fact = prime_factors(number);
-	
-	while (cycle < number) {
-		 alpha = RandomNum(std::stoi(number.ToString()));
-		for (auto i = 0;i < prime_fact.size();i++) {
+	for (auto i = 0;i < prime_fact.size();i++) {
+	while (true) {
+		 //alpha = RandomNum(std::stoi(number.ToString()));
+		
 			
 			b = power_modulus(alpha, number/prime_fact[i],number);
 			//b = pow(alpha, number/prime_fact[i]);
 			if (b == Number("1"))
 			{
-				cycle++;
+				elements.push_back(cycle);
 				
 				break;
 			}
 			//else 
-			//res.push_back(calc.Modul(alpha));		
+			//res.push_back(calc.Modul(alpha));	
+			cycle++;
 		}
 		
 	}
