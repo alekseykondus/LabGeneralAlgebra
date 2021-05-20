@@ -354,7 +354,7 @@ int main() {
 
 #ifdef DOCTEST_CONFIG_IMPLEMENT
 	doctest::Context context;
-	int res = context.run();
+	//int res = context.run();
 #endif
 	//std::string str("abc");
 	//LongArithmetic::Number number(str);
@@ -362,8 +362,8 @@ int main() {
 	/*for (auto const& element : res) {
 		std::cout << element.ToString() << ' ';
 	}*/
-	/*std::vector<Number> result = Generators::generators(Number("50"),'*');
+	std::vector<Number> result = Generators::generators(Number("7"),'+');
 	for (std::vector<int>::size_type i = 0;i != result.size();i++) {
 		std::cout << result[i].ToString() << ' ';
-	}*/
+	}
 }
