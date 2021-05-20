@@ -54,6 +54,8 @@ private slots:
 
     void on_montPow_clicked();
 
+    void on_DLog_calc_clicked();
+
 private:
     Ui::MainWindow *ui;
     LongArithmetic::Calculator m_Calculator;

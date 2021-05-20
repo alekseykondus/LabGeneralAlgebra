@@ -273,3 +273,13 @@ void MainWindow::on_montPow_clicked()
 
     ui->resultM->setText(QString::fromStdString(m_Calculator.montPow(a,b,mod).ToString()));
 }
+
+void MainWindow::on_DLog_calc_clicked()
+{
+    LongArithmetic::Number modul(ui->Number_modul->text().toStdString());
+        LongArithmetic::Number left(ui->DLog1->text().toStdString());
+        LongArithmetic::Number right(ui->DLog2->text().toStdString());
+        m_Calculator.SetModulus(modul);
+
+        ui->DLog_res->setText(QString::fromStdString(m_Calculator.DiscretLog(left, right, modul).ToString()));
+}
