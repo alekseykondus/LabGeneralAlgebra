@@ -116,7 +116,7 @@ void MainWindow::on_pushButton_2_clicked()
     LongArithmetic::Number y(ui->lineEdit_3->text().toStdString());
     LongArithmetic::Number a(ui->lineEdit_4->text().toStdString());
     LongArithmetic::Number b(ui->lineEdit_5->text().toStdString());
-    int step = stoi(ui->lineEdit_6->text().toStdString());
+    LongArithmetic::Number step(ui->lineEdit_6->text().toStdString());
     LongArithmetic::Number modul(ui->Number_modul->text().toStdString());
 
     Point point(x, y);
