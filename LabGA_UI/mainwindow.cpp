@@ -7,6 +7,7 @@
 
 #include <QString>
 #include <QRegExpValidator>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -142,4 +143,93 @@ void MainWindow::on_karmikle_button_clicked()
     m_Euler.SetModul(modul);
 
     ui->euler_result->setText(QString::fromStdString(m_Euler.carmichael(a).ToString()));
+}
+
+void MainWindow::on_pushButton_EC_sum_clicked()
+{
+    LongArithmetic::Number modul(ui->Number_modul->text().toStdString());
+    LongArithmetic::Number a(ui->lineEdit_EC_A->text().toStdString());
+    LongArithmetic::Number b(ui->lineEdit_EC_B->text().toStdString());
+    LongArithmetic::Calculator* calculator = new LongArithmetic::Calculator(modul);
+    if (modul < LongArithmetic::Number("3")) {
+        QMessageBox::critical(this, "Error", "Modul < 3");
+        return;
+    }
+    if (calculator->Plus(calculator->Multiplication(LongArithmetic::Number("4"), calculator->Multiplication(calculator->Multiplication(a, a), a)), calculator->Multiplication(LongArithmetic::Number("27"), calculator->Multiplication(b, b))) == LongArithmetic::Number("0")) {
+        QMessageBox::critical(this, "Error", "Incorrect A and B");
+        return;
+    }
+
+    Point x(LongArithmetic::Number(ui->lineEdit_EC_x1->text().toStdString()), LongArithmetic::Number(ui->lineEdit_EC_y1->text().toStdString()));
+    Point y(LongArithmetic::Number(ui->lineEdit_EC_x2->text().toStdString()), LongArithmetic::Number(ui->lineEdit_EC_y2->text().toStdString()));
+    EllipticCurve e(a, b, modul);
+    if (!e.is_curve_point(x)) {
+        QMessageBox::critical(this, "Error", "First point is not on a curve");
+        return;
+    }
+    if (!e.is_curve_point(y)) {
+        QMessageBox::critical(this, "Error", "Second point is not on a curve");
+        return;
+    }
+    std::string s;
+    Point res = e.Sum(x, y);
+    if (res.is_endless()) s = "∞";
+    else s = "(" + res.x().ToString() + ";" + res.y().ToString() + ")";
+    ui->lineEdit__EC_res->setText(QString::fromStdString(s));
+}
+
+void MainWindow::on_pushButton_EC_inverse1_clicked()
+{
+    LongArithmetic::Number modul(ui->Number_modul->text().toStdString());
+    LongArithmetic::Number a(ui->lineEdit_EC_A->text().toStdString());
+    LongArithmetic::Number b(ui->lineEdit_EC_B->text().toStdString());
+    LongArithmetic::Calculator* calculator = new LongArithmetic::Calculator(modul);
+    if (modul < LongArithmetic::Number("3")) {
+        QMessageBox::critical(this, "Error", "Modul < 3");
+        return;
+    }
+    if (calculator->Plus(calculator->Multiplication(LongArithmetic::Number("4"), calculator->Multiplication(calculator->Multiplication(a, a), a)), calculator->Multiplication(LongArithmetic::Number("27"), calculator->Multiplication(b, b))) == LongArithmetic::Number("0")) {
+        QMessageBox::critical(this, "Error", "Incorrect A and B");
+        return;
+    }
+
+    Point x(LongArithmetic::Number(ui->lineEdit_EC_x1->text().toStdString()), LongArithmetic::Number(ui->lineEdit_EC_y1->text().toStdString()));
+    EllipticCurve e(a, b, modul);
+    if (!e.is_curve_point(x)) {
+        QMessageBox::critical(this, "Error", "First point is not on a curve");
+        return;
+    }
+    std::string s;
+    Point res = e.Inverse(x);
+    if (res.is_endless()) s = "∞";
+    else s = "(" + res.x().ToString() + ";" + res.y().ToString() + ")";
+    ui->lineEdit__EC_res->setText(QString::fromStdString(s));
+}
+
+void MainWindow::on_pushButton_EC_inverse_2_clicked()
+{
+    LongArithmetic::Number modul(ui->Number_modul->text().toStdString());
+    LongArithmetic::Number a(ui->lineEdit_EC_A->text().toStdString());
+    LongArithmetic::Number b(ui->lineEdit_EC_B->text().toStdString());
+    LongArithmetic::Calculator* calculator = new LongArithmetic::Calculator(modul);
+    if (modul < LongArithmetic::Number("3")) {
+        QMessageBox::critical(this, "Error", "Modul < 3");
+        return;
+    }
+    if (calculator->Plus(calculator->Multiplication(LongArithmetic::Number("4"), calculator->Multiplication(calculator->Multiplication(a, a), a)), calculator->Multiplication(LongArithmetic::Number("27"), calculator->Multiplication(b, b))) == LongArithmetic::Number("0")) {
+        QMessageBox::critical(this, "Error", "Incorrect A and B");
+        return;
+    }
+
+    Point y(LongArithmetic::Number(ui->lineEdit_EC_x2->text().toStdString()), LongArithmetic::Number(ui->lineEdit_EC_y2->text().toStdString()));
+    EllipticCurve e(a, b, modul);
+    if (!e.is_curve_point(y)) {
+        QMessageBox::critical(this, "Error", "First point is not on a curve");
+        return;
+    }
+    std::string s;
+    Point res = e.Inverse(y);
+    if (res.is_endless()) s = "∞";
+    else s = "(" + res.x().ToString() + ";" + res.y().ToString() + ")";
+    ui->lineEdit__EC_res->setText(QString::fromStdString(s));
 }
