@@ -432,6 +432,11 @@ TEST_CASE("Check sum")
     CHECK(e1.Sum(g1, g2).x() == g2.x());
     CHECK(e1.Sum(g1, g2).y() == g2.y());
 }
+
+// lab 3 testing start
+
+// lab 3 testing end
+
 #endif
 
 Number evklid(Number a, Number b)
