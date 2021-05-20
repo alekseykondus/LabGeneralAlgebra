@@ -135,7 +135,6 @@ TEST_CASE("testing Calculator") {
 	calculator.SetModulus(Number("946457816401"));
 	Number a = calculator.ModuloDivision(calculator.Multiplication(Number("12343453535345534234563"), Number("4654645")), Number("4654645"));
 	CHECK(a == calculator.Modul(Number("12343453535345534234563")));
-	
 }
 
 TEST_CASE("testing increment decrement") {
@@ -359,5 +358,5 @@ int main() {
 #endif
 	//std::string str("abc");
 	//LongArithmetic::Number number(str);
-	 
+	
 }

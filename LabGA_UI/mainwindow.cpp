@@ -4,7 +4,7 @@
 #include "Calculator.h"
 #include "lab7/OrderOfElement.h"
 #include "lab12/pointDegree.h"
-#include "generators.h"
+
 #include <QString>
 #include <QRegExpValidator>
 #include <QMessageBox>
@@ -232,24 +232,4 @@ void MainWindow::on_pushButton_EC_inverse_2_clicked()
     if (res.is_endless()) s = "∞";
     else s = "(" + res.x().ToString() + ";" + res.y().ToString() + ")";
     ui->lineEdit__EC_res->setText(QString::fromStdString(s));
-}
-
-void MainWindow::on_pushButton_3_clicked()
-{
-    std::vector<Number> result;
-    LongArithmetic::Number const modul(ui->Number_modul->text().toStdString());
-   if(ui->radioButton->isChecked()) {
-    result = Generators::generators(modul,'+');
-   } else if(ui->radioButton_2->isChecked()) {
-      result = Generators::generators(modul,'*');
-   }
-  // for(std::vector<Number>::size_type i = 0; i < result.size(); i++){
-  //     ui->lineEdit_7->setText(QString::fromStdString(result[i].ToString()));
-  // }
-   QStringList items;
-   foreach(const auto number, result)
-   {
-       items << QString::fromStdString(number.ToString());
-   }
-ui->label_23->setText(items.join(","));
 }

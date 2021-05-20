@@ -15,9 +15,6 @@ namespace LongArithmetic {
     Number::Number(Sign sign, const std::vector<std::uint64_t>& digits) :
         m_Sign(sign), m_Digits(digits) {}
 
-    Number::Number() :
-        m_Sign(Sign::Plus), m_Digits{ 0 } {}
-
     Number Number::operator-() const {
         return Number(m_Sign == Sign::Plus ? Sign::Minus : Sign::Plus, m_Digits);;
     }

@@ -178,34 +178,9 @@ namespace LongArithmetic {
         }
         return Modul(lasty);
     }
-    Number Calculator::SqrtL(Number number)
+    /*Number DiscretLog(Number& left, Number& right, Number& modul)
     {
-        Number zero("0");
-        Number one("1");
-        Number two("2");
-        if (number < zero)
-        {
-            Number noSqrt("-1");
-            return noSqrt;
-        }
-        if (number == zero)
-        {
-            return zero;
-        }
-        Number div("1") , rslt("0");
-        while (number > zero)
-        {
-            number = number - div; div = div + two;
-            rslt = rslt+(number < zero ? zero : one);
-        }
-        return rslt;
-    }
-    Number Calculator::DiscretLog(Number& left, Number& right, Number& modul)
-    {
-        left = left % modul;
-        right = right % modul;
-        Number one("1");
-        Number n = (Number)SqrtL(modul) + one;
+        Number n = (Number)sqrt(modul) + 1;
 
         Number an("1");
         for (Number i("0"); i < n; i++)
@@ -228,5 +203,5 @@ namespace LongArithmetic {
         }
         Number noAns("-1");
         return noAns;
-    }
+    }*/
 }

@@ -13,7 +13,6 @@ namespace LongArithmetic {
 			Minus = -1,
 			Plus = 1
 		};
-		Number();
 
 		Number(Sign sign, const std::vector<std::uint64_t>& digits);
 
