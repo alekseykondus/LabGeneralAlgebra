@@ -3,10 +3,13 @@
 #include "/PROJECTS/GA-Lab/LabGeneralAlgebra/Lab1GA/Number.h"
 
 void scenario(OrderOfEllipticCurve::OrderOfEllipticCurve& core) {
-    core.initializePrimeNumbersVector();
-    for (int i = 0; i < core.primeNumbers.size(); i++) {
-        for (int j = 0; j < core.primeNumbers[i].GetDigits().size(); j++)
-            std::cout << core.primeNumbers[i].GetDigits()[j] << ", ";
+    core.chooseM();
+    LongArithmetic::Number tmp(core.babyGiant());
+    while (tmp.GetDigits().size() == 0 || tmp.GetDigits()[0] == 0) {
+        tmp.SetDigits(core.babyGiant().GetDigits());
+    }
+    for (int i = 0; i < tmp.GetDigits().size(); i++) {
+        std::cout << tmp.GetDigits()[i];
     }
 }
 
