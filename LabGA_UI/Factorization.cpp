@@ -54,7 +54,8 @@ namespace LongArithmetic {
 			do
 			{
 				// this can be changed at : rest = bigger % smaller; (don't realized at 1st var)
-				rest = bigger - (bigger / smaller) * smaller;
+                //rest = bigger - (bigger / smaller) * smaller;
+                rest = bigger % smaller;
 				
 				// for next step
 				bigger = smaller;

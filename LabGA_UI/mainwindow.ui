@@ -893,12 +893,29 @@
          <rect>
           <x>9</x>
           <y>9</y>
-          <width>711</width>
+          <width>793</width>
           <height>451</height>
          </rect>
         </property>
         <layout class="QGridLayout" name="gridLayout_7">
-         <item row="2" column="1">
+         <item row="1" column="1">
+          <widget class="QLineEdit" name="factorization_input"/>
+         </item>
+         <item row="1" column="0">
+          <widget class="QLabel" name="factorization_input_label">
+           <property name="text">
+            <string>Input :</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="factorization_result_label">
+           <property name="text">
+            <string>Result : </string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
           <layout class="QHBoxLayout" name="factorization_buttons">
            <item>
             <widget class="QPushButton" name="factorization_naive">
@@ -923,25 +940,15 @@
            </item>
           </layout>
          </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="factorization_input"/>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="factorization_input_label">
-           <property name="text">
-            <string>Input :</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="factorization_result_label">
-           <property name="text">
-            <string>Result : </string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
+         <item row="4" column="1">
           <widget class="QTextEdit" name="factorization_result"/>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLabel" name="factorization_input_warning">
+           <property name="text">
+            <string>INPUT : must be a composite number, and not a prime power [Applied cryptography, p91] (fatal error)</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>

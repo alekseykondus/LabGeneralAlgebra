@@ -22,6 +22,7 @@ namespace LongArithmetic {
 		Number GCD(const Number& number1, const Number& number2);
 
 		// return pair of factors (NO_FACTOR if failed)
+        // !!! input must be copmposite number that isn't prime power !!!
 		pair<Number, Number> PollardRhoFactorization(const Number& number);
 
 		// return all prime factors (with repeating if it exists)
