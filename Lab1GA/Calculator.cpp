@@ -178,7 +178,7 @@ namespace LongArithmetic {
         }
         return Modul(lasty);
     }
-    /*Number DiscretLog(Number& left, Number& right, Number& modul)
+    Number DiscretLog(Number& left, Number& right, Number& modul)
     {
         Number n = (Number)sqrt(modul) + 1;
 
@@ -203,5 +203,5 @@ namespace LongArithmetic {
         }
         Number noAns("-1");
         return noAns;
-    }*/
+    }
 }

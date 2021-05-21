@@ -41,7 +41,7 @@ namespace LongArithmetic {
         Number k("1");
         while (n > k) {
             res = calc.Multiplication(res, a);
-            if (res == k)
+            if (res == one)
                 return k;
 
             k = calc.Plus(k, one);
