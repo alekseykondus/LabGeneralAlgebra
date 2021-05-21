@@ -432,6 +432,38 @@ TEST_CASE("Check sum")
     CHECK(e1.Sum(g1, g2).x() == g2.x());
     CHECK(e1.Sum(g1, g2).y() == g2.y());
 }
+
+// lab 3 testing start
+
+#include "Factorization.h"
+
+TEST_CASE("factorization error testing")
+{
+    using namespace LongArithmetic;
+
+    Number prime1("7591324493");
+    Number prime2("2167854043");
+
+    vector<Number> result;
+
+    Factorization factorObject = Factorization();
+
+    result = factorObject.NaiveFactorization(- prime1);
+    CHECK(result.size() == 0);
+}
+
+/*
+Number prime_numbers[] = {
+    Number("7591324493"),
+    Number("2167854043"),
+    Number("9038293309"),
+    Number("1012128389"),
+    Number("4212308629")
+};
+*/
+
+// lab 3 testing end
+
 #endif
 
 Number evklid(Number a, Number b)
@@ -495,33 +527,16 @@ int ReverseElement(int a, int N) {
 }
 
 int main(int argc, char *argv[]) {
+/*#ifdef DOCTEST_CONFIG_IMPLEMENT
+    doctest::Context context;
+    int res = context.run();
+#endif*/
+
     QApplication a(argc, argv);
     MainWindow w;
 
     w.setWindowState(Qt::WindowMaximized);
     w.show();
 
-/*#ifdef DOCTEST_CONFIG_IMPLEMENT
-    doctest::Context context;
-    int res = context.run();
-#endif*/
-
-
-//	std::cout << ReverseElement(96, 179) << std::endl;
-//	evklid(Number("96"), Number("179"));
-//	evklid(1234567, 123456789);
-//	std::cout << Euler_fuction(12) << std::endl;
-//	std::cout << carmichael(12) << std::endl;
-
-    //std::string str("abc");
-    //LongArithmetic::Number number(str);
-    //std::vector<Number> res = Generators::generators(Number("30"));
-    /*for (auto const& element : res) {
-        std::cout << element.ToString() << ' ';
-    }*/
-    /*std::vector<Number> result = Generators::generators(Number("7"),'+');
-    for (std::vector<int>::size_type i = 0;i != result.size();i++) {
-        std::cout << result[i].ToString() << ' ';
-    }*/
     return a.exec();
 }

@@ -52,7 +52,7 @@ namespace LongArithmetic {
 
             for (auto i = str.rbegin(); i != end; i++) {
                 if (*i < '0' || *i > '9') {
-                    throw std::exception("");
+                    //throw std::exception("");
                 }
                 m_Digits.back() += static_cast<uint64_t>(*i - '0') * powl(10, power);
                 if (++power == 9) {
@@ -351,7 +351,7 @@ namespace LongArithmetic {
     }
 
     Number Number::operator/(const Number& right) const {
-        if (right.ToString() == "0") throw std::exception{ "Divide By Zero" };
+        //if (right.ToString() == "0") throw std::exception{ "Divide By Zero" };
         Number b(right.ToString());
         b.SetSign(Number::Sign::Plus);
         Number result(""), current("");

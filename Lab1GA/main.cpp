@@ -25,6 +25,8 @@ Number RandomNumber() {
 
 #ifdef DOCTEST_CONFIG_IMPLEMENT
 #include "doctest.h"
+#include "../lab7/OrderOfElement.h"
+
 TEST_CASE("testing constructor & ToString & FromString") {
 	std::string str;
 	LongArithmetic::Number number(str);
@@ -352,11 +354,13 @@ int main() {
 	//	std::cout << Euler_fuction(12) << std::endl;
 	//	std::cout << carmichael(12) << std::endl;
 
-#ifdef DOCTEST_CONFIG_IMPLEMENT
-	doctest::Context context;
-	int res = context.run();
-#endif
-	//std::string str("abc");
+std::cout << LongArithmetic::find(Number("9"), Number("2")).ToString() << endl;
+
+//#ifdef DOCTEST_CONFIG_IMPLEMENT
+//	doctest::Context context;
+//	int res = context.run();
+//#endif
+	cout << LongArithmetic::find(Number("10"), Number("9")).ToString() << endl;
 	//LongArithmetic::Number number(str);
 	
 }

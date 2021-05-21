@@ -19,12 +19,15 @@ namespace LongArithmetic {
 		Number& Increment(Number& number);
 		Number& Decrement(Number& number);
 
+        Number montMult(Number a, Number b, Number mod);
+        Number montPow(Number a, Number b, Number mod);
 
 		Number Modul(const Number& number);
-		//Number Inverse(const Number& number);
+
 		Number Inverse(Number number);
-		void decrease(const Number& a, Number& b, const Number& a_count_in_a, Number& a_count_in_b);
-		Number DiscretLog(Number& left, Number& right, Number& modul);
+
+        Number SqrtL(Number number);
+        Number DiscretLog(Number& left, Number& right, Number& modul);
 
 		void SetModulus(const Number& modulus);
 		Number GetModulus() const;

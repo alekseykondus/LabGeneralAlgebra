@@ -17,6 +17,9 @@ namespace LongArithmetic {
     Number::Number(Sign sign, const std::vector<std::uint64_t>& digits) :
         m_Sign(sign), m_Digits(digits) {}
 
+    Number::Number() :
+        m_Sign(Sign::Plus), m_Digits{ 0 } {}
+
     Number Number::operator-() const {
         return Number(m_Sign == Sign::Plus ? Sign::Minus : Sign::Plus, m_Digits);;
     }
@@ -146,46 +149,22 @@ namespace LongArithmetic {
         return !(*this <= right);
     }
 
-    /*Number Number::operator+(const Number& right) const {
-        Number answer(*this);
-        if (GetSign() == Number::Sign::Minus) {
-            if (right.GetSign() == Number::Sign::Minus) return -((-*this) + (-right));
-            else return right - (-*this);
-        }
-        else if (right.GetSign() == Number::Sign::Minus) return *this - (-right);
-        bool carry = false;
-        for (size_t i = 0; i < answer.GetDigits().size() || carry; i++) {
-            if (i == answer.GetDigits().size()) {
-                answer.m_Digits.push_back(0);
-            }
-            answer.m_Digits[i] += carry + right.GetDigits()[i];
-            carry = answer.GetDigits()[i] >= Number::Base;
-            if (carry) {
-                answer.m_Digits[i] -= Number::Base;
-            }
-        }
-        /*if (m_Modulus < answer) {
-            answer = Minus(answer, m_Modulus);
-        }////
-        return answer;
-    }*/
-    int my_div(int num, int diver) {
+    int64_t my_div(int64_t num, int64_t diver) {
         if ((num < 0) && (num % diver))
             return num / diver - 1;
         else
             return num / diver;
     }
-    int my_mod(int num, int diver) {
+    int64_t my_mod(int64_t num, int64_t diver) {
         if ((num < 0) && (num % diver))
             return num % diver + diver;
         else
             return num % diver;
     }
-    Number Number::operator + (const Number& num) const {
 
+    Number Number::operator + (const Number& num) const {
         Number res("0");
         std::vector<std::uint64_t> reschunks;
-        //a+b
         Number a = *this;
         Number b = num;
         if (a.GetDigits().size() > b.GetDigits().size()) {
@@ -199,8 +178,8 @@ namespace LongArithmetic {
 
             res.SetSign(a.GetSign());
 
-            int over = 0;
-            for (int i = 0; i < a.m_Digits.size(); i++) {
+            int64_t over = 0;
+            for (size_t i = 0; i < a.m_Digits.size(); i++) {
                 reschunks.push_back(a.m_Digits[i] + b.m_Digits[i]);
                 reschunks[i] += over;
                 over = my_div(reschunks[i], Base);
@@ -218,7 +197,7 @@ namespace LongArithmetic {
             a.SetSign(static_cast<Sign>((int)a.GetSign() * (-1)));
             if (a >= b) {
 
-                for (int i = 0; i < a.m_Digits.size(); i++) {
+                for (size_t i = 0; i < a.m_Digits.size(); i++) {
                     reschunks.push_back(a.m_Digits[i] - b.m_Digits[i]);
                     reschunks[i] += over;
                     over = my_div(reschunks[i], Base);
@@ -227,7 +206,7 @@ namespace LongArithmetic {
             }
             else {
                 res.SetSign(static_cast<Sign>((int)res.GetSign() * (-1)));
-                for (int i = 0; i < a.m_Digits.size(); i++) {
+                for (size_t i = 0; i < a.m_Digits.size(); i++) {
                     reschunks.push_back(b.m_Digits[i] - a.m_Digits[i]);
                     reschunks[i] += over;
                     over = my_div(reschunks[i], Base);
@@ -244,35 +223,10 @@ namespace LongArithmetic {
         return res;
     }
 
-
-
-    /*Number Number::operator-(const Number& right) const {
-        if (right.ToString() == "0") return *this;  //TODO
-        Number answer(*this);
-        if (right.GetSign() == Number::Sign::Minus) return *this + (-right);
-        else if (GetSign() == Number::Sign::Minus) return -((-*this) + right);
-        else if (*this < right) {
-            answer = -(right - *this);
-            answer.RemoveLeadingZeros();
-            return answer;
-        }
-        bool carry = false;
-        for (size_t i = 0; i < right.GetDigits().size() || carry != 0; ++i) {
-            answer.m_Digits[i] -= carry + right.GetDigits()[i];
-            carry = GetDigits()[i] < 0;
-            if (carry) {
-                answer.m_Digits[i] += Number::Base;
-            }
-        }
-        answer.RemoveLeadingZeros();
-        return answer;
-    }*/
-
     Number Number::operator - (const Number& num) const {
 
         Number res("0");
         std::vector<std::uint64_t> reschunks;
-        //a-b
         Number a = *this;
         Number b = num;
         if (a.GetDigits().size() > b.GetDigits().size()) {
@@ -286,8 +240,8 @@ namespace LongArithmetic {
 
             res.SetSign(a.GetSign());
 
-            int over = 0;
-            for (int i = 0; i < a.GetDigits().size(); i++) {
+            int64_t over = 0;
+            for (size_t i = 0; i < a.GetDigits().size(); i++) {
                 reschunks.push_back(a.GetDigits()[i] + b.GetDigits()[i]);
                 reschunks[i] += over;
                 over = my_div(reschunks[i], Base);
@@ -304,7 +258,7 @@ namespace LongArithmetic {
             int over = 0;
 
             if (a >= b) {
-                for (int i = 0; i < a.GetDigits().size(); i++) {
+                for (size_t i = 0; i < a.GetDigits().size(); i++) {
                     reschunks.push_back(a.GetDigits()[i] - b.GetDigits()[i]);
                     reschunks[i] += over;
                     over = my_div(reschunks[i], Base);

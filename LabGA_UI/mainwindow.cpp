@@ -4,6 +4,7 @@
 #include "Calculator.h"
 #include "lab7/OrderOfElement.h"
 #include "lab12/pointDegree.h"
+#include "generators.h"
 
 #include <QString>
 #include <QRegExpValidator>
@@ -233,3 +234,97 @@ void MainWindow::on_pushButton_EC_inverse_2_clicked()
     else s = "(" + res.x().ToString() + ";" + res.y().ToString() + ")";
     ui->lineEdit__EC_res->setText(QString::fromStdString(s));
 }
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    using namespace LongArithmetic;
+    std::vector<Number> result;
+    LongArithmetic::Number const modul(ui->Number_modul->text().toStdString());
+    if(ui->radioButton_2->isChecked()) {
+        result = Generators::generators(modul,'+');
+    } else if(ui->radioButton->isChecked()) {
+        result = Generators::generators(modul,'*');
+    }
+    QStringList items;
+    foreach(const auto number, result)
+    {
+       items << QString::fromStdString(number.ToString());
+    }
+    ui->label_23->setText(items.join(","));
+}
+
+void MainWindow::on_montMult_clicked()
+{
+    LongArithmetic::Number a(ui->Number_aM->text().toStdString());
+    LongArithmetic::Number b(ui->Number_bM->text().toStdString());
+    LongArithmetic::Number mod(ui->Number_modul->text().toStdString());
+    m_Calculator.SetModulus(mod);
+
+    ui->resultM->setText(QString::fromStdString(m_Calculator.montMult(a,b,mod).ToString()));
+}
+
+
+void MainWindow::on_montPow_clicked()
+{
+    LongArithmetic::Number a(ui->Number_aM->text().toStdString());
+    LongArithmetic::Number b(ui->Number_bM->text().toStdString());
+    LongArithmetic::Number mod(ui->Number_modul->text().toStdString());
+    m_Calculator.SetModulus(mod);
+
+    ui->resultM->setText(QString::fromStdString(m_Calculator.montPow(a,b,mod).ToString()));
+}
+
+void MainWindow::on_DLog_calc_clicked()
+{
+    LongArithmetic::Number modul(ui->Number_modul->text().toStdString());
+        LongArithmetic::Number left(ui->DLog1->text().toStdString());
+        LongArithmetic::Number right(ui->DLog2->text().toStdString());
+        m_Calculator.SetModulus(modul);
+
+        ui->DLog_res->setText(QString::fromStdString(m_Calculator.DiscretLog(left, right, modul).ToString()));
+}
+
+// factorization buttons start
+
+#include <vector>
+#include <string>
+
+void MainWindow::on_factorization_naive_clicked()
+{
+    LongArithmetic::Number input(ui->factorization_input->text().toStdString());
+    vector<LongArithmetic::Number> result = factorizer.NaiveFactorization(input);
+    int count = result.size();
+
+    std::string output;
+    for(int i = 0; i < count; i++)
+    {
+        output += result[i].ToString() + '\n';
+    }
+
+    ui->factorization_result->setText(QString::fromStdString(output));
+}
+
+void MainWindow::on_factorization_pollard_clicked()
+{
+    LongArithmetic::Number input(ui->factorization_input->text().toStdString());
+    pair<Number, Number> result = factorizer.PollardRhoFactorization(input);
+
+    ui->factorization_result->setText(QString::fromStdString(result.first.ToString() + '\n' + result.second.ToString()));
+}
+
+void MainWindow::on_factorization_all_clicked()
+{
+    LongArithmetic::Number input(ui->factorization_input->text().toStdString());
+    vector<LongArithmetic::Number> result = factorizer.PrimeFactors(input);
+    int count = result.size();
+
+    std::string output;
+    for(int i = 0; i < count; i++)
+    {
+        output += result[i].ToString() + '\n';
+    }
+
+    ui->factorization_result->setText(QString::fromStdString(output));
+}
+
+// factorization buttons end

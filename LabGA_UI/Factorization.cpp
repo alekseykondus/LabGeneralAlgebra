@@ -8,8 +8,9 @@ namespace LongArithmetic {
 
 	vector<Number> Factorization::NaiveFactorization(const Number& number)
 	{
+        Number zero("0");
 		// ! added Number initializer because don't realized default constructor !
-		vector<Number> factor_list = vector<Number>(0, Number("0"));
+        vector<Number> factor_list = vector<Number>(0, zero);
 
 		if (number.GetSign() == Number::Sign::Plus)
 		{
@@ -17,9 +18,11 @@ namespace LongArithmetic {
 			for (Number i = Number("2"); /*at this place -> */ i * i <= number; i++)
 			{
 				// this can be changed at : ((number % i) == 0) (don't realized at 1st var)
-				if (/*at this place ->*/((number / i) * i) == number)
+                //if (/*at this place ->*/((number / i) * i) == number)
+                if (number % i == zero)
 				{
 					factor_list.push_back(i);
+                    factor_list.push_back(number / i);
 				}
 			}
 		}
@@ -51,7 +54,8 @@ namespace LongArithmetic {
 			do
 			{
 				// this can be changed at : rest = bigger % smaller; (don't realized at 1st var)
-				rest = bigger - (bigger / smaller) * smaller;
+                //rest = bigger - (bigger / smaller) * smaller;
+                rest = bigger % smaller;
 				
 				// for next step
 				bigger = smaller;
@@ -141,7 +145,7 @@ namespace LongArithmetic {
 	{
 		pair<Number, Number> pollard_result = PollardRhoFactorization(number);
 
-		if (pollard_result == NO_FACTOR)
+        if (pollard_result.first == NO_FACTOR.first && pollard_result.second == NO_FACTOR.second)
 		{
 			list->push_back(number);
 		}
