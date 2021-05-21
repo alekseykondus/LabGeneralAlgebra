@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -21,6 +22,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -119,7 +121,24 @@ public:
     QPushButton *montMult;
     QPushButton *montPow;
     QWidget *tab_9;
+    QLabel *label_25;
+    QLabel *label_26;
+    QLabel *label_27;
+    QLineEdit *DLog1;
+    QLineEdit *DLog2;
+    QLineEdit *DLog_res;
+    QPushButton *DLog_calc;
     QWidget *tab_10;
+    QWidget *gridLayoutWidget_2;
+    QGridLayout *gridLayout_7;
+    QHBoxLayout *factorization_buttons;
+    QPushButton *factorization_naive;
+    QPushButton *factorization_pollard;
+    QPushButton *factorization_all;
+    QLineEdit *factorization_input;
+    QLabel *factorization_input_label;
+    QLabel *factorization_result_label;
+    QTextEdit *factorization_result;
     QWidget *tab_8;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -136,12 +155,12 @@ public:
         Number_modul = new QLineEdit(centralwidget);
         Number_modul->setObjectName(QString::fromUtf8("Number_modul"));
 
-        gridLayout->addWidget(Number_modul, 1, 1, 1, 1);
+        gridLayout->addWidget(Number_modul, 2, 1, 1, 1);
 
         label = new QLabel(centralwidget);
         label->setObjectName(QString::fromUtf8("label"));
 
-        gridLayout->addWidget(label, 1, 0, 1, 1);
+        gridLayout->addWidget(label, 2, 0, 1, 1);
 
         tabWidget = new QTabWidget(centralwidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
@@ -473,15 +492,82 @@ public:
         tabWidget->addTab(tab_7, QString());
         tab_9 = new QWidget();
         tab_9->setObjectName(QString::fromUtf8("tab_9"));
+        label_25 = new QLabel(tab_9);
+        label_25->setObjectName(QString::fromUtf8("label_25"));
+        label_25->setGeometry(QRect(90, 70, 55, 16));
+        label_26 = new QLabel(tab_9);
+        label_26->setObjectName(QString::fromUtf8("label_26"));
+        label_26->setGeometry(QRect(90, 130, 55, 16));
+        label_27 = new QLabel(tab_9);
+        label_27->setObjectName(QString::fromUtf8("label_27"));
+        label_27->setGeometry(QRect(90, 350, 55, 16));
+        DLog1 = new QLineEdit(tab_9);
+        DLog1->setObjectName(QString::fromUtf8("DLog1"));
+        DLog1->setGeometry(QRect(190, 60, 521, 22));
+        DLog2 = new QLineEdit(tab_9);
+        DLog2->setObjectName(QString::fromUtf8("DLog2"));
+        DLog2->setGeometry(QRect(190, 130, 521, 22));
+        DLog_res = new QLineEdit(tab_9);
+        DLog_res->setObjectName(QString::fromUtf8("DLog_res"));
+        DLog_res->setGeometry(QRect(190, 350, 511, 22));
+        DLog_calc = new QPushButton(tab_9);
+        DLog_calc->setObjectName(QString::fromUtf8("DLog_calc"));
+        DLog_calc->setGeometry(QRect(340, 210, 171, 61));
         tabWidget->addTab(tab_9, QString());
         tab_10 = new QWidget();
         tab_10->setObjectName(QString::fromUtf8("tab_10"));
+        gridLayoutWidget_2 = new QWidget(tab_10);
+        gridLayoutWidget_2->setObjectName(QString::fromUtf8("gridLayoutWidget_2"));
+        gridLayoutWidget_2->setGeometry(QRect(9, 9, 711, 451));
+        gridLayout_7 = new QGridLayout(gridLayoutWidget_2);
+        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
+        gridLayout_7->setContentsMargins(0, 0, 0, 0);
+        factorization_buttons = new QHBoxLayout();
+        factorization_buttons->setObjectName(QString::fromUtf8("factorization_buttons"));
+        factorization_naive = new QPushButton(gridLayoutWidget_2);
+        factorization_naive->setObjectName(QString::fromUtf8("factorization_naive"));
+
+        factorization_buttons->addWidget(factorization_naive);
+
+        factorization_pollard = new QPushButton(gridLayoutWidget_2);
+        factorization_pollard->setObjectName(QString::fromUtf8("factorization_pollard"));
+
+        factorization_buttons->addWidget(factorization_pollard);
+
+        factorization_all = new QPushButton(gridLayoutWidget_2);
+        factorization_all->setObjectName(QString::fromUtf8("factorization_all"));
+
+        factorization_buttons->addWidget(factorization_all);
+
+
+        gridLayout_7->addLayout(factorization_buttons, 2, 1, 1, 1);
+
+        factorization_input = new QLineEdit(gridLayoutWidget_2);
+        factorization_input->setObjectName(QString::fromUtf8("factorization_input"));
+
+        gridLayout_7->addWidget(factorization_input, 0, 1, 1, 1);
+
+        factorization_input_label = new QLabel(gridLayoutWidget_2);
+        factorization_input_label->setObjectName(QString::fromUtf8("factorization_input_label"));
+
+        gridLayout_7->addWidget(factorization_input_label, 0, 0, 1, 1);
+
+        factorization_result_label = new QLabel(gridLayoutWidget_2);
+        factorization_result_label->setObjectName(QString::fromUtf8("factorization_result_label"));
+
+        gridLayout_7->addWidget(factorization_result_label, 3, 0, 1, 1);
+
+        factorization_result = new QTextEdit(gridLayoutWidget_2);
+        factorization_result->setObjectName(QString::fromUtf8("factorization_result"));
+
+        gridLayout_7->addWidget(factorization_result, 3, 1, 1, 1);
+
         tabWidget->addTab(tab_10, QString());
         tab_8 = new QWidget();
         tab_8->setObjectName(QString::fromUtf8("tab_8"));
         tabWidget->addTab(tab_8, QString());
 
-        gridLayout->addWidget(tabWidget, 0, 0, 1, 2);
+        gridLayout->addWidget(tabWidget, 1, 1, 1, 1);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -494,7 +580,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(6);
+        tabWidget->setCurrentIndex(8);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -551,13 +637,22 @@ public:
         pushButton_3->setText(QCoreApplication::translate("MainWindow", "\320\227\320\275\320\260\320\271\321\202\320\270 \320\262\321\201\321\226 \320\263\320\265\320\275\320\265\321\200\320\260\321\202\320\276\321\200\320\270 \320\263\321\200\321\203\320\277\320\270", nullptr));
         radioButton->setText(QCoreApplication::translate("MainWindow", "*", nullptr));
         radioButton_2->setText(QCoreApplication::translate("MainWindow", "+", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_6), QCoreApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_6), QCoreApplication::translate("MainWindow", "\320\223\320\265\320\275\320\265\321\200\320\260\321\202\320\276\321\200\320\270 \320\263\321\200\321\203\320\277\320\270", nullptr));
         label_24->setText(QCoreApplication::translate("MainWindow", "Result", nullptr));
         montMult->setText(QCoreApplication::translate("MainWindow", "Mult", nullptr));
         montPow->setText(QCoreApplication::translate("MainWindow", "Pow", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_7), QCoreApplication::translate("MainWindow", "\320\234\320\276\320\275\321\202\320\263\320\276\320\274\320\265\321\200\321\226", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_9), QCoreApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_10), QCoreApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));
+        label_25->setText(QCoreApplication::translate("MainWindow", "Number 1", nullptr));
+        label_26->setText(QCoreApplication::translate("MainWindow", "Number 2", nullptr));
+        label_27->setText(QCoreApplication::translate("MainWindow", "Result", nullptr));
+        DLog_calc->setText(QCoreApplication::translate("MainWindow", "Calculate", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_9), QCoreApplication::translate("MainWindow", "Discret Logarythm", nullptr));
+        factorization_naive->setText(QCoreApplication::translate("MainWindow", "Naive", nullptr));
+        factorization_pollard->setText(QCoreApplication::translate("MainWindow", "Pollard", nullptr));
+        factorization_all->setText(QCoreApplication::translate("MainWindow", "all", nullptr));
+        factorization_input_label->setText(QCoreApplication::translate("MainWindow", "Input :", nullptr));
+        factorization_result_label->setText(QCoreApplication::translate("MainWindow", "Result : ", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_10), QCoreApplication::translate("MainWindow", "Factorization", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_8), QCoreApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));
     } // retranslateUi
 

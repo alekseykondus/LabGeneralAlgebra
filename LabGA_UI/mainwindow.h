@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "Calculator.h"
 #include "euler_carmichael.h"
+#include "Factorization.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -56,9 +57,14 @@ private slots:
 
     void on_DLog_calc_clicked();
 
+    void on_factorization_naive_clicked();
+    void on_factorization_pollard_clicked();
+    void on_factorization_all_clicked();
+
 private:
     Ui::MainWindow *ui;
     LongArithmetic::Calculator m_Calculator;
     Euler_Carmichael m_Euler;
+    LongArithmetic::Factorization factorizer;
 };
 #endif // MAINWINDOW_H

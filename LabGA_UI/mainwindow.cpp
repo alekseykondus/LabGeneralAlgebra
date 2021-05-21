@@ -283,3 +283,48 @@ void MainWindow::on_DLog_calc_clicked()
 
         ui->DLog_res->setText(QString::fromStdString(m_Calculator.DiscretLog(left, right, modul).ToString()));
 }
+
+// factorization buttons start
+
+#include <vector>
+#include <string>
+
+void MainWindow::on_factorization_naive_clicked()
+{
+    LongArithmetic::Number input(ui->factorization_input->text().toStdString());
+    vector<LongArithmetic::Number> result = factorizer.NaiveFactorization(input);
+    int count = result.size();
+
+    std::string output;
+    for(int i = 0; i < count; i++)
+    {
+        output += result[i].ToString() + '\n';
+    }
+
+    ui->factorization_result->setText(QString::fromStdString(output));
+}
+
+void MainWindow::on_factorization_pollard_clicked()
+{
+    LongArithmetic::Number input(ui->factorization_input->text().toStdString());
+    pair<Number, Number> result = factorizer.PollardRhoFactorization(input);
+
+    ui->factorization_result->setText(QString::fromStdString(result.first.ToString() + '\n' + result.second.ToString()));
+}
+
+void MainWindow::on_factorization_all_clicked()
+{
+    LongArithmetic::Number input(ui->factorization_input->text().toStdString());
+    vector<LongArithmetic::Number> result = factorizer.PrimeFactors(input);
+    int count = result.size();
+
+    std::string output;
+    for(int i = 0; i < count; i++)
+    {
+        output += result[i].ToString() + '\n';
+    }
+
+    ui->factorization_result->setText(QString::fromStdString(output));
+}
+
+// factorization buttons end

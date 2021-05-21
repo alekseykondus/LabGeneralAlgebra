@@ -450,6 +450,8 @@ TEST_CASE("factorization error testing")
 
     result = factorObject.NaiveFactorization(- prime1);
     CHECK(result.size() == 0);
+
+    pair<Number, Number> factors = factorObject.PollardRhoFactorization(prime1);
 }
 
 /*

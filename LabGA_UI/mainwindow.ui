@@ -32,7 +32,7 @@
     <item row="1" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>5</number>
+       <number>8</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -886,8 +886,65 @@
       </widget>
       <widget class="QWidget" name="tab_10">
        <attribute name="title">
-        <string>Страница</string>
+        <string>Factorization</string>
        </attribute>
+       <widget class="QWidget" name="gridLayoutWidget_2">
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>9</y>
+          <width>711</width>
+          <height>451</height>
+         </rect>
+        </property>
+        <layout class="QGridLayout" name="gridLayout_7">
+         <item row="2" column="1">
+          <layout class="QHBoxLayout" name="factorization_buttons">
+           <item>
+            <widget class="QPushButton" name="factorization_naive">
+             <property name="text">
+              <string>Naive</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="factorization_pollard">
+             <property name="text">
+              <string>Pollard</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="factorization_all">
+             <property name="text">
+              <string>all</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="0" column="1">
+          <widget class="QLineEdit" name="factorization_input"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="factorization_input_label">
+           <property name="text">
+            <string>Input :</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="factorization_result_label">
+           <property name="text">
+            <string>Result : </string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="1">
+          <widget class="QTextEdit" name="factorization_result"/>
+         </item>
+        </layout>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab_8">
        <attribute name="title">
