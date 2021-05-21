@@ -131,14 +131,15 @@ public:
     QWidget *tab_10;
     QWidget *gridLayoutWidget_2;
     QGridLayout *gridLayout_7;
+    QLineEdit *factorization_input;
+    QLabel *factorization_input_label;
+    QLabel *factorization_result_label;
     QHBoxLayout *factorization_buttons;
     QPushButton *factorization_naive;
     QPushButton *factorization_pollard;
     QPushButton *factorization_all;
-    QLineEdit *factorization_input;
-    QLabel *factorization_input_label;
-    QLabel *factorization_result_label;
     QTextEdit *factorization_result;
+    QLabel *factorization_input_warning;
     QWidget *tab_8;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -518,10 +519,25 @@ public:
         tab_10->setObjectName(QString::fromUtf8("tab_10"));
         gridLayoutWidget_2 = new QWidget(tab_10);
         gridLayoutWidget_2->setObjectName(QString::fromUtf8("gridLayoutWidget_2"));
-        gridLayoutWidget_2->setGeometry(QRect(9, 9, 711, 451));
+        gridLayoutWidget_2->setGeometry(QRect(9, 9, 793, 451));
         gridLayout_7 = new QGridLayout(gridLayoutWidget_2);
         gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
         gridLayout_7->setContentsMargins(0, 0, 0, 0);
+        factorization_input = new QLineEdit(gridLayoutWidget_2);
+        factorization_input->setObjectName(QString::fromUtf8("factorization_input"));
+
+        gridLayout_7->addWidget(factorization_input, 1, 1, 1, 1);
+
+        factorization_input_label = new QLabel(gridLayoutWidget_2);
+        factorization_input_label->setObjectName(QString::fromUtf8("factorization_input_label"));
+
+        gridLayout_7->addWidget(factorization_input_label, 1, 0, 1, 1);
+
+        factorization_result_label = new QLabel(gridLayoutWidget_2);
+        factorization_result_label->setObjectName(QString::fromUtf8("factorization_result_label"));
+
+        gridLayout_7->addWidget(factorization_result_label, 4, 0, 1, 1);
+
         factorization_buttons = new QHBoxLayout();
         factorization_buttons->setObjectName(QString::fromUtf8("factorization_buttons"));
         factorization_naive = new QPushButton(gridLayoutWidget_2);
@@ -540,27 +556,17 @@ public:
         factorization_buttons->addWidget(factorization_all);
 
 
-        gridLayout_7->addLayout(factorization_buttons, 2, 1, 1, 1);
-
-        factorization_input = new QLineEdit(gridLayoutWidget_2);
-        factorization_input->setObjectName(QString::fromUtf8("factorization_input"));
-
-        gridLayout_7->addWidget(factorization_input, 0, 1, 1, 1);
-
-        factorization_input_label = new QLabel(gridLayoutWidget_2);
-        factorization_input_label->setObjectName(QString::fromUtf8("factorization_input_label"));
-
-        gridLayout_7->addWidget(factorization_input_label, 0, 0, 1, 1);
-
-        factorization_result_label = new QLabel(gridLayoutWidget_2);
-        factorization_result_label->setObjectName(QString::fromUtf8("factorization_result_label"));
-
-        gridLayout_7->addWidget(factorization_result_label, 3, 0, 1, 1);
+        gridLayout_7->addLayout(factorization_buttons, 3, 1, 1, 1);
 
         factorization_result = new QTextEdit(gridLayoutWidget_2);
         factorization_result->setObjectName(QString::fromUtf8("factorization_result"));
 
-        gridLayout_7->addWidget(factorization_result, 3, 1, 1, 1);
+        gridLayout_7->addWidget(factorization_result, 4, 1, 1, 1);
+
+        factorization_input_warning = new QLabel(gridLayoutWidget_2);
+        factorization_input_warning->setObjectName(QString::fromUtf8("factorization_input_warning"));
+
+        gridLayout_7->addWidget(factorization_input_warning, 0, 1, 1, 1);
 
         tabWidget->addTab(tab_10, QString());
         tab_8 = new QWidget();
@@ -647,11 +653,12 @@ public:
         label_27->setText(QCoreApplication::translate("MainWindow", "Result", nullptr));
         DLog_calc->setText(QCoreApplication::translate("MainWindow", "Calculate", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_9), QCoreApplication::translate("MainWindow", "Discret Logarythm", nullptr));
+        factorization_input_label->setText(QCoreApplication::translate("MainWindow", "Input :", nullptr));
+        factorization_result_label->setText(QCoreApplication::translate("MainWindow", "Result : ", nullptr));
         factorization_naive->setText(QCoreApplication::translate("MainWindow", "Naive", nullptr));
         factorization_pollard->setText(QCoreApplication::translate("MainWindow", "Pollard", nullptr));
         factorization_all->setText(QCoreApplication::translate("MainWindow", "all", nullptr));
-        factorization_input_label->setText(QCoreApplication::translate("MainWindow", "Input :", nullptr));
-        factorization_result_label->setText(QCoreApplication::translate("MainWindow", "Result : ", nullptr));
+        factorization_input_warning->setText(QCoreApplication::translate("MainWindow", "INPUT : must be a composite number, and not a prime power [Applied cryptography, p91] (fatal error)", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_10), QCoreApplication::translate("MainWindow", "Factorization", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_8), QCoreApplication::translate("MainWindow", "\320\241\321\202\321\200\320\260\320\275\320\270\321\206\320\260", nullptr));
     } // retranslateUi
