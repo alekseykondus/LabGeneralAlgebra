@@ -57,8 +57,9 @@ Point PointDegree::pointDegree (Point a, LongArithmetic::Number degree, LongArit
 	bool resultPointClear = 1;
 	
 	Point temporaryResultPoint = a;
+	LongArithmetic::Number currentTempPointDegree = LongArithmetic::Number("1");
+	
 	for (int i = degrees.size()-1; i >= 0; i--) {
-		LongArithmetic::Number currentTempPointDegree = LongArithmetic::Number("1");
 		while(currentTempPointDegree < degrees[i]){
 			temporaryResultPoint = ellipticCurve.Sum(temporaryResultPoint, temporaryResultPoint);
 			currentTempPointDegree = currentTempPointDegree * LongArithmetic::Number("2") ;
