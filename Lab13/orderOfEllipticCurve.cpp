@@ -26,6 +26,7 @@ namespace OrderOfEllipticCurve {
         }
         return true;
     }
+
     bool OrderOfEllipticCurve::isPrime(const int mod)
     {
         if (mod == 0 || mod == 1) {
@@ -40,30 +41,32 @@ namespace OrderOfEllipticCurve {
         }
         return true;
     }
+
     void OrderOfEllipticCurve::chooseM()
     {
         double buff = sqrt(sqrt(mainEllipticCurve.Modul().GetDigits()[0]));
         std::cout << buff << std::endl;
-        int tmp = buff+1;
+        int tmp = buff + 1;
         m = new LongArithmetic::Number(std::to_string(tmp));
         std::cout << "+===" << m->GetDigits()[0] << "===+" << std::endl;
     }
+
     Number OrderOfEllipticCurve::babyGiant()
     {
-Point startPoint = generatePoint();
+        /*Point startPoint = generatePoint();
         while (!mainEllipticCurve.is_curve_point(startPoint)) {
             startPoint = generatePoint();
         }
-        M = new Number("");
-        //Point startPoint(LongArithmetic::Number("0"), LongArithmetic::Number("1"));
-        
-        
+        M = new Number("");*/
+        Point startPoint(LongArithmetic::Number("19"), LongArithmetic::Number("0"));
+
         Point Q = PointDegree::pointDegree(startPoint, mainEllipticCurve.Modul() + LongArithmetic::Number("1"), mainEllipticCurve.a(), mainEllipticCurve.b(), mainEllipticCurve.Modul());
         LongArithmetic::Number L("1");
-
+        Point zeroPoint(LongArithmetic::Number("0"), LongArithmetic::Number("0"));
         for (LongArithmetic::Number j("1"); j < *m; j++) {
             Point jPointTemp = PointDegree::pointDegree(startPoint, j, mainEllipticCurve.a(), mainEllipticCurve.b(), mainEllipticCurve.Modul());
-            jPoints.push_back(std::make_pair(j, jPointTemp));
+            if (jPointTemp.is_endless() == false) 
+                jPoints.push_back(std::make_pair(j, jPointTemp));
         }
 
         LongArithmetic::Number k = *m;
@@ -71,29 +74,33 @@ Point startPoint = generatePoint();
         Point tempComparePoint(LongArithmetic::Number("0"), LongArithmetic::Number("0"));
 
         std::vector<std::pair<LongArithmetic::Number, Point>> jPointsMinus;
+        ///////////////////////////Не присваивает минус элементам///////////////////////////
         for (int j = 0; j < jPoints.size(); j++) {
             Point bufferVariable = jPoints[j].second;
-            bufferVariable.x().SetSign(LongArithmetic::Number::Sign::Minus);
+            bufferVariable.x().SetSign(LongArithmetic::Number::Sign::Minus); 
             jPointsMinus.push_back(std::make_pair(jPoints[j].first, bufferVariable));
         }
+        ////////////////////////////////////////////////////////////////////////////////////
         for (k; k < *m; k++) {
             Point variableComparePoint1 = PointDegree::pointDegree(startPoint, *m * LongArithmetic::Number("2"), mainEllipticCurve.a(), mainEllipticCurve.b(), mainEllipticCurve.Modul());
             tempComparePoint = mainEllipticCurve.Sum(Q, PointDegree::pointDegree(variableComparePoint1, k, mainEllipticCurve.a(), mainEllipticCurve.b(), mainEllipticCurve.Modul()));
             for (int i = 0; i < jPoints.size(); i++) {
-                if ((tempComparePoint.is_endless() == jPoints[i].second.is_endless()) && 
-                    ((tempComparePoint.is_endless() && jPoints[i].second.is_endless()) || 
+                if ((tempComparePoint.is_endless() == jPoints[i].second.is_endless()) &&
+                    ((tempComparePoint.is_endless() && jPoints[i].second.is_endless()) ||
                         (tempComparePoint.x() == jPoints[i].second.x() && tempComparePoint.y() == jPoints[i].second.y()))) { // Может лишнее tempComparePoint.y() == jPoints[i].second.y())
-                    *M = mainEllipticCurve.Modul() + LongArithmetic::Number("1") + *m * k * LongArithmetic::Number("2") - jPoints[i].first;
+                    return mainEllipticCurve.Modul() + LongArithmetic::Number("1") + *m * k * LongArithmetic::Number("2") - jPoints[i].first;
+                    //*M = mainEllipticCurve.Modul() + LongArithmetic::Number("1") + *m * k * LongArithmetic::Number("2") - jPoints[i].first;
                     break;
                 }
-                
+
                 if (tempComparePoint.x() == jPointsMinus[i].second.x()) {
-                   *M = mainEllipticCurve.Modul() + LongArithmetic::Number("1") + *m * k * LongArithmetic::Number("2") + jPoints[i].first;
-                   break;
+                    return mainEllipticCurve.Modul() + LongArithmetic::Number("1") + *m * k * LongArithmetic::Number("2") + jPoints[i].first;
+                    //*M = mainEllipticCurve.Modul() + LongArithmetic::Number("1") + *m * k * LongArithmetic::Number("2") + jPoints[i].first;
+                    break;
                 }
             }
         }
-        std::vector<LongArithmetic::Number> primeNumbaersM = primeFactorization(*M);
+        /*std::vector<LongArithmetic::Number> primeNumbaersM = primeFactorization(*M);
         int i = 0;
         while (i < primeNumbaersM.size()) {
             Point v1 = PointDegree::pointDegree(startPoint, *M / primeNumbaersM[i], mainEllipticCurve.a(), mainEllipticCurve.b(), mainEllipticCurve.Modul());
@@ -124,8 +131,9 @@ Point startPoint = generatePoint();
         if (checker == 0) {
             return LongArithmetic::Number("0");
         }
-        return *N;
+        return *N;*/
     }
+
     Point OrderOfEllipticCurve::generatePoint()
     {
         srand(time(0));
@@ -136,9 +144,10 @@ Point startPoint = generatePoint();
             randValueY = 0 + rand() % mainEllipticCurve.Modul().GetDigits()[0];
         }
         Point newPoint(LongArithmetic::Number(std::to_string(randValueX)), LongArithmetic::Number(std::to_string(randValueY)));
-       
+
         return newPoint;
     }
+
     std::vector<LongArithmetic::Number> OrderOfEllipticCurve::primeFactorization(LongArithmetic::Number n)
     {
         std::vector<LongArithmetic::Number> primeNumbers;
@@ -146,12 +155,12 @@ Point startPoint = generatePoint();
         {
             n = n / LongArithmetic::Number("2");
         }
-        
+
         int buff = sqrt(n.GetDigits()[0]);
 
         for (LongArithmetic::Number i("3"); i <= LongArithmetic::Number(std::to_string(buff)); i = i + LongArithmetic::Number("2"))
         {
-             
+
             while (n % i == LongArithmetic::Number("0"))
             {
                 primeNumbers.push_back(i);
@@ -161,6 +170,7 @@ Point startPoint = generatePoint();
         }
         return primeNumbers;
     }
+
     LongArithmetic::Number OrderOfEllipticCurve::lcm(LongArithmetic::Number L, LongArithmetic::Number M)
     {
         return (L / Generators::gcd(L, M)) * M;

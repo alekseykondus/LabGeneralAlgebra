@@ -5,9 +5,9 @@
 void scenario(OrderOfEllipticCurve::OrderOfEllipticCurve& core) {
     core.chooseM();
     LongArithmetic::Number tmp(core.babyGiant());
-    while (tmp.GetDigits().size() == 0 || tmp.GetDigits()[0] == 0) {
+    /*while (tmp.GetDigits().size() == 0 || tmp.GetDigits()[0] == 0) {
         tmp.SetDigits(core.babyGiant().GetDigits());
-    }
+    }*/
     for (int i = 0; i < tmp.GetDigits().size(); i++) {
         std::cout << tmp.GetDigits()[i];
     }
