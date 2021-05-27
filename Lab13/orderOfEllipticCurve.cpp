@@ -58,9 +58,10 @@ namespace OrderOfEllipticCurve {
             startPoint = generatePoint();
         }
         M = new Number("");*/
-        Point startPoint(LongArithmetic::Number("19"), LongArithmetic::Number("0"));
+        Point startPoint(LongArithmetic::Number("2"), LongArithmetic::Number("1"));
 
         Point Q = PointDegree::pointDegree(startPoint, mainEllipticCurve.Modul() + LongArithmetic::Number("1"), mainEllipticCurve.a(), mainEllipticCurve.b(), mainEllipticCurve.Modul());
+        if(Q.is_endless() == true) Q.make_normal(LongArithmetic::Number("0"), LongArithmetic::Number("0"));
         LongArithmetic::Number L("1");
         Point zeroPoint(LongArithmetic::Number("0"), LongArithmetic::Number("0"));
         for (LongArithmetic::Number j("1"); j < *m; j++) {
@@ -77,23 +78,24 @@ namespace OrderOfEllipticCurve {
         ///////////////////////////Не присваивает минус элементам///////////////////////////
         for (int j = 0; j < jPoints.size(); j++) {
             Point bufferVariable = jPoints[j].second;
-            bufferVariable.x().SetSign(LongArithmetic::Number::Sign::Minus); 
+            bufferVariable.setX(-bufferVariable.x());
+            bufferVariable.setY(-bufferVariable.y());
             jPointsMinus.push_back(std::make_pair(jPoints[j].first, bufferVariable));
         }
         ////////////////////////////////////////////////////////////////////////////////////
         for (k; k < *m; k++) {
             Point variableComparePoint1 = PointDegree::pointDegree(startPoint, *m * LongArithmetic::Number("2"), mainEllipticCurve.a(), mainEllipticCurve.b(), mainEllipticCurve.Modul());
-            tempComparePoint = mainEllipticCurve.Sum(Q, PointDegree::pointDegree(variableComparePoint1, k, mainEllipticCurve.a(), mainEllipticCurve.b(), mainEllipticCurve.Modul()));
+            Point variableComparePoint2 = PointDegree::pointDegree(variableComparePoint1, k, mainEllipticCurve.a(), mainEllipticCurve.b(), mainEllipticCurve.Modul());
+            tempComparePoint = mainEllipticCurve.Sum(Q, variableComparePoint2);
+            if(tempComparePoint.is_endless() == true)tempComparePoint.make_normal(LongArithmetic::Number("0"), LongArithmetic::Number("0"));
             for (int i = 0; i < jPoints.size(); i++) {
-                if ((tempComparePoint.is_endless() == jPoints[i].second.is_endless()) &&
-                    ((tempComparePoint.is_endless() && jPoints[i].second.is_endless()) ||
-                        (tempComparePoint.x() == jPoints[i].second.x() && tempComparePoint.y() == jPoints[i].second.y()))) { // Может лишнее tempComparePoint.y() == jPoints[i].second.y())
+                if ((tempComparePoint.is_endless() == jPoints[i].second.is_endless()) && ((tempComparePoint.is_endless() && jPoints[i].second.is_endless()) || (tempComparePoint.x() == jPoints[i].second.x() && tempComparePoint.y() == jPoints[i].second.y()))) { // Может лишнее tempComparePoint.y() == jPoints[i].second.y())
                     return mainEllipticCurve.Modul() + LongArithmetic::Number("1") + *m * k * LongArithmetic::Number("2") - jPoints[i].first;
                     //*M = mainEllipticCurve.Modul() + LongArithmetic::Number("1") + *m * k * LongArithmetic::Number("2") - jPoints[i].first;
                     break;
                 }
 
-                if (tempComparePoint.x() == jPointsMinus[i].second.x()) {
+                if ((tempComparePoint.is_endless() == jPointsMinus[i].second.is_endless()) && ((tempComparePoint.is_endless() && jPointsMinus[i].second.is_endless()) || (tempComparePoint.x() == jPointsMinus[i].second.x()) && tempComparePoint.y() == jPoints[i].second.y())) {
                     return mainEllipticCurve.Modul() + LongArithmetic::Number("1") + *m * k * LongArithmetic::Number("2") + jPoints[i].first;
                     //*M = mainEllipticCurve.Modul() + LongArithmetic::Number("1") + *m * k * LongArithmetic::Number("2") + jPoints[i].first;
                     break;
