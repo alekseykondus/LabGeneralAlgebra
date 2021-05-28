@@ -17,8 +17,7 @@ namespace OrderOfEllipticCurve {
 		bool isPrime(const LongArithmetic::Number& mod);
 		bool isPrime(const int mod);
 		void chooseM();
-		Number babyGiant();
-		Point generatePoint();
+		Number babyGiant(Point startPoint);
 		std::vector<LongArithmetic::Number> primeFactorization(LongArithmetic::Number n);
 		LongArithmetic::Number lcm(LongArithmetic::Number L, LongArithmetic::Number M);
 	};
