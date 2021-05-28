@@ -15,21 +15,12 @@ void scenario(OrderOfEllipticCurve::OrderOfEllipticCurve& core) {
             tmp = core.babyGiant(startPoint);
             if (!(tmp == LongArithmetic::Number("0"))) {
                 for (int k = 0; k < tmp.GetDigits().size(); k++) {
-                    std::cout << tmp.GetDigits()[k];
+                    std::cout << "Count of points: " << tmp.GetDigits()[k];
                 }
                 return;
             }
         }
     }
-    /*Point startPoint(LongArithmetic::Number(""), LongArithmetic::Number("4"));
-    tmp = core.babyGiant(startPoint);*/
-    // 7 1 101
-    /*while (tmp.GetDigits().size() == 0 || tmp.GetDigits()[0] == 0) {
-        tmp.SetDigits(core.babyGiant().GetDigits());
-    }*/
-    /*for (int i = 0; i < tmp.GetDigits().size(); i++) {
-        std::cout << tmp.GetDigits()[i];
-    }*/
 }
 
 int main()
