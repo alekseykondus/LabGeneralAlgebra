@@ -51,8 +51,14 @@ vector <LongArithmetic::Number> PointDegree::expandNum (LongArithmetic::Number d
 }
 
 Point PointDegree::pointDegree (Point a, LongArithmetic::Number degree, LongArithmetic::Number numA, LongArithmetic::Number numB, LongArithmetic::Number mod){
+	
+	
 	EllipticCurve ellipticCurve(numA, numB, mod);
-	vector <LongArithmetic::Number> degrees = expandNum(degree);
+	if(degree<LongArithmetic::Number("0")){
+		degree = degree * LongArithmetic::Number("-1");
+	}
+	a = ellipticCurve.Inverse(a);
+			vector <LongArithmetic::Number> degrees = expandNum(degree);
 	Point resultPoint;
 	bool resultPointClear = 1;
 	
